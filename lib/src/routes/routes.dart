@@ -1,7 +1,7 @@
 import 'package:go_router/go_router.dart';
 
-import '../../features/navigation/presentation/navigation.dart';
-import '../../features/order/presentation/order.dart';
+import '../view/navigation/navigation.dart';
+import '../view/order/order.dart';
 
 final router = GoRouter(initialLocation: '/', routes: [
   GoRoute(path: '/', builder: (context, state) => Navigation()),

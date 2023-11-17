@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
-import '../../home/presentation/home.dart';
+import '../home/home.dart';
 
 final pageIndexProvider = StateProvider<int>((ref) {
   return 0;
