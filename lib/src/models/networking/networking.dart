@@ -30,7 +30,7 @@ class Networking {
   }
 
   /// Gets the singleton instance of the [Networking] class.
-  static Networking instance() {
+  static Networking _instance() {
     _self ??= Networking._();
     return _self!;
   }
@@ -49,15 +49,21 @@ class Networking {
   /// Makes a generic HTTP request with the specified [url], [requestMethod], and optional [data].
   ///
   /// Returns a [Result] containing either a [Response] on success or an [Exception] on failure.
-  static Future<Result<Response, Exception>> call(
+  static Future<Result<Response<T>, Exception>> call<T>(
       url, RequestMethod requestMethod,
       {Object? data}) async {
     try {
-      Response response = await instance()
-          ._dio
-          .fetch(RequestOptions(method: "$requestMethod", data: data));
+      final Response<T> response = await _instance()._dio.fetch(
+            RequestOptions(
+              baseUrl: BASE_URL + url,
+              method: "$requestMethod",
+              data: data,
+            ),
+          );
+
       return Success(response);
     } on DioException catch (e) {
+      print(e);
       return Failure(e);
     } catch (e) {
       return Failure(Exception(e.toString()));
@@ -65,19 +71,19 @@ class Networking {
   }
 
   /// Makes a POST request with the specified [url] and [data].
-  static Future<Result<Response, Exception>> post(
+  static Future<Result<Response<T>, Exception>> post<T>(
       String url, dynamic data) async {
     return call(url, RequestMethod.POST, data: data);
   }
 
   /// Makes a GET request with the specified [url] and optional [data].
-  static Future<Result<Response, Exception>> get(
+  static Future<Result<Response<T>, Exception>> get<T>(
       String url, dynamic data) async {
     return call(url, RequestMethod.GET, data: data);
   }
 
   /// Makes a DELETE request with the specified [url] and optional [data].
-  static Future<Result<Response, Exception>> delete(
+  static Future<Result<Response<T>, Exception>> delete<T>(
       String url, dynamic data) async {
     return call(url, RequestMethod.DELETE, data: data);
   }

@@ -4,6 +4,8 @@ import 'package:vendor/src/view/home/home.dart';
 int bottomSelectedIndex = 0;
 
 class Navigation extends StatefulWidget {
+  const Navigation({super.key});
+
   @override
   State<StatefulWidget> createState() => _Navigation();
 }
