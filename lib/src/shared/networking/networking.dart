@@ -63,7 +63,6 @@ class Networking {
 
       return Success(response);
     } on DioException catch (e) {
-      print(e);
       return Failure(e);
     } catch (e) {
       return Failure(Exception(e.toString()));
