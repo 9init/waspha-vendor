@@ -1,41 +1,98 @@
 import 'package:flutter/material.dart';
-import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:vendor/src/view/home/home.dart';
 
-import '../home/home.dart';
+int bottomSelectedIndex = 0;
 
-final pageIndexProvider = StateProvider<int>((ref) {
-  return 0;
-});
+class Navigation extends StatefulWidget {
+  @override
+  State<StatefulWidget> createState() => _Navigation();
+}
 
-class Navigation extends ConsumerWidget {
-  Navigation({super.key});
-  final List<Widget> _pages = [const HomeScreen()];
+class _Navigation extends State<Navigation> {
+  List<BottomNavigationBarItem> buildBottomNavBarItems() {
+    return [
+      const BottomNavigationBarItem(
+        icon: Icon(Icons.home),
+        label: 'Home',
+      ),
+      const BottomNavigationBarItem(
+        icon: Icon(Icons.request_page),
+        label: 'Request',
+      ),
+      const BottomNavigationBarItem(
+        icon: Icon(Icons.handshake),
+        label: 'Offers',
+      ),
+      const BottomNavigationBarItem(
+        icon: Icon(Icons.home),
+        label: 'Orders',
+      ),
+    ];
+  }
 
   @override
-  Widget build(BuildContext context, WidgetRef ref) {
-    int currentIndex = ref.watch(pageIndexProvider);
+  void initState() {
+    super.initState();
+  }
+
+  PageController pageController = PageController(
+    initialPage: 0,
+    keepPage: true,
+  );
+
+  Widget buildPageView() {
+    return PageView(
+      controller: PageController(
+        initialPage: 0,
+        keepPage: true,
+      ),
+      onPageChanged: (index) {
+        setState(() {
+          bottomSelectedIndex = index;
+        });
+      },
+      children: const <Widget>[
+        HomeScreen(),
+        Colored(color: Colors.red),
+        Colored(color: Colors.blue),
+        Colored(color: Colors.yellow)
+      ],
+    );
+  }
+
+  void bottomTapped(int index) {
+    setState(() {
+      bottomSelectedIndex = index;
+      pageController.animateToPage(index,
+          duration: const Duration(milliseconds: 500), curve: Curves.ease);
+    });
+  }
+
+  @override
+  Widget build(BuildContext context) {
     return Scaffold(
-        body: PageView(
-          children: _pages,
-          onPageChanged: (index) {
-            ref.read(pageIndexProvider.notifier).update((state) => index);
-          },
-        ),
-        bottomNavigationBar: BottomNavigationBar(
-          currentIndex: currentIndex,
-          onTap: (index) {
-            ref.read(pageIndexProvider.notifier).update((state) => index);
-          },
-          items: const [
-            BottomNavigationBarItem(
-              icon: Icon(Icons.home),
-              label: 'Home',
-            ),
-            BottomNavigationBarItem(
-              icon: Icon(Icons.home),
-              label: 'Home',
-            ),
-          ],
-        ));
+      body: buildPageView(),
+      bottomNavigationBar: BottomNavigationBar(
+        currentIndex: bottomSelectedIndex,
+        items: buildBottomNavBarItems(),
+        onTap: (index) {
+          bottomTapped(index);
+        },
+      ),
+    );
+  }
+}
+
+class Colored extends StatelessWidget {
+  const Colored({
+    super.key,
+    required this.color,
+  });
+  final Color color;
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      color: color,
+    );
   }
 }
