@@ -1,6 +1,6 @@
 import 'package:dio/dio.dart';
-import 'package:vendor/src/models/networking/Networking.dart';
-import 'package:vendor/src/models/networking/results.dart';
+import 'package:vendor/src/shared/networking/Networking.dart';
+import 'package:vendor/src/shared/networking/results.dart';
 
 import '../../models/vendor/Vendor.dart';
 

@@ -4,8 +4,8 @@ import 'package:dio/dio.dart';
 import 'package:cookie_jar/cookie_jar.dart';
 import 'package:dio_cookie_manager/dio_cookie_manager.dart';
 import 'package:path_provider/path_provider.dart';
-import 'package:vendor/src/models/networking/request_method.dart';
-import 'package:vendor/src/models/networking/results.dart';
+import 'package:vendor/src/shared/networking/request_method.dart';
+import 'package:vendor/src/shared/networking/results.dart';
 
 /// A singleton class for handling network requests using Dio.
 class Networking {
