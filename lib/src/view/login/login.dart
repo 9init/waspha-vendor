@@ -14,10 +14,11 @@ class Login extends HookConsumerWidget {
   final TextEditingController _passwordController = TextEditingController();
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
 
-  validateLogin(WidgetRef ref) {
+  Future<bool> validateLogin(WidgetRef ref) async {
     if (_formKey.currentState!.validate()) {
-      ref.read(loginViewModelProvider.notifier).performLogin();
+      return await ref.read(loginViewModelProvider.notifier).performLogin();
     }
+    return false;
   }
 
   @override
@@ -93,8 +94,22 @@ class Login extends HookConsumerWidget {
               height: 10,
             ),
             AuthButton(
-              onTap: () => validateLogin(ref),
-              text: "Continue",
+              onTap: () async {
+                if (ref.read(isLoadingProvider)) return;
+                print(ref.read(isLoadingProvider));
+
+                final result = await validateLogin(ref);
+                if (!result &&
+                    context.mounted &&
+                    ref.read(isVendorIdOrPasswordNullProvider)) {
+                  ScaffoldMessenger.of(context).showSnackBar(
+                    const SnackBar(
+                      content: Text("Invalid Vendor ID or Password"),
+                    ),
+                  );
+                }
+              },
+              text: ref.watch(isLoadingProvider) ? "Loading" : "Continue",
             ),
             const SizedBox(
               height: 10,
