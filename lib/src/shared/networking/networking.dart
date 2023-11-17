@@ -77,14 +77,14 @@ class Networking {
   }
 
   /// Makes a GET request with the specified [url] and optional [data].
-  static Future<Result<Response<T>, Exception>> get<T>(
-      String url, dynamic data) async {
+  static Future<Result<Response<T>, Exception>> get<T>(String url,
+      {dynamic data}) async {
     return call(url, RequestMethod.GET, data: data);
   }
 
   /// Makes a DELETE request with the specified [url] and optional [data].
-  static Future<Result<Response<T>, Exception>> delete<T>(
-      String url, dynamic data) async {
+  static Future<Result<Response<T>, Exception>> delete<T>(String url,
+      {dynamic data}) async {
     return call(url, RequestMethod.DELETE, data: data);
   }
 }

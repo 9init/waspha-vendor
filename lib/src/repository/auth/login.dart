@@ -19,4 +19,14 @@ class LoginRepository {
 
     return value;
   }
+
+  static Future<bool> isLoggedIn() async {
+    final Result<Response<dynamic>, Exception> result =
+        await Networking.post("/average-rating", {});
+
+    return switch (result) {
+      Success() => true,
+      Failure() => false,
+    };
+  }
 }
