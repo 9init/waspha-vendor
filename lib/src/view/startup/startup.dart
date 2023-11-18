@@ -13,9 +13,15 @@ class StartUp extends StatelessWidget {
     return Scaffold(
       body: Consumer(builder: (context, ref, child) {
         Future(() {
-          final isLoggedIn = ref.read(authCheckViewModelProvider);
-          // Use isLoggedIn to determine the UI based on login status
-          isLoggedIn ? context.go("/home") : context.go("/login");
+          ref.watch(authCheckViewModelProvider).when(
+                data: (isLoggedIn) {
+                  isLoggedIn ? context.go("/home") : context.go("/login");
+                },
+                error: (error, stackStrace) {
+                  context.go("/login");
+                },
+                loading: () {},
+              );
         });
         return Container(
           decoration: BoxDecoration(

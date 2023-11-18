@@ -26,12 +26,16 @@ class Networking {
   /// Private constructor for singleton pattern.
   Networking._() {
     _self = this;
-    prepareJar();
   }
 
   /// Gets the singleton instance of the [Networking] class.
-  static Networking _instance() {
-    _self ??= Networking._();
+  static Future<Networking> _instance() async {
+    if (_self != null) return _self!;
+
+    final instance = Networking._();
+    await instance.prepareJar();
+    _self = instance;
+
     return _self!;
   }
 
@@ -40,7 +44,6 @@ class Networking {
     final Directory appDocDir = await getApplicationDocumentsDirectory();
     final String appDocPath = appDocDir.path;
     final jar = PersistCookieJar(
-      ignoreExpires: true,
       storage: FileStorage("$appDocPath/.cookies/"),
     );
     _dio.interceptors.add(CookieManager(jar));
@@ -51,21 +54,21 @@ class Networking {
   /// Returns a [Result] containing either a [Response] on success or an [Exception] on failure.
   static Future<Result<Response<T>, Exception>> call<T>(
       url, RequestMethod requestMethod,
-      {Object? data}) async {
+      {dynamic data}) async {
     try {
-      final Response<T> response = await _instance()._dio.fetch(
-            RequestOptions(
-              baseUrl: BASE_URL + url,
-              method: "$requestMethod",
-              data: data,
-            ),
-          );
-
+      final instance = await _instance();
+      final Response<T> response = await instance._dio.fetch(
+        RequestOptions(
+          baseUrl: BASE_URL + url,
+          method: "$requestMethod",
+          data: data,
+        ),
+      );
       return Success(response);
     } on DioException catch (e) {
       return Failure(e);
     } catch (e) {
-      return Failure(Exception(e.toString()));
+      return Failure(Exception(e));
     }
   }
 

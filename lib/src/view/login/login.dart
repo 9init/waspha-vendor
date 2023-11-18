@@ -1,8 +1,10 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
+import 'package:go_router/go_router.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:vendor/src/view/common/auth/social_media.dart';
+import 'package:vendor/src/view/home/home.dart';
 import 'package:vendor/src/view/login/login_form.dart';
 
 import '../common/auth/auth_container.dart';
@@ -99,9 +101,12 @@ class Login extends HookConsumerWidget {
                 print(ref.read(isLoadingProvider));
 
                 final result = await validateLogin(ref);
+                if (result && context.mounted) {
+                  context.go("/home");
+                }
                 if (!result &&
                     context.mounted &&
-                    ref.read(isVendorIdOrPasswordNullProvider)) {
+                    !ref.read(isVendorIdOrPasswordNullProvider)) {
                   ScaffoldMessenger.of(context).showSnackBar(
                     const SnackBar(
                       content: Text("Invalid Vendor ID or Password"),
