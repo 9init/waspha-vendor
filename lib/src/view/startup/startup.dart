@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:go_router/go_router.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:vendor/src/view/common/colors/colors.dart';
 import 'package:vendor/src/view/startup/viewmodel.dart';
 
 class StartUp extends StatelessWidget {
@@ -28,7 +29,8 @@ class StartUp extends StatelessWidget {
               colors: [
                 Colors.indigo[900]!,
                 Colors.indigo[600]!,
-                Colors.pink[400]!,
+                // Colors.pink[400]!,
+                WasphaColors.secondary
               ],
               begin: Alignment.bottomCenter,
               end: Alignment.topRight,

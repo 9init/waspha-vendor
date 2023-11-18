@@ -1,7 +1,7 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
 
-part 'Vendor.freezed.dart';
-part 'Vendor.g.dart';
+part 'vendor.freezed.dart';
+part 'vendor.g.dart';
 
 @freezed
 class Vendor with _$Vendor {

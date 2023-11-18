@@ -2,7 +2,7 @@ import 'package:dio/dio.dart';
 import 'package:vendor/src/shared/networking/Networking.dart';
 import 'package:vendor/src/shared/networking/results.dart';
 
-import '../../models/vendor/Vendor.dart';
+import '../../models/vendor/vendor.dart';
 
 class LoginRepository {
   static Future<Vendor?> login(String vendorId, String password) async {
