@@ -102,7 +102,7 @@ class Login extends HookConsumerWidget {
 
                 final result = await validateLogin(ref);
                 if (result && context.mounted) {
-                  context.go("/home");
+                  context.go("/main");
                 }
                 if (!result &&
                     context.mounted &&

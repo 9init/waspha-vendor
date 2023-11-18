@@ -1,4 +1,3 @@
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:go_router/go_router.dart';
@@ -15,7 +14,7 @@ class StartUp extends StatelessWidget {
         Future(() {
           ref.watch(authCheckViewModelProvider).when(
                 data: (isLoggedIn) {
-                  isLoggedIn ? context.go("/home") : context.go("/login");
+                  isLoggedIn ? context.go("/main") : context.go("/login");
                 },
                 error: (error, stackStrace) {
                   context.go("/login");

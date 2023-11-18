@@ -75,6 +75,7 @@ class _Navigation extends State<Navigation> {
     return Scaffold(
       body: buildPageView(),
       bottomNavigationBar: BottomNavigationBar(
+        type: BottomNavigationBarType.fixed,
         currentIndex: bottomSelectedIndex,
         items: buildBottomNavBarItems(),
         onTap: (index) {
