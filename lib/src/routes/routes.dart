@@ -14,7 +14,7 @@ import 'package:vendor/src/view/verification/verification_waiting.dart';
 
 import '../view/order/order.dart';
 
-final router = GoRouter(initialLocation: '/reciept', routes: [
+final router = GoRouter(initialLocation: '/', routes: [
   GoRoute(path: '/', builder: (context, state) => const StartUp()),
   GoRoute(path: '/main', builder: (context, state) => const Navigation()),
   GoRoute(path: '/login', builder: (context, state) => Login()),
@@ -25,7 +25,7 @@ final router = GoRouter(initialLocation: '/reciept', routes: [
   GoRoute(path: '/home', builder: (context, state) => const HomeScreen()),
   GoRoute(path: '/order', builder: (context, state) => const OrderScreen()),
   GoRoute(path: '/settlement', builder: (context, state) => const Settlement()),
-  GoRoute(path: '/reciept', builder: (context, state) => const Reciept()),
+  GoRoute(path: '/receipt', builder: (context, state) => const Receipt()),
   GoRoute(
       path: '/verification_waiting',
       builder: (context, state) => const VerificationSuspended()),

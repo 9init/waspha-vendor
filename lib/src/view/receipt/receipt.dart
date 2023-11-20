@@ -1,13 +1,17 @@
 import 'package:flutter/material.dart';
 
-class Reciept extends StatelessWidget {
-  const Reciept({super.key});
+class Receipt extends StatelessWidget {
+  const Receipt({super.key});
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text("Reciept"),
+        leading: IconButton(
+          icon: const Icon(Icons.arrow_back, color: Colors.black),
+          onPressed: () => Navigator.of(context).pop(),
+        ),
+        title: const Text("Receipt"),
         centerTitle: true,
         scrolledUnderElevation: 0,
       ),
@@ -28,7 +32,7 @@ class Reciept extends StatelessWidget {
               ],
             ),
             const Padding(
-              padding: EdgeInsets.symmetric(horizontal: 13),
+              padding: EdgeInsets.symmetric(horizontal: 20),
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
@@ -113,18 +117,21 @@ class Reciept extends StatelessWidget {
               height: 10,
             ),
             const Padding(
-              padding: EdgeInsets.symmetric(horizontal: 30),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Text("Total",
-                      style:
-                          TextStyle(fontSize: 25, fontWeight: FontWeight.bold)),
-                  Text("KWD 7.00",
-                      style:
-                          TextStyle(fontSize: 25, fontWeight: FontWeight.bold)),
-                ],
+              padding: EdgeInsets.symmetric(horizontal: 20),
+              child: SizedBox(
+                width: double.infinity,
+                child: FittedBox(
+                  child: Text(
+                    "Total KWD 777.00",
+                    style: TextStyle(
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                ),
               ),
+            ),
+            const SizedBox(
+              height: 20,
             ),
             const Padding(
               padding: EdgeInsets.symmetric(horizontal: 60),
@@ -155,16 +162,15 @@ class Reciept extends StatelessWidget {
                   trailing: "KWD 6.00",
                   size: 16,
                 )),
-            Container(
-                child: ListView.builder(
-                    shrinkWrap: true,
-                    itemCount: 1,
-                    itemBuilder: (context, index) {
-                      return const Padding(
-                          padding: EdgeInsets.all(13),
-                          child:
-                              TextFee(leading: "1 x Item 1", trailing: "FREE"));
-                    })),
+            ListView.builder(
+                physics: const NeverScrollableScrollPhysics(),
+                shrinkWrap: true,
+                itemCount: 1,
+                itemBuilder: (context, index) {
+                  return const Padding(
+                      padding: EdgeInsets.symmetric(horizontal: 20),
+                      child: TextFee(leading: "1 x Item 1", trailing: "FREE"));
+                }),
             const Padding(
               padding: EdgeInsets.symmetric(horizontal: 50),
               child: Divider(
@@ -172,10 +178,10 @@ class Reciept extends StatelessWidget {
               ),
             ),
             const Padding(
-                padding: EdgeInsets.symmetric(horizontal: 13, vertical: 10),
+                padding: EdgeInsets.symmetric(horizontal: 20, vertical: 10),
                 child: TextFee(leading: "Delivery fee", trailing: "KWD 1.00")),
             const Padding(
-              padding: EdgeInsets.symmetric(horizontal: 13, vertical: 10),
+              padding: EdgeInsets.symmetric(horizontal: 20, vertical: 10),
               child: TextFee(
                 leading: "Parking fee",
                 trailing: "KWD 1.00",
@@ -223,39 +229,44 @@ class Reciept extends StatelessWidget {
             const SizedBox(
               height: 50,
             ),
-            Align(
+            const Align(
               alignment: Alignment.centerLeft,
-              child: Container(
-                height: 50,
-                width: 100,
-                alignment: Alignment.topLeft,
-                decoration: const BoxDecoration(
+              child: DecoratedBox(
+                decoration: BoxDecoration(
                   color: Color(0xFF663399),
                   borderRadius: BorderRadius.only(
                       topRight: Radius.circular(50),
                       bottomRight: Radius.circular(50)),
                 ),
-                child: const Center(
-                    child: Text("Print Receipt",
-                        style: TextStyle(color: Colors.white, fontSize: 14))),
+                child: Padding(
+                  padding: EdgeInsets.symmetric(vertical: 15, horizontal: 25),
+                  child: Text(
+                    "Print Receipt",
+                    style: TextStyle(color: Colors.white),
+                  ),
+                ),
               ),
             ),
-            const SizedBox(
-              height: 50,
-            ),
-            ConstrainedBox(
-                constraints:
-                    const BoxConstraints.tightFor(width: 300, height: 50),
+            Padding(
+              padding: const EdgeInsets.symmetric(vertical: 30, horizontal: 20),
+              child: Container(
+                width: double.infinity,
+                height: 50,
                 child: ElevatedButton(
-                    style: ElevatedButton.styleFrom(
-                        backgroundColor: const Color(0xFF663399),
-                        shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(10))),
-                    onPressed: () {},
-                    child: const Text(
-                      "Resend by email",
-                      style: TextStyle(fontSize: 13, color: Colors.white),
-                    ))),
+                  style: ElevatedButton.styleFrom(
+                    backgroundColor: const Color(0xFF663399),
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(10),
+                    ),
+                  ),
+                  onPressed: () {},
+                  child: const Text(
+                    "Resend by email",
+                    style: TextStyle(fontSize: 13, color: Colors.white),
+                  ),
+                ),
+              ),
+            ),
           ],
         ),
       ),

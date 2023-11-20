@@ -6,12 +6,18 @@ class LoginModel {
   String vendorId = '';
   String password = '';
   bool loading = false;
+  bool rememberPassword = false;
 
-  LoginModel copyWith({String? vendorId, String? password, bool? loading}) {
+  LoginModel copyWith(
+      {String? vendorId,
+      String? password,
+      bool? loading,
+      bool? rememberPassword}) {
     return LoginModel()
       ..loading = loading ?? this.loading
       ..vendorId = vendorId ?? this.vendorId
-      ..password = password ?? this.password;
+      ..password = password ?? this.password
+      ..rememberPassword = rememberPassword ?? this.rememberPassword;
   }
 }
 
@@ -30,6 +36,10 @@ class LoginViewModel extends StateNotifier<LoginModel> {
 
   void updateLoading(bool isLoading) {
     state = state.copyWith(loading: isLoading);
+  }
+
+  void updateRememberPassword(bool rememberPassword) {
+    state = state.copyWith(rememberPassword: rememberPassword);
   }
 
   // Method to perform the login logic
@@ -61,3 +71,6 @@ final isVendorIdOrPasswordNullProvider = Provider<bool>((ref) =>
 // A Provider to indicate the loading state during login
 final isLoadingProvider =
     Provider<bool>((ref) => ref.watch(loginViewModelProvider).loading);
+
+final isRememberPassProvider =
+    Provider<bool>((ref) => ref.watch(loginViewModelProvider).rememberPassword);

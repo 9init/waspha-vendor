@@ -15,16 +15,16 @@ class Login extends HookConsumerWidget {
   final TextEditingController _passwordController = TextEditingController();
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
 
-  Future<bool> validateLogin(WidgetRef ref) async {
+  Future<bool> validateLogin(LoginViewModel viewModel) async {
     if (_formKey.currentState!.validate()) {
-      return await ref.read(loginViewModelProvider.notifier).performLogin();
+      return await viewModel.performLogin();
     }
     return false;
   }
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final isRememberBoxChecked = useState(false);
+    final viewModel = ref.read(loginViewModelProvider.notifier);
     return Scaffold(
       body: SingleChildScrollView(
         child: Form(
@@ -55,9 +55,7 @@ class Login extends HookConsumerWidget {
               CustomFormField(
                 text: "Email or Mobile Number",
                 controller: _mobileController,
-                onChanged: (value) => ref
-                    .read(loginViewModelProvider.notifier)
-                    .updateVendorID(value),
+                onChanged: (value) => viewModel.updateVendorID(value),
               ),
               const SizedBox(
                 height: 30,
@@ -65,9 +63,7 @@ class Login extends HookConsumerWidget {
               CustomFormField(
                 text: "Password",
                 isPassword: true,
-                onChanged: (value) => ref
-                    .read(loginViewModelProvider.notifier)
-                    .updatePassword(value),
+                onChanged: (value) => viewModel.updatePassword(value),
                 controller: _passwordController,
               ),
               const SizedBox(
@@ -80,12 +76,23 @@ class Login extends HookConsumerWidget {
                 padding: const EdgeInsets.symmetric(horizontal: 20),
                 child: Row(
                   children: [
-                    Checkbox(
-                        value: isRememberBoxChecked.value,
-                        onChanged: (value) {
-                          isRememberBoxChecked.value = value!;
-                        }),
-                    const Text("Remember me"),
+                    GestureDetector(
+                      onTap: () {
+                        final value = ref.watch(isRememberPassProvider);
+                        viewModel.updateRememberPassword(!value!);
+                      },
+                      child: Row(
+                        children: [
+                          Checkbox(
+                            value: ref.watch(isRememberPassProvider),
+                            onChanged: (value) {
+                              viewModel.updateRememberPassword(value!);
+                            },
+                          ),
+                          const Text("Remember me"),
+                        ],
+                      ),
+                    ),
                     const Spacer(),
                     GestureDetector(
                         onTap: () {
@@ -102,7 +109,7 @@ class Login extends HookConsumerWidget {
                 onTap: () async {
                   if (ref.read(isLoadingProvider)) return;
 
-                  final result = await validateLogin(ref);
+                  final result = await validateLogin(viewModel);
                   if (result && context.mounted) {
                     context.go("/main");
                   }

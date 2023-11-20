@@ -5,11 +5,13 @@ import 'package:vendor/src/shared/networking/results.dart';
 import '../../models/vendor/vendor.dart';
 
 class LoginRepository {
-  static Future<Vendor?> login(String vendorId, String password) async {
+  static Future<Vendor?> login(String vendorId, String password,
+      {bool keepLogin = false}) async {
     final Result<Response<dynamic>, Exception> result =
         await Networking.post("/login", {
       "vendor_id": vendorId,
       "password": password,
+      "keepLogin": keepLogin,
     });
 
     final value = switch (result) {
