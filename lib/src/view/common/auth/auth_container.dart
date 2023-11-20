@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:vendor/src/view/login/custom_clip.dart';
 
+import '../colors/colors.dart';
+
 class AuthContainer extends StatelessWidget {
   const AuthContainer({
     super.key,
@@ -26,10 +28,7 @@ class AuthContainer extends StatelessWidget {
               gradient: LinearGradient(
                   begin: Alignment.bottomLeft,
                   end: Alignment.topRight,
-                  colors: [
-                    Color(0xFF002286),
-                    Color.fromARGB(255, 161, 75, 95),
-                  ]),
+                  colors: [WasphaColors.tertiary, WasphaColors.secondary]),
             ),
             child: SafeArea(
               child: Padding(
@@ -50,7 +49,8 @@ class AuthContainer extends StatelessWidget {
                     ),
                     text != null
                         ? Text(text!,
-                            style: TextStyle(color: Colors.white, fontSize: 15))
+                            style: const TextStyle(
+                                color: Colors.white, fontSize: 15))
                         : Container(),
                   ],
                 ),

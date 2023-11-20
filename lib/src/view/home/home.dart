@@ -1,27 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
+import '../common/circleText/circle_text.dart';
+import '../common/profileAppBar/profile_appBar.dart';
+
 class HomeScreen extends StatelessWidget {
   const HomeScreen({super.key});
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        leading: const Padding(
-          padding: EdgeInsets.symmetric(horizontal: 20),
-          child: CircleAvatar(),
-        ),
-        actions: [
-          IconButton(
-            onPressed: () {},
-            icon: const Icon(Icons.notifications),
-          ),
-          const Padding(
-            padding: EdgeInsets.symmetric(horizontal: 20),
-            child: CircleAvatar(),
-          )
-        ],
-      ),
+      appBar: ProfileAppBar(),
       body: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 20),
         child: Column(
@@ -137,25 +125,6 @@ class HomeScreen extends StatelessWidget {
           ],
         ),
       ),
-    );
-  }
-}
-
-class CircleWithText extends StatelessWidget {
-  const CircleWithText({
-    super.key,
-    this.text = 'Box',
-  });
-  final String text;
-  @override
-  Widget build(BuildContext context) {
-    return Column(
-      children: [
-        const CircleAvatar(
-          radius: 25,
-        ),
-        Text(text)
-      ],
     );
   }
 }

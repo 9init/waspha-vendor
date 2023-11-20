@@ -1,10 +1,9 @@
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:go_router/go_router.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:vendor/src/view/common/auth/social_media.dart';
-import 'package:vendor/src/view/home/home.dart';
+import 'package:vendor/src/view/common/colors/colors.dart';
 import 'package:vendor/src/view/login/login_form.dart';
 
 import '../common/auth/auth_container.dart';
@@ -16,122 +15,135 @@ class Login extends HookConsumerWidget {
   final TextEditingController _passwordController = TextEditingController();
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
 
-  Future<bool> validateLogin(WidgetRef ref) async {
+  Future<bool> validateLogin(LoginViewModel viewModel) async {
     if (_formKey.currentState!.validate()) {
-      return await ref.read(loginViewModelProvider.notifier).performLogin();
+      return await viewModel.performLogin();
     }
     return false;
   }
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final isRememberBoxChecked = useState(false);
+    final viewModel = ref.read(loginViewModelProvider.notifier);
     return Scaffold(
-      body: Form(
-        key: _formKey,
-        child: Column(
-          children: [
-            const AuthContainer(
-                text: "Welcome, Please login to \n your account."),
-            const SizedBox(
-              height: 10,
-            ),
-            const Text("Login  via social networks"),
-            const SizedBox(
-              height: 10,
-            ),
-            SocialMedia(
-              googleOnTap: () {},
-              facebookOnTap: () {},
-              appleOnTap: () {},
-            ),
-            const SizedBox(
-              height: 10,
-            ),
-            const Text("or login with mobile"),
-            const SizedBox(
-              height: 10,
-            ),
-            CustomFormField(
-              text: "Email or Mobile Number",
-              controller: _mobileController,
-              onChanged: (value) => ref
-                  .read(loginViewModelProvider.notifier)
-                  .updateVendorID(value),
-            ),
-            const SizedBox(
-              height: 30,
-            ),
-            CustomFormField(
-              text: "Password",
-              isPassword: true,
-              onChanged: (value) => ref
-                  .read(loginViewModelProvider.notifier)
-                  .updatePassword(value),
-              controller: _passwordController,
-            ),
-            const SizedBox(
-              height: 10,
-            ),
-            const SizedBox(
-              height: 10,
-            ),
-            Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 20),
-              child: Row(
-                children: [
-                  Checkbox(
-                      value: isRememberBoxChecked.value,
-                      onChanged: (value) {
-                        isRememberBoxChecked.value = value!;
-                      }),
-                  const Text("Remember me"),
-                  const Spacer(),
-                  GestureDetector(
-                      onTap: () {}, child: const Text("Forgot Password?")),
-                ],
+      body: SingleChildScrollView(
+        child: Form(
+          key: _formKey,
+          child: Column(
+            children: [
+              const AuthContainer(
+                  text: "Welcome, Please login to \n your account."),
+              const SizedBox(
+                height: 10,
               ),
-            ),
-            const SizedBox(
-              height: 10,
-            ),
-            AuthButton(
-              onTap: () async {
-                if (ref.read(isLoadingProvider)) return;
-                print(ref.read(isLoadingProvider));
-
-                final result = await validateLogin(ref);
-                if (result && context.mounted) {
-                  context.go("/main");
-                }
-                if (!result &&
-                    context.mounted &&
-                    !ref.read(isVendorIdOrPasswordNullProvider)) {
-                  ScaffoldMessenger.of(context).showSnackBar(
-                    const SnackBar(
-                      content: Text("Invalid Vendor ID or Password"),
+              const Text("Login  via social networks"),
+              const SizedBox(
+                height: 10,
+              ),
+              SocialMedia(
+                googleOnTap: () {},
+                facebookOnTap: () {},
+                appleOnTap: () {},
+              ),
+              const SizedBox(
+                height: 10,
+              ),
+              const Text("or login with mobile"),
+              const SizedBox(
+                height: 10,
+              ),
+              CustomFormField(
+                text: "Email or Mobile Number",
+                controller: _mobileController,
+                onChanged: (value) => viewModel.updateVendorID(value),
+              ),
+              const SizedBox(
+                height: 30,
+              ),
+              CustomFormField(
+                text: "Password",
+                isPassword: true,
+                onChanged: (value) => viewModel.updatePassword(value),
+                controller: _passwordController,
+              ),
+              const SizedBox(
+                height: 10,
+              ),
+              const SizedBox(
+                height: 10,
+              ),
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 20),
+                child: Row(
+                  children: [
+                    GestureDetector(
+                      onTap: () {
+                        final value = ref.watch(isRememberPassProvider);
+                        viewModel.updateRememberPassword(!value!);
+                      },
+                      child: Row(
+                        children: [
+                          Checkbox(
+                            value: ref.watch(isRememberPassProvider),
+                            onChanged: (value) {
+                              viewModel.updateRememberPassword(value!);
+                            },
+                          ),
+                          const Text("Remember me"),
+                        ],
+                      ),
                     ),
-                  );
-                }
-              },
-              text: ref.watch(isLoadingProvider) ? "Loading" : "Continue",
-            ),
-            const SizedBox(
-              height: 10,
-            ),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                const Text("Don't have an account?"),
-                TextButton(
-                    onPressed: () {},
-                    child: const Text(
-                      "Sign Up",
-                      style: TextStyle(color: Colors.blue),
-                    ))
-              ],
-            )
-          ],
+                    const Spacer(),
+                    GestureDetector(
+                        onTap: () {
+                          context.go('/forget_pass');
+                        },
+                        child: const Text("Forgot Password?")),
+                  ],
+                ),
+              ),
+              const SizedBox(
+                height: 10,
+              ),
+              AuthButton(
+                onTap: () async {
+                  if (ref.read(isLoadingProvider)) return;
+
+                  final result = await validateLogin(viewModel);
+                  if (result && context.mounted) {
+                    context.go("/main");
+                  }
+                  if (!result &&
+                      context.mounted &&
+                      !ref.read(isVendorIdOrPasswordNullProvider)) {
+                    ScaffoldMessenger.of(context).showSnackBar(
+                      const SnackBar(
+                        content: Text("Invalid Vendor ID or Password"),
+                      ),
+                    );
+                  }
+                },
+                text: ref.watch(isLoadingProvider) ? "Loading" : "Continue",
+              ),
+              const SizedBox(
+                height: 10,
+              ),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  const Text("Don't have an account?"),
+                  TextButton(
+                      onPressed: () {
+                        context.go('/register');
+                      },
+                      child: const Text(
+                        "Sign Up",
+                        style: TextStyle(color: Colors.blue),
+                      ))
+                ],
+              )
+            ],
+          ),
         ),
       ),
     );
@@ -163,10 +175,7 @@ class AuthButton extends StatelessWidget {
                   gradient: const LinearGradient(
                       begin: Alignment.bottomLeft,
                       end: Alignment.topRight,
-                      colors: [
-                        Color(0xFF002286),
-                        Color.fromARGB(255, 161, 75, 95),
-                      ]),
+                      colors: [WasphaColors.tertiary, WasphaColors.secondary]),
                   borderRadius: BorderRadius.circular(10)),
               child: Center(
                   child: Text(
