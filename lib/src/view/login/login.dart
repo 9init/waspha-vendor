@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:go_router/go_router.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:vendor/src/view/common/auth/social_media.dart';
@@ -79,7 +78,7 @@ class Login extends HookConsumerWidget {
                     GestureDetector(
                       onTap: () {
                         final value = ref.watch(isRememberPassProvider);
-                        viewModel.updateRememberPassword(!value!);
+                        viewModel.updateRememberPassword(!value);
                       },
                       child: Row(
                         children: [

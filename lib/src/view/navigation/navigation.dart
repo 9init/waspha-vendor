@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:vendor/src/view/home/home.dart';
+
+import '../requests/requests.dart';
 
 int bottomSelectedIndex = 0;
 
@@ -13,20 +16,28 @@ class Navigation extends StatefulWidget {
 class _Navigation extends State<Navigation> {
   List<BottomNavigationBarItem> buildBottomNavBarItems() {
     return [
-      const BottomNavigationBarItem(
-        icon: Icon(Icons.home),
+      BottomNavigationBarItem(
+        icon: SvgPicture.asset(
+          'assets/imgs/home.svg',
+        ),
         label: 'Home',
       ),
-      const BottomNavigationBarItem(
-        icon: Icon(Icons.request_page),
+      BottomNavigationBarItem(
+        icon: SvgPicture.asset(
+          'assets/imgs/requests.svg',
+        ),
         label: 'Request',
       ),
-      const BottomNavigationBarItem(
-        icon: Icon(Icons.handshake),
+      BottomNavigationBarItem(
+        icon: SvgPicture.asset(
+          'assets/imgs/offers.svg',
+        ),
         label: 'Offers',
       ),
-      const BottomNavigationBarItem(
-        icon: Icon(Icons.home),
+      BottomNavigationBarItem(
+        icon: SvgPicture.asset(
+          'assets/imgs/orders.svg',
+        ),
         label: 'Orders',
       ),
     ];
@@ -44,10 +55,7 @@ class _Navigation extends State<Navigation> {
 
   Widget buildPageView() {
     return PageView(
-      controller: PageController(
-        initialPage: 0,
-        keepPage: true,
-      ),
+      controller: pageController,
       onPageChanged: (index) {
         setState(() {
           bottomSelectedIndex = index;
@@ -55,7 +63,7 @@ class _Navigation extends State<Navigation> {
       },
       children: const <Widget>[
         HomeScreen(),
-        Colored(color: Colors.red),
+        Requests(),
         Colored(color: Colors.blue),
         Colored(color: Colors.yellow)
       ],
