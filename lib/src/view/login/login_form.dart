@@ -37,7 +37,8 @@ class CustomFormField extends HookWidget {
         obscureText: !isPassVisible.value && isPassword,
         onChanged: onChanged,
         decoration: InputDecoration(
-          hintText: text.toUpperCase(),
+          hintText: text,
+          floatingLabelBehavior: FloatingLabelBehavior.auto,
           suffixIcon: isPassword
               ? IconButton(
                   onPressed: () => isPassVisible.value = !isPassVisible.value,

@@ -44,16 +44,15 @@ class WasphaHeader extends StatelessWidget {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Visibility(
-                    visible: backButtonEnabled,
-                    child: const Padding(
-                      padding: EdgeInsets.symmetric(horizontal: 25),
-                      child: BackButton(color: Colors.white),
-                    ),
-                  ),
+                  backButtonEnabled
+                      ? const Padding(
+                          padding:
+                              EdgeInsets.only(left: 25, right: 25, bottom: 15),
+                          child: BackButton(color: Colors.white),
+                        )
+                      : const SizedBox(height: 20),
                   Padding(
-                    padding:
-                        const EdgeInsets.only(left: 70, top: 30, bottom: 20),
+                    padding: const EdgeInsets.only(left: 70, bottom: 20),
                     child: Column(
                       mainAxisAlignment: MainAxisAlignment.center,
                       crossAxisAlignment: CrossAxisAlignment.start,

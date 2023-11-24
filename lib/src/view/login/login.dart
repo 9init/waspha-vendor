@@ -31,7 +31,9 @@ class Login extends HookConsumerWidget {
           child: Column(
             children: [
               const WasphaHeader(
-                  text: "Welcome, Please login to\nyour account."),
+                text: "Welcome, Please login to\nyour account.",
+                backButtonEnabled: false,
+              ),
               const SizedBox(
                 height: 10,
               ),
@@ -94,10 +96,11 @@ class Login extends HookConsumerWidget {
                     ),
                     const Spacer(),
                     GestureDetector(
-                        onTap: () {
-                          context.go('/forget_pass');
-                        },
-                        child: const Text("Forgot Password?")),
+                      onTap: () {
+                        context.push('/forget_pass');
+                      },
+                      child: const Text("Forgot Password?"),
+                    ),
                   ],
                 ),
               ),
@@ -133,13 +136,14 @@ class Login extends HookConsumerWidget {
                 children: [
                   const Text("Don't have an account?"),
                   TextButton(
-                      onPressed: () {
-                        context.go('/register');
-                      },
-                      child: const Text(
-                        "Sign Up",
-                        style: TextStyle(color: Colors.blue),
-                      ))
+                    onPressed: () {
+                      context.go('/register');
+                    },
+                    child: const Text(
+                      "Sign Up",
+                      style: TextStyle(color: Colors.blue),
+                    ),
+                  )
                 ],
               )
             ],
