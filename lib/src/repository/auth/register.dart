@@ -28,7 +28,6 @@ class RegisterRepository {
       Success(value: final value) => Vendor.fromJson(value.data["data"]),
       Failure() => null,
     };
-    print(value);
 
     return value;
   }

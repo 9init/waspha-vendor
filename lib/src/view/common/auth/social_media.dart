@@ -31,7 +31,7 @@ class SocialMedia extends StatelessWidget {
           child: Container(
             width: 90,
             height: 40,
-            color: const Color(0xFFFDD4B39),
+            color: const Color(0xFFDD4B39),
             child: Padding(
               padding: const EdgeInsets.all(8.0),
               child: Image.asset(

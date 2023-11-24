@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
 
+import '../common/alignContainer/aligned_container.dart';
+import '../common/customDivider/custom_divider.dart';
+
 class Receipt extends StatelessWidget {
   const Receipt({super.key});
 
@@ -74,12 +77,7 @@ class Receipt extends StatelessWidget {
                 style: TextStyle(
                   fontSize: 25,
                 )),
-            const Padding(
-              padding: EdgeInsets.symmetric(horizontal: 60),
-              child: Divider(
-                thickness: 2,
-              ),
-            ),
+            const CustomDivider(),
             const SizedBox(
               height: 20,
             ),
@@ -103,12 +101,7 @@ class Receipt extends StatelessWidget {
                 style: TextStyle(
                   fontSize: 25,
                 )),
-            const Padding(
-              padding: EdgeInsets.symmetric(horizontal: 60),
-              child: Divider(
-                thickness: 2,
-              ),
-            ),
+            const CustomDivider(),
             const SizedBox(
               height: 20,
             ),
@@ -133,12 +126,7 @@ class Receipt extends StatelessWidget {
             const SizedBox(
               height: 20,
             ),
-            const Padding(
-              padding: EdgeInsets.symmetric(horizontal: 60),
-              child: Divider(
-                thickness: 2,
-              ),
-            ),
+            const CustomDivider(),
             const Padding(
               padding: EdgeInsets.all(13),
               child: Row(
@@ -149,12 +137,7 @@ class Receipt extends StatelessWidget {
                 ],
               ),
             ),
-            const Padding(
-              padding: EdgeInsets.symmetric(horizontal: 60),
-              child: Divider(
-                thickness: 2,
-              ),
-            ),
+            const CustomDivider(),
             const Padding(
                 padding: EdgeInsets.all(13),
                 child: TextFee(
@@ -229,27 +212,12 @@ class Receipt extends StatelessWidget {
             const SizedBox(
               height: 50,
             ),
-            const Align(
-              alignment: Alignment.centerLeft,
-              child: DecoratedBox(
-                decoration: BoxDecoration(
-                  color: Color(0xFF663399),
-                  borderRadius: BorderRadius.only(
-                      topRight: Radius.circular(50),
-                      bottomRight: Radius.circular(50)),
-                ),
-                child: Padding(
-                  padding: EdgeInsets.symmetric(vertical: 15, horizontal: 25),
-                  child: Text(
-                    "Print Receipt",
-                    style: TextStyle(color: Colors.white),
-                  ),
-                ),
-              ),
+            const AlignedContainer(
+              text: "Print Receipt",
             ),
             Padding(
               padding: const EdgeInsets.symmetric(vertical: 30, horizontal: 20),
-              child: Container(
+              child: SizedBox(
                 width: double.infinity,
                 height: 50,
                 child: ElevatedButton(
@@ -274,25 +242,3 @@ class Receipt extends StatelessWidget {
   }
 }
 
-class TextFee extends StatelessWidget {
-  const TextFee({
-    super.key,
-    required this.leading,
-    required this.trailing,
-    this.size = 14,
-  });
-  final String leading;
-  final String trailing;
-  final double size;
-
-  @override
-  Widget build(BuildContext context) {
-    return Row(
-      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-      children: [
-        Text(leading, style: TextStyle(fontSize: size)),
-        Text(trailing, style: TextStyle(fontSize: size)),
-      ],
-    );
-  }
-}

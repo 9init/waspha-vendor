@@ -1,4 +1,5 @@
-import 'package:state_notifier/state_notifier.dart';
+// ignore_for_file: depend_on_referenced_packages
+
 import 'package:riverpod/riverpod.dart';
 import 'package:vendor/src/repository/auth/login.dart';
 

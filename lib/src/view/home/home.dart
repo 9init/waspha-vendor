@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
 import '../common/circleText/circle_text.dart';
-import '../common/profileAppBar/profile_appBar.dart';
+import '../common/profileAppBar/profile_app_bar.dart';
 
 class HomeScreen extends StatelessWidget {
   const HomeScreen({super.key});
@@ -36,7 +36,7 @@ class HomeScreen extends StatelessWidget {
             const SizedBox(height: 20),
             GestureDetector(
               onTap: () {
-                context.push('/order');
+                context.push('/payouts');
               },
               child: Center(
                 child: Container(

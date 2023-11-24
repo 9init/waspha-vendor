@@ -3,7 +3,6 @@ import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:otp_text_field/otp_text_field.dart';
 import 'package:otp_text_field/style.dart';
 import 'package:vendor/src/view/common/auth/auth_container.dart';
-import 'package:vendor/src/view/common/colors/colors.dart';
 
 import '../common/auth/custom_btn.dart';
 import '../login/login.dart';
@@ -67,7 +66,6 @@ class Verification extends HookWidget {
                 textFieldAlignment: MainAxisAlignment.spaceAround,
                 fieldStyle: FieldStyle.box,
                 onCompleted: (pin) {
-                  print("Completed: $pin");
                   pinsState.value = pin;
                 },
               ),

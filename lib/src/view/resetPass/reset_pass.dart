@@ -1,9 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_hooks/flutter_hooks.dart';
-import 'package:otp_text_field/otp_text_field.dart';
-import 'package:otp_text_field/style.dart';
 import 'package:vendor/src/view/common/auth/auth_container.dart';
-import 'package:vendor/src/view/common/colors/colors.dart';
 
 import '../login/login.dart';
 import '../login/login_form.dart';
