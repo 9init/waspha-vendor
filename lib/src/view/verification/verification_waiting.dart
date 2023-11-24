@@ -6,8 +6,8 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:vendor/src/view/common/auth/custom_btn.dart';
 import 'package:vendor/src/view/common/colors/colors.dart';
 
-import '../common/customDots/custom_dots.dart';
-import '../common/profileAppBar/profile_app_bar.dart';
+import '../common/custom_dots/custom_dots.dart';
+import '../common/profile_app_bar/profile_app_bar.dart';
 import 'verification_banner.dart';
 
 class VerificationWaiting extends HookWidget {
@@ -89,6 +89,3 @@ class VerificationWaiting extends HookWidget {
     );
   }
 }
-
-
-

@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 
-import '../common/customCloseBtn/close_btn.dart';
-import '../common/notificationCard/notification_card.dart';
+import '../common/custom_close_btn/close_btn.dart';
+import '../common/notification_card/notification_card.dart';
 
 class Notifications extends HookWidget {
   const Notifications({super.key});

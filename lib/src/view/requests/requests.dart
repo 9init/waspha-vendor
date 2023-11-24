@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:vendor/src/view/common/profileAppBar/profile_app_bar.dart';
+import 'package:vendor/src/view/common/profile_app_bar/profile_app_bar.dart';
 
 class Requests extends StatelessWidget {
   const Requests({super.key});

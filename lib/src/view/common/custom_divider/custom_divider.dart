@@ -33,19 +33,29 @@ class TextFee extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Row(mainAxisAlignment: MainAxisAlignment.spaceBetween, children: [
-      Text(leading,
-          style: TextStyle(
-              fontSize: size,
-              fontWeight: boldLeading ? FontWeight.bold : FontWeight.normal)),
-      Text(trailing,
-          style: TextStyle(
-              fontSize: size, color: isFree ? Colors.red : Colors.black)),
-      if (credit != null)
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+      children: [
         Text(
-          credit ?? "",
-          style: const TextStyle(fontWeight: FontWeight.bold),
-        )
-    ]);
+          leading,
+          style: TextStyle(
+            fontSize: size,
+            fontWeight: boldLeading ? FontWeight.bold : FontWeight.normal,
+          ),
+        ),
+        Text(
+          trailing,
+          style: TextStyle(
+            fontSize: size,
+            color: isFree ? Colors.red : Colors.black,
+          ),
+        ),
+        if (credit != null)
+          Text(
+            credit!,
+            style: const TextStyle(fontWeight: FontWeight.bold),
+          )
+      ],
+    );
   }
 }

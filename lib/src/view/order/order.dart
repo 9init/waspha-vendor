@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:vendor/src/view/common/customDivider/custom_divider.dart';
+import 'package:vendor/src/view/common/custom_divider/custom_divider.dart';
 
 import '../common/alignContainer/aligned_container.dart';
 
@@ -141,7 +141,7 @@ class Order extends StatelessWidget {
                           height: 15,
                         ),
                         Text("EGP 5.00", style: TextStyle(fontSize: 16))
-                        ],
+                      ],
                     ),
                     VerticalDivider(),
                     Column(

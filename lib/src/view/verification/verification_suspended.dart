@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:vendor/src/view/common/colors/colors.dart';
 
-import '../common/profileAppBar/profile_app_bar.dart';
+import '../common/profile_app_bar/profile_app_bar.dart';
 
 class VerificationSuspended extends StatelessWidget {
   const VerificationSuspended({super.key});

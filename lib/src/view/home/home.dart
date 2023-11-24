@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
 import '../common/circleText/circle_text.dart';
-import '../common/profileAppBar/profile_app_bar.dart';
+import '../common/profile_app_bar/profile_app_bar.dart';
 
 class HomeScreen extends StatelessWidget {
   const HomeScreen({super.key});

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 import '../common/alignContainer/aligned_container.dart';
-import '../common/customDivider/custom_divider.dart';
+import '../common/custom_divider/custom_divider.dart';
 
 class Receipt extends StatelessWidget {
   const Receipt({super.key});
@@ -241,4 +241,3 @@ class Receipt extends StatelessWidget {
     );
   }
 }
-

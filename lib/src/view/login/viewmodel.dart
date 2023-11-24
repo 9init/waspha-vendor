@@ -9,11 +9,12 @@ class LoginModel {
   bool loading = false;
   bool rememberPassword = false;
 
-  LoginModel copyWith(
-      {String? vendorId,
-      String? password,
-      bool? loading,
-      bool? rememberPassword}) {
+  LoginModel copyWith({
+    String? vendorId,
+    String? password,
+    bool? loading,
+    bool? rememberPassword,
+  }) {
     return LoginModel()
       ..loading = loading ?? this.loading
       ..vendorId = vendorId ?? this.vendorId
