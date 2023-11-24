@@ -16,9 +16,9 @@ class ApplicationForm extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            const AuthContainer(
-              title: "Application\n Form",
-              titleSize: 20,
+            const WasphaHeader(
+              title1: "Application\n Form",
+              title1Size: 20,
             ),
             const SizedBox(
               height: 10,
@@ -421,7 +421,7 @@ class ApplicationForm extends StatelessWidget {
             Center(
               child: ConstrainedBox(
                   constraints:
-                      const BoxConstraints.tightFor(width: 300, height: 60 ),
+                      const BoxConstraints.tightFor(width: 300, height: 60),
                   child: CustomButton(
                       shape: const MaterialStatePropertyAll(
                           RoundedRectangleBorder(

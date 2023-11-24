@@ -22,9 +22,9 @@ class Verification extends HookWidget {
         key: _formKey,
         child: Column(
           children: [
-            const AuthContainer(
-              title: "Verfication",
-              titleSize: 30,
+            const WasphaHeader(
+              title1: "Verification",
+              title1Size: 30,
             ),
             const SizedBox(
               height: 30,
@@ -80,4 +80,3 @@ class Verification extends HookWidget {
     );
   }
 }
-

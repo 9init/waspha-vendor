@@ -30,8 +30,8 @@ class Login extends HookConsumerWidget {
           key: _formKey,
           child: Column(
             children: [
-              const AuthContainer(
-                  text: "Welcome, Please login to \n your account."),
+              const WasphaHeader(
+                  text: "Welcome, Please login to\nyour account."),
               const SizedBox(
                 height: 10,
               ),

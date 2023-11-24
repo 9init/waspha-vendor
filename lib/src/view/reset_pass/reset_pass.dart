@@ -19,10 +19,10 @@ class ResetPassword extends StatelessWidget {
         key: _formKey,
         child: Column(
           children: [
-            const AuthContainer(
+            const WasphaHeader(
               text: "Password",
-              title: "Recovery",
-              titleSize: 30,
+              title1: "Recovery",
+              title1Size: 30,
             ),
             const SizedBox(
               height: 30,

@@ -22,13 +22,12 @@ class ForgetPassword extends HookWidget {
           key: _formKey,
           child: Column(
             children: [
-              const AuthContainer(
-                title: "Forgot your \n Password",
-                titleSize: 30,
+              const WasphaHeader(
+                title1: "Forgot your",
+                title2: "Password?",
+                title2Size: 30,
               ),
-              const SizedBox(
-                height: 120,
-              ),
+              const Spacer(),
               const Text(
                 "Recover password using \n Email or phone No.",
                 textAlign: TextAlign.center,
@@ -89,7 +88,9 @@ class ForgetPassword extends HookWidget {
               const SizedBox(
                 height: 100,
               ),
-              AuthButton(onTap: () {}, text: "Continue")
+              AuthButton(onTap: () {}, text: "Continue"),
+              const Spacer(),
+              const Spacer()
             ],
           )),
     );

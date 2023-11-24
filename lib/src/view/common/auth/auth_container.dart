@@ -3,17 +3,23 @@ import 'package:vendor/src/view/login/custom_clip.dart';
 
 import '../colors/colors.dart';
 
-class AuthContainer extends StatelessWidget {
-  const AuthContainer({
+class WasphaHeader extends StatelessWidget {
+  const WasphaHeader({
     super.key,
     this.text,
-    this.title = "We are\nWASPHA",
-    this.titleSize = 40,
+    this.title1 = "We are",
+    this.title2 = "WASPHA",
+    this.title1Size = 20,
+    this.title2Size = 40,
+    this.backButtonEnabled = true,
   });
 
   final String? text;
-  final String title;
-  final double titleSize;
+  final String? title1;
+  final String? title2;
+  final double title1Size;
+  final double title2Size;
+  final bool backButtonEnabled;
 
   @override
   Widget build(BuildContext context) {
@@ -26,34 +32,64 @@ class AuthContainer extends StatelessWidget {
             width: double.infinity,
             decoration: const BoxDecoration(
               gradient: LinearGradient(
-                  begin: Alignment.bottomLeft,
-                  end: Alignment.topRight,
-                  colors: [WasphaColors.tertiary, WasphaColors.secondary]),
+                begin: Alignment.bottomLeft,
+                end: Alignment.topRight,
+                colors: [
+                  WasphaColors.tertiary,
+                  WasphaColors.secondary,
+                ],
+              ),
             ),
             child: SafeArea(
-              child: Padding(
-                padding: const EdgeInsets.only(left: 70),
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Text(
-                      title,
-                      style: TextStyle(
-                          color: Colors.white,
-                          fontSize: titleSize,
-                          fontWeight: FontWeight.bold),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Visibility(
+                    visible: backButtonEnabled,
+                    child: const Padding(
+                      padding: EdgeInsets.symmetric(horizontal: 25),
+                      child: BackButton(color: Colors.white),
                     ),
-                    const SizedBox(
-                      height: 10,
+                  ),
+                  Padding(
+                    padding:
+                        const EdgeInsets.only(left: 70, top: 30, bottom: 20),
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(
+                          title1 ?? "",
+                          style: TextStyle(
+                            color: Colors.white,
+                            fontSize: title1Size,
+                            fontWeight: FontWeight.normal,
+                          ),
+                        ),
+                        Text(
+                          title2 ?? "",
+                          style: TextStyle(
+                            color: Colors.white,
+                            fontSize: title2Size,
+                            fontWeight: FontWeight.bold,
+                          ),
+                        ),
+                        const SizedBox(
+                          height: 10,
+                        ),
+                        text != null
+                            ? Text(
+                                text!,
+                                style: const TextStyle(
+                                  color: Colors.white,
+                                  fontSize: 15,
+                                ),
+                              )
+                            : Container(),
+                      ],
                     ),
-                    text != null
-                        ? Text(text!,
-                            style: const TextStyle(
-                                color: Colors.white, fontSize: 15))
-                        : Container(),
-                  ],
-                ),
+                  ),
+                ],
               ),
             ),
           ),

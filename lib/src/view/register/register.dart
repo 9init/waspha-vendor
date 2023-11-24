@@ -38,10 +38,10 @@ class Register extends ConsumerWidget {
             key: _formKey,
             child: Column(
               children: [
-                const AuthContainer(
-                  title: "Sign up now",
+                const WasphaHeader(
+                  title1: "Sign up now",
                   text: "Please fill the details",
-                  titleSize: 30,
+                  title1Size: 30,
                 ),
                 const Text("signup  via social networks"),
                 const SizedBox(
