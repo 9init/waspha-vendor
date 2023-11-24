@@ -113,6 +113,7 @@ class Login extends HookConsumerWidget {
                   if (result && context.mounted) {
                     context.go("/main");
                   }
+
                   if (!result &&
                       context.mounted &&
                       !ref.read(isVendorIdOrPasswordNullProvider)) {

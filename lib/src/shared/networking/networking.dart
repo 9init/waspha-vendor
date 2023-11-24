@@ -33,14 +33,14 @@ class Networking {
     if (_self != null) return _self!;
 
     final instance = Networking._();
-    await instance.prepareJar();
+    await instance._prepareJar();
     _self = instance;
 
     return _self!;
   }
 
   /// Initializes a cookie jar for managing cookies during network requests.
-  Future<void> prepareJar() async {
+  Future<void> _prepareJar() async {
     final Directory appDocDir = await getApplicationDocumentsDirectory();
     final String appDocPath = appDocDir.path;
     final jar = PersistCookieJar(
