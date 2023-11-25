@@ -2,12 +2,14 @@ import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:phone_form_field/phone_form_field.dart';
+import 'package:vendor/src/models/phone/phone_model.dart';
 import 'package:vendor/src/view/common/auth/auth_container.dart';
+import 'package:vendor/src/view/forget_password/viewmodel.dart';
 import 'package:vendor/src/view/login/login.dart';
 
 import '../login/login_form.dart';
 
-class ForgetPassword extends HookWidget {
+class ForgetPassword extends ConsumerWidget {
   ForgetPassword({super.key});
 
   final TextEditingController _emailController = TextEditingController();
@@ -15,7 +17,7 @@ class ForgetPassword extends HookWidget {
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
     return Scaffold(
       body: Form(
         key: _formKey,
@@ -40,7 +42,16 @@ class ForgetPassword extends HookWidget {
               mobileController: _mobileController,
             ),
             const SizedBox(height: 70),
-            AuthButton(onTap: () {}, text: "Continue"),
+            AuthButton(
+              onTap: () {
+                if (!_formKey.currentState!.validate()) return;
+
+                final vmNotifier =
+                    ref.read(passwordResetViewModelProvider.notifier);
+                vmNotifier.requestResetPassword();
+              },
+              text: "Continue",
+            ),
             const Spacer(),
             const Spacer(),
             const Spacer(),
@@ -50,9 +61,6 @@ class ForgetPassword extends HookWidget {
     );
   }
 }
-
-// Create the state provider for radio box
-final _selectedOptionProvider = StateProvider<int>((ref) => 0);
 
 class EmailField extends ConsumerWidget {
   const EmailField({
@@ -64,19 +72,25 @@ class EmailField extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    final vmProvider = passwordResetViewModelProvider;
+    final viewmodel = ref.watch(vmProvider);
+    final vmNotifier = ref.read(vmProvider.notifier);
     return Row(
       children: [
         Radio(
           value: 0,
-          groupValue: ref.watch(_selectedOptionProvider),
+          groupValue: viewmodel.selectedOption.value,
           onChanged: (value) {
-            ref.read(_selectedOptionProvider.notifier).state = value as int;
+            vmNotifier.updateSelectedOption(ResetOption.EMAIL);
           },
         ),
         Expanded(
           child: CustomFormField(
             controller: emailController,
+            onChanged: (p0) =>
+                vmNotifier.updateEmail(emailController.value.text),
             text: "Email Address",
+            isOptional: viewmodel.selectedOption == ResetOption.PHONE,
           ),
         ),
       ],
@@ -94,13 +108,17 @@ class MobileField extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    final vmProvider = passwordResetViewModelProvider;
+    final viewmodel = ref.watch(vmProvider);
     return Row(
       children: [
         Radio(
           value: 1,
-          groupValue: ref.watch(_selectedOptionProvider),
+          groupValue: viewmodel.selectedOption.value,
           onChanged: (value) {
-            ref.read(_selectedOptionProvider.notifier).state = value as int;
+            ref
+                .read(vmProvider.notifier)
+                .updateSelectedOption(ResetOption.PHONE);
           },
         ),
         Expanded(
@@ -115,12 +133,20 @@ class MobileField extends ConsumerWidget {
               showFlagInInput: true,
               defaultCountry: IsoCode.EG,
               validator: (phoneNumber) {
-                if (phoneNumber == null) {
-                  return "Please enter your phone number";
+                if (viewmodel.selectedOption == ResetOption.PHONE &&
+                    phoneNumber?.isValid() != true) {
+                  return "Please enter a valid phone number";
                 }
                 return null;
               },
-              onChanged: (value) {},
+              onChanged: (value) {
+                final m = mobileController.value!;
+                final phoneModel = PhoneModel(
+                  countryCode: int.parse(m.countryCode),
+                  number: int.parse(m.nsn),
+                );
+                ref.read(vmProvider.notifier).updatePhoneNumber(phoneModel);
+              },
             ),
           ),
         ),

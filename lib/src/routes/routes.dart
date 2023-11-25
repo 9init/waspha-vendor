@@ -7,7 +7,7 @@ import 'package:vendor/src/view/order/order.dart';
 import 'package:vendor/src/view/receipt/receipt.dart';
 import 'package:vendor/src/view/register/register.dart';
 import 'package:vendor/src/view/requests/requests.dart';
-import 'package:vendor/src/view/reset_pass/reset_pass.dart';
+import 'package:vendor/src/view/pass_reset/pass_reset.dart';
 import 'package:vendor/src/view/settlement/settlement.dart';
 import 'package:vendor/src/view/startup/startup.dart';
 import 'package:vendor/src/view/verification/verification.dart';
