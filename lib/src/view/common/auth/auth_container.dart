@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:vendor/src/view/login/custom_clip.dart';
+import 'package:vendor/src/view/common/curev_clipper/custom_clip.dart';
 
 import '../colors/colors.dart';
 

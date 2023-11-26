@@ -4,6 +4,7 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:phone_form_field/phone_form_field.dart';
 import 'package:vendor/src/models/phone/phone_model.dart';
 import 'package:vendor/src/view/common/auth/auth_container.dart';
+import 'package:vendor/src/view/common/auth_btn/auth_btn.dart';
 import 'package:vendor/src/view/forget_password/viewmodel.dart';
 import 'package:vendor/src/view/login/login.dart';
 

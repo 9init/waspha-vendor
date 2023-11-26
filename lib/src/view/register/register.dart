@@ -2,11 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:phone_form_field/phone_form_field.dart';
+import 'package:vendor/src/view/common/auth_btn/auth_btn.dart';
 import 'package:vendor/src/view/register/viewmodel.dart';
 
 import '../common/auth/auth_container.dart';
 import '../common/auth/social_media.dart';
-import '../login/login.dart';
 import '../login/login_form.dart';
 
 class Register extends ConsumerWidget {

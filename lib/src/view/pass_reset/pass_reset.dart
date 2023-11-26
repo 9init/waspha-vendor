@@ -3,6 +3,7 @@ import 'package:go_router/go_router.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:vendor/src/models/loading_state/loading_state.dart';
 import 'package:vendor/src/view/common/auth/auth_container.dart';
+import 'package:vendor/src/view/common/auth_btn/auth_btn.dart';
 import 'package:vendor/src/view/pass_reset/viewmodel.dart';
 
 import '../login/login.dart';

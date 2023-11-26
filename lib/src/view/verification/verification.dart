@@ -3,6 +3,7 @@ import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:otp_text_field/otp_text_field.dart';
 import 'package:otp_text_field/style.dart';
 import 'package:vendor/src/view/common/auth/auth_container.dart';
+import 'package:vendor/src/view/common/auth_btn/auth_btn.dart';
 
 import '../common/auth/custom_btn.dart';
 import '../login/login.dart';

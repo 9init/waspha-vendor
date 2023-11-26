@@ -4,10 +4,10 @@ import 'package:go_router/go_router.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:vendor/src/models/loading_state/loading_state.dart';
 import 'package:vendor/src/view/common/auth/auth_container.dart';
+import 'package:vendor/src/view/common/auth_btn/auth_btn.dart';
 import 'package:vendor/src/view/common/otp_form/otp_form.dart';
 import 'package:vendor/src/view/forget_password/viewmodel.dart';
 import 'package:vendor/src/view/forget_password_otp/viewmodel.dart';
-import 'package:vendor/src/view/login/login.dart';
 
 class ForgetPasswordOtp extends StatelessWidget {
   const ForgetPasswordOtp({
