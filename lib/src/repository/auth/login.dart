@@ -7,8 +7,7 @@ import '../../models/vendor/vendor.dart';
 class LoginRepository {
   static Future<Vendor?> login(String vendorId, String password,
       {bool keepLogin = false}) async {
-    final Result<Response<dynamic>, Exception> result =
-        await Networking.post("/login", {
+    final result = await Networking.post("/login", {
       "vendor_id": vendorId,
       "password": password,
       "keepLogin": keepLogin,
@@ -17,18 +16,19 @@ class LoginRepository {
     final value = switch (result) {
       Success(value: final value) => Vendor.fromJson(value.data["data"]),
       Failure() => null,
+      Error() => null,
     };
 
     return value;
   }
 
   static Future<bool> isLoggedIn() async {
-    final Result<Response<dynamic>, Exception> result =
-        await Networking.post("/average-rating", {});
+    final result = await Networking.post("/average-rating", {});
 
     return switch (result) {
       Success() => true,
       Failure() => false,
+      Error() => false,
     };
   }
 }

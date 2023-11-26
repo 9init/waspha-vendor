@@ -96,7 +96,7 @@ class WasphaHeader extends StatelessWidget {
         Positioned(
           top: -100,
           child: Image.asset(
-            "assets/images/onboarding/atom.png",
+            "assets/imgs/onboarding/atom.png",
             scale: 1.2,
             opacity: const AlwaysStoppedAnimation(0.2),
           ),

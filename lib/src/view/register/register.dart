@@ -43,7 +43,7 @@ class Register extends ConsumerWidget {
                   text: "Please fill the details",
                   title1Size: 30,
                 ),
-                const Text("signup  via social networks"),
+                const Text("Sign-up via social networks"),
                 const SizedBox(
                   height: 10,
                 ),

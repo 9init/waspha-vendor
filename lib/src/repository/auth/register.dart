@@ -1,5 +1,3 @@
-import 'package:dio/dio.dart';
-
 import '../../models/vendor/vendor.dart';
 import '../../shared/networking/networking.dart';
 import '../../shared/networking/results.dart';
@@ -12,8 +10,7 @@ class RegisterRepository {
       required String countryCode,
       required String phone,
       required String fullPhoneNo}) async {
-    final Result<Response<dynamic>, Exception> result =
-        await Networking.post("/vendor/signup-request", {
+    final result = await Networking.post("/vendor/signup-request", {
       "name": name,
       "password": password,
       "email": email,
@@ -27,6 +24,7 @@ class RegisterRepository {
     final value = switch (result) {
       Success(value: final value) => Vendor.fromJson(value.data["data"]),
       Failure() => null,
+      Error() => null,
     };
 
     return value;

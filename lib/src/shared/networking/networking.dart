@@ -54,7 +54,7 @@ class Networking {
   /// Makes a generic HTTP request with the specified [url], [requestMethod], and optional [data].
   ///
   /// Returns a [Result] containing either a [Response] on success or an [Exception] on failure.
-  static Future<Result<Response<T>, Exception>> call<T>(
+  static Future<Result<Response<T>, DioException, Exception>> call<T>(
       url, RequestMethod requestMethod,
       {dynamic data}) async {
     try {
@@ -67,27 +67,28 @@ class Networking {
         ),
       );
       return Success(response);
+    } on SocketException catch (e) {
+      return Error(Exception(e));
     } on DioException catch (e) {
       return Failure(e);
-    } catch (e) {
-      return Failure(Exception(e));
     }
   }
 
   /// Makes a POST request with the specified [url] and [data].
-  static Future<Result<Response<T>, Exception>> post<T>(
+  static Future<Result<Response<T>, DioException, Exception>> post<T>(
       String url, dynamic data) async {
     return call(url, RequestMethod.POST, data: data);
   }
 
   /// Makes a GET request with the specified [url] and optional [data].
-  static Future<Result<Response<T>, Exception>> get<T>(String url,
+  static Future<Result<Response<T>, DioException, Exception>> get<T>(String url,
       {dynamic data}) async {
     return call(url, RequestMethod.GET, data: data);
   }
 
   /// Makes a DELETE request with the specified [url] and optional [data].
-  static Future<Result<Response<T>, Exception>> delete<T>(String url,
+  static Future<Result<Response<T>, DioException, Exception>> delete<T>(
+      String url,
       {dynamic data}) async {
     return call(url, RequestMethod.DELETE, data: data);
   }

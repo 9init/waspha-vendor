@@ -3,7 +3,6 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:state_notifier/state_notifier.dart';
 import 'package:vendor/src/models/phone/phone_model.dart';
 import 'package:vendor/src/repository/auth/password_reset.dart';
-import 'package:vendor/src/view/pass_reset/pass_reset.dart';
 
 enum ResetOption {
   // ignore: constant_identifier_names
@@ -15,14 +14,17 @@ enum ResetOption {
   final int value;
 }
 
-@immutable
 class PasswordResetModel {
   String? email;
   PhoneModel? phoneNumber;
   ResetOption selectedOption = ResetOption.EMAIL; // Use the enum type
+
   bool get isValid => selectedOption == ResetOption.EMAIL
       ? email != null && email!.isNotEmpty
       : phoneNumber != null;
+
+  String? get value =>
+      selectedOption == ResetOption.EMAIL ? email : phoneNumber?.phoneNumber;
 
   PasswordResetModel copyWith({
     String? email,

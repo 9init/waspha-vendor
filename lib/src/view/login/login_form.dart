@@ -9,6 +9,7 @@ class CustomFormField extends HookWidget {
     this.isPassword = false,
     this.isOptional = false,
     this.onChanged,
+    this.validator,
   });
 
   final TextEditingController controller;
@@ -16,6 +17,7 @@ class CustomFormField extends HookWidget {
   final bool isPassword;
   final bool isOptional;
   final void Function(String)? onChanged;
+  final String? Function(String?)? validator;
 
   @override
   Widget build(BuildContext context) {
@@ -25,15 +27,16 @@ class CustomFormField extends HookWidget {
       padding: const EdgeInsets.symmetric(horizontal: 30),
       child: TextFormField(
         controller: controller,
-        validator: (value) {
-          if (isOptional) {
-            return null;
-          }
-          if (value!.isEmpty) {
-            return "Please enter your ${text.toLowerCase()}";
-          }
-          return null;
-        },
+        validator: validator ??
+            (value) {
+              if (isOptional) {
+                return null;
+              }
+              if (value!.isEmpty) {
+                return "Please enter your ${text.toLowerCase()}";
+              }
+              return null;
+            },
         obscureText: !isPassVisible.value && isPassword,
         onChanged: onChanged,
         decoration: InputDecoration(

@@ -35,7 +35,7 @@ class SocialMedia extends StatelessWidget {
             child: Padding(
               padding: const EdgeInsets.all(8.0),
               child: Image.asset(
-                "assets/images/onboarding/google.png",
+                "assets/imgs/onboarding/google.png",
                 color: Colors.white,
               ),
             ),

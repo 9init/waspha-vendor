@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_hooks/flutter_hooks.dart';
+import 'package:go_router/go_router.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:phone_form_field/phone_form_field.dart';
 import 'package:vendor/src/models/phone/phone_model.dart';
@@ -49,6 +49,9 @@ class ForgetPassword extends ConsumerWidget {
                 final vmNotifier =
                     ref.read(passwordResetViewModelProvider.notifier);
                 vmNotifier.requestResetPassword();
+
+                final resetModel = ref.read(passwordResetViewModelProvider);
+                context.push("/forget_pass_otp", extra: resetModel);
               },
               text: "Continue",
             ),
@@ -140,7 +143,8 @@ class MobileField extends ConsumerWidget {
                 return null;
               },
               onChanged: (value) {
-                final m = mobileController.value!;
+                final m = mobileController.value;
+                if (m == null || m.nsn.isEmpty) return;
                 final phoneModel = PhoneModel(
                   countryCode: int.parse(m.countryCode),
                   number: int.parse(m.nsn),

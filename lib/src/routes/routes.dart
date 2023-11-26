@@ -1,5 +1,7 @@
 import 'package:go_router/go_router.dart';
 import 'package:vendor/src/view/forget_password/forget_password.dart';
+import 'package:vendor/src/view/forget_password/viewmodel.dart';
+import 'package:vendor/src/view/forget_password_otp/forget_password_otp.dart';
 import 'package:vendor/src/view/home/home.dart';
 import 'package:vendor/src/view/login/login.dart';
 import 'package:vendor/src/view/navigation/navigation.dart';
@@ -23,7 +25,16 @@ final router = GoRouter(initialLocation: '/', routes: [
   GoRoute(path: '/login', builder: (context, state) => Login()),
   GoRoute(path: '/register', builder: (context, state) => Register()),
   GoRoute(path: '/forget_pass', builder: (context, state) => ForgetPassword()),
-  GoRoute(path: '/reset_pass', builder: (context, state) => ResetPassword()),
+  GoRoute(
+    path: '/forget_pass_otp',
+    builder: (context, state) => ForgetPasswordOtp(
+      passResetModel: state.extra as PasswordResetModel,
+    ),
+  ),
+  GoRoute(
+      path: '/reset_pass',
+      builder: (context, state) =>
+          ResetPassword(followUpCode: state.extra as String)),
   GoRoute(path: '/verification', builder: (context, state) => Verification()),
   GoRoute(path: '/payouts', builder: (context, state) => const Payouts()),
   GoRoute(path: '/settlement', builder: (context, state) => const Settlement()),
