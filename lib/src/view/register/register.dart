@@ -7,7 +7,7 @@ import 'package:vendor/src/view/register/viewmodel.dart';
 
 import '../common/auth/auth_container.dart';
 import '../common/auth/social_media.dart';
-import '../login/login_form.dart';
+import '../common/custome_form/custom_form.dart';
 
 class Register extends ConsumerWidget {
   Register({super.key});
