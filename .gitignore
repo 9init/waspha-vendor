@@ -42,3 +42,18 @@ app.*.map.json
 /android/app/debug
 /android/app/profile
 /android/app/release
+# lock files
+**/pubspec.lock
+
+# certificate files
+*.cer
+*.p12
+
+# environment variable files (e.g. .env.* files)
+*.env
+
+# generated files
+*.g.dart
+*.freezed.dart
+**/generated
+**/gen
