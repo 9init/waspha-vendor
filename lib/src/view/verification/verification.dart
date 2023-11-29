@@ -6,7 +6,6 @@ import 'package:vendor/src/view/common/auth/auth_container.dart';
 import 'package:vendor/src/view/common/auth_btn/auth_btn.dart';
 
 import '../common/auth/custom_btn.dart';
-import '../login/login.dart';
 
 class Verification extends HookWidget {
   Verification({super.key});

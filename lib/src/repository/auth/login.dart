@@ -1,4 +1,3 @@
-import 'package:dio/dio.dart';
 import 'package:vendor/src/shared/networking/Networking.dart';
 import 'package:vendor/src/shared/networking/results.dart';
 

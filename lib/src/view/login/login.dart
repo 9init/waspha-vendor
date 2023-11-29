@@ -3,7 +3,6 @@ import 'package:go_router/go_router.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:vendor/src/view/common/auth/social_media.dart';
 import 'package:vendor/src/view/common/auth_btn/auth_btn.dart';
-import 'package:vendor/src/view/common/colors/colors.dart';
 import 'package:vendor/src/view/common/custome_form/custom_form.dart';
 
 import '../common/auth/auth_container.dart';
