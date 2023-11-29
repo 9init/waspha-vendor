@@ -145,6 +145,7 @@ class MobileField extends ConsumerWidget {
               onChanged: (value) {
                 final m = mobileController.value;
                 if (m == null || m.nsn.isEmpty) return;
+
                 final phoneModel = PhoneModel(
                   countryCode: int.parse(m.countryCode),
                   number: int.parse(m.nsn),
