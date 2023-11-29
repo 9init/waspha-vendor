@@ -9,18 +9,13 @@ class PasswordChangeNotifier extends StateNotifier<PasswordChangeModel> {
       : super(const PasswordChangeModel(state: LoadingState.initial));
 
   Future<void> changePassword(String newPassword, String resetCode) async {
-    try {
-      debugPrint("$newPassword, $resetCode");
-      // Set the state to loading
-      state = const PasswordChangeModel(state: LoadingState.loading);
+    debugPrint("$newPassword, $resetCode");
 
-      // Fetch and update state
-      state =
-          await PasswordResetRepository.resetPassword(resetCode, newPassword);
-    } catch (error) {
-      // Handle the error
-      state = const PasswordChangeModel(state: LoadingState.error);
-    }
+    // Set the state to loading
+    state = const PasswordChangeModel(state: LoadingState.loading);
+
+    // Fetch and update state
+    state = await PasswordResetRepository.resetPassword(resetCode, newPassword);
   }
 }
 
