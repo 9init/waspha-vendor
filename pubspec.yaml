@@ -52,10 +52,10 @@ dependencies:
   cupertino_icons: ^1.0.6
   dio_cookie_manager: ^3.1.1
   circular_countdown_timer: ^0.2.3
-  flutter_screenutil: ^5.9.0
   # Internationalization and localization features
   intl: ^0.18.1
   #  provides a set of utility methods to help with screen adaptation and responsiveness
+  flutter_screenutil: ^5.9.0
 
 
 dev_dependencies:
