@@ -7,4 +7,5 @@ class ColorConstants {
   static const blackColor = Color(0xFF0A0A0A);
   static const greenColor = Color(0xFF00FF00);
   static const redColor = Color(0xFFFF0000);
+  static const transparentColor = Colors.transparent;
 }

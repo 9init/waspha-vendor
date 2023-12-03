@@ -18,4 +18,10 @@ class AppDimensions {
   static double widthMedium = 100.w;
   static double widthLarge = 150.w;
   static double widthExtraLarge = 200.w;
+
+  // Border
+  static double borderSmall = 15.r;
+  static double borderMedium = 25.r;
+  static double borderLarge = 60.r;
+  static double borderExtraLarge = 80.r;
 }
