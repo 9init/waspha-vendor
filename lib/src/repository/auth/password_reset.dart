@@ -1,4 +1,3 @@
-import 'package:dio/dio.dart';
 import 'package:vendor/src/models/loading_state/loading_state.dart';
 import 'package:vendor/src/models/password_change/password_change_model.dart';
 import 'package:vendor/src/models/phone/phone_model.dart';

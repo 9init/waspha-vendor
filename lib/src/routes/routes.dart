@@ -2,7 +2,6 @@ import 'package:go_router/go_router.dart';
 import 'package:vendor/src/view/forget_password/forget_password.dart';
 import 'package:vendor/src/view/forget_password/viewmodel.dart';
 import 'package:vendor/src/view/forget_password_otp/forget_password_otp.dart';
-import 'package:vendor/src/view/home/home.dart';
 import 'package:vendor/src/view/login/login.dart';
 import 'package:vendor/src/view/navigation/navigation.dart';
 import 'package:vendor/src/view/order/order.dart';
@@ -35,19 +34,40 @@ final router = GoRouter(initialLocation: '/', routes: [
       path: '/reset_pass',
       builder: (context, state) =>
           ResetPassword(followUpCode: state.extra as String)),
-  GoRoute(path: '/verification', builder: (context, state) => Verification()),
-  GoRoute(path: '/payouts', builder: (context, state) => const Payouts()),
-  GoRoute(path: '/settlement', builder: (context, state) => const Settlement()),
-  GoRoute(path: '/receipt', builder: (context, state) => const Receipt()),
-  GoRoute(path: '/order', builder: (context, state) => const Order()),
-  GoRoute(path: '/requests', builder: (context, state) => const Requests()),
   GoRoute(
-      path: '/notification',
-      builder: (context, state) => const Notifications()),
+    path: '/verification',
+    builder: (context, state) => Verification(),
+  ),
   GoRoute(
-      path: '/application_form',
-      builder: (context, state) => const ApplicationForm()),
+    path: '/payouts',
+    builder: (context, state) => const Payouts(),
+  ),
   GoRoute(
-      path: '/verification_waiting',
-      builder: (context, state) => VerificationWaiting()),
+    path: '/settlement',
+    builder: (context, state) => const Settlement(),
+  ),
+  GoRoute(
+    path: '/receipt',
+    builder: (context, state) => const Receipt(),
+  ),
+  GoRoute(
+    path: '/order',
+    builder: (context, state) => const Order(),
+  ),
+  GoRoute(
+    path: '/requests',
+    builder: (context, state) => const Requests(),
+  ),
+  GoRoute(
+    path: '/notification',
+    builder: (context, state) => const Notifications(),
+  ),
+  GoRoute(
+    path: '/application_form',
+    builder: (context, state) => const ApplicationForm(),
+  ),
+  GoRoute(
+    path: '/verification_waiting',
+    builder: (context, state) => VerificationWaiting(),
+  ),
 ]);

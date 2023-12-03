@@ -1,11 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+import 'package:vendor/src/view/home/homemodel.dart';
 
 import '../common/circleText/circle_text.dart';
 import '../common/profile_app_bar/profile_app_bar.dart';
 
 class HomeScreen extends StatelessWidget {
   const HomeScreen({super.key});
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -15,24 +17,30 @@ class HomeScreen extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            const Text('Home',
-                style: TextStyle(fontSize: 25, fontWeight: FontWeight.bold)),
-            const SizedBox(height: 20),
             const Row(
               children: [
-                CircleWithText(),
+                CircleWithText(switchButtonType: SwitchButtonType.button1,),
                 Spacer(),
                 CircleWithText(
                   text: 'Delivery',
+                  switchButtonType: SwitchButtonType.button2,
                 ),
                 SizedBox(
                   width: 10,
                 ),
-                CircleWithText(
-                  text: 'Pickup',
-                ),
               ],
             ),
+            Align(
+              alignment: Alignment(0.4, 0.0),
+              child: CircleWithText(
+                text: 'Pickup',
+                switchButtonType: SwitchButtonType.button3,
+              ),
+            ),
+            const Text('Home',
+                style:
+                    TextStyle(fontSize: 25, fontWeight: FontWeight.bold)),
+            const SizedBox(height: 20),
             const SizedBox(height: 20),
             GestureDetector(
               onTap: () {
@@ -77,7 +85,8 @@ class HomeScreen extends StatelessWidget {
                               Text(
                                 "- 400",
                                 style: TextStyle(
-                                    fontSize: 20, fontWeight: FontWeight.bold),
+                                    fontSize: 20,
+                                    fontWeight: FontWeight.bold),
                               ),
                             ],
                           ),
@@ -92,7 +101,8 @@ class HomeScreen extends StatelessWidget {
                               Text(
                                 "EGP 21.4",
                                 style: TextStyle(
-                                    fontSize: 20, fontWeight: FontWeight.bold),
+                                    fontSize: 20,
+                                    fontWeight: FontWeight.bold),
                               ),
                             ],
                           ),
@@ -121,7 +131,8 @@ class HomeScreen extends StatelessWidget {
             ),
             const SizedBox(height: 20),
             const Align(
-                alignment: Alignment.centerRight, child: Text("Dismiss all"))
+                alignment: Alignment.centerRight,
+                child: Text("Dismiss all"))
           ],
         ),
       ),

@@ -19,7 +19,7 @@ publish_to: 'none' # Remove this line if you wish to publish to pub.dev
 version: 1.0.0+1
 
 environment:
-  sdk: '>=3.1.4 <4.0.0'
+  sdk: '>=3.1.3 <4.0.0'
 
 # Dependencies specify other packages that your package needs in order to work.
 # To automatically upgrade your package dependencies to the latest versions
@@ -30,6 +30,9 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
+  flutter_localizations:
+    sdk: flutter
+
   dio: ^5.3.3
   hooks_riverpod: ^2.4.6
   google_maps_flutter: ^2.5.0
@@ -39,27 +42,38 @@ dependencies:
   go_router: ^12.1.1
   path_provider: ^2.1.1
   json_annotation: ^4.8.1
+  # For convert Svg code into a basic photo
   flutter_svg: ^2.0.9
   phone_form_field: ^8.1.0
   otp_text_field: ^1.1.3
   readmore: ^2.2.0
   cached_network_image: ^3.3.0
-
-
-  # The following adds the Cupertino Icons font to your application.
   # Use with the CupertinoIcons class for iOS style icons.
   cupertino_icons: ^1.0.6
   dio_cookie_manager: ^3.1.1
   circular_countdown_timer: ^0.2.3
   flutter_screenutil: ^5.9.0
+  # Internationalization and localization features
+  intl: ^0.18.1
+  #  provides a set of utility methods to help with screen adaptation and responsiveness
+
 
 dev_dependencies:
   flutter_test:
     sdk: flutter
+  # Build Runner is a package that provides a concrete way of generating files using Dart code, outside of tools like pub and the Dart VM.
+  # Use the below command to generate files:
+  # `dart run build_runner build --delete-conflicting-outputs`
   build_runner: ^2.4.6
   freezed: ^2.4.5
   json_serializable: ^6.7.1
   riverpod_generator: ^2.3.6
+  # Important: Used to generate localization manually in case it's not generated automatically
+  # `dart run intl_utils:generate`
+  intl_utils: ^2.8.3
+  # used for code generation related to assets,
+  flutter_gen_runner: ^5.3.1
+
 
   # The "flutter_lints" package below contains a set of recommended lints to
   # encourage good coding practices. The lint set provided by the package is
@@ -67,11 +81,27 @@ dev_dependencies:
   # package. See that file for information about deactivating specific lint
   # rules and activating additional ones.
   flutter_lints: ^3.0.1
+flutter_gen:
+  output: lib/core/gen/
+  line_length: 50
 
-# For information on the generic Dart part of this file, see the
-# following page: https://dart.dev/tools/pub/pubspec
+  integrations:
+    flutter_svg: true
+    flare_flutter: true
+    lottie: true
 
-# The following section is specific to Flutter packages.
+  assets:
+    enabled: true
+
+    outputs:
+      class_name: MyAssets
+
+  fonts:
+    enabled: true
+    outputs:
+      class_name: MyFontFamily
+
+
 flutter:
 
   # The following line ensures that the Material Icons font is
@@ -84,28 +114,33 @@ flutter:
   - assets/imgs/
   - assets/imgs/onboarding/
 
-  # An image asset can refer to one or more resolution-specific "variants", see
-  # https://flutter.dev/assets-and-images/#resolution-aware
 
-  # For details regarding adding assets from package dependencies, see
-  # https://flutter.dev/assets-and-images/#from-packages
+  fonts:
+  - family: OpenSans
+    fonts:
+    - asset: assets/fonts/OpenSans-Light.ttf
+      weight: 300
+      style: normal
 
-  # To add custom fonts to your application, add a fonts section here,
-  # in this "flutter" section. Each entry in this list should have a
-  # "family" key with the font family name, and a "fonts" key with a
-  # list giving the asset and other descriptors for the font. For
-  # example:
-  # fonts:
-  #   - family: Schyler
-  #     fonts:
-  #       - asset: fonts/Schyler-Regular.ttf
-  #       - asset: fonts/Schyler-Italic.ttf
-  #         style: italic
-  #   - family: Trajan Pro
-  #     fonts:
-  #       - asset: fonts/TrajanPro.ttf
-  #       - asset: fonts/TrajanPro_Bold.ttf
-  #         weight: 700
-  #
-  # For details regarding fonts from package dependencies,
-  # see https://flutter.dev/custom-fonts/#from-packages
+    - asset: assets/fonts/OpenSans-Regular.ttf
+      weight: 400
+      style: normal
+
+    - asset: assets/fonts/OpenSans-Medium.ttf
+      weight: 500
+      style: normal
+
+    - asset: assets/fonts/OpenSans-SemiBold.ttf
+      weight: 600
+      style: normal
+
+    - asset: assets/fonts/OpenSans-Bold.ttf
+      weight: 700
+      style: normal
+flutter_intl:
+  enabled: true
+  arb_dir: lib/core/localization/l10n
+  output_dir: lib/core/localization/generated
+  class_name: AppLocalization
+  main_locale: en
+  synthetic-package: false
