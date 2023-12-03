@@ -15,7 +15,7 @@ class StartUp extends StatelessWidget {
         Future(() {
           ref.watch(authCheckViewModelProvider).when(
                 data: (isLoggedIn) {
-                  isLoggedIn ? context.go("/main") : context.go("/login");
+                  isLoggedIn ? context.go("/login") : context.go("/main");
                 },
                 error: (error, stackStrace) {
                   context.go("/login");
