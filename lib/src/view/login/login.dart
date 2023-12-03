@@ -1,10 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-import 'package:vendor/src/view/common/auth/social_media.dart';
 import 'package:vendor/src/view/common/auth_btn/auth_btn.dart';
-import 'package:vendor/src/view/common/colors/colors.dart';
-import 'package:vendor/src/view/common/custome_form/custom_form.dart';
+import 'package:vendor/src/view/common/custom_form/custom_form.dart';
 
 import '../common/auth/auth_container.dart';
 import 'viewmodel.dart';
@@ -25,6 +23,7 @@ class Login extends HookConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final viewModel = ref.read(loginViewModelProvider.notifier);
+
     return Scaffold(
       body: SingleChildScrollView(
         child: Form(
@@ -35,25 +34,7 @@ class Login extends HookConsumerWidget {
                 text: "Welcome, Please login to\nyour account.",
                 backButtonEnabled: false,
               ),
-              const SizedBox(
-                height: 10,
-              ),
-              const Text("Login  via social networks"),
-              const SizedBox(
-                height: 10,
-              ),
-              SocialMedia(
-                googleOnTap: () {},
-                facebookOnTap: () {},
-                appleOnTap: () {},
-              ),
-              const SizedBox(
-                height: 10,
-              ),
-              const Text("or login with mobile"),
-              const SizedBox(
-                height: 10,
-              ),
+              const SizedBox(height: 50),
               CustomFormField(
                 text: "Email or Mobile Number",
                 controller: _mobileController,
