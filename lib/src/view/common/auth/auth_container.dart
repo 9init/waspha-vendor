@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:vendor/core/localization/localization.dart';
 import 'package:vendor/src/view/common/curev_clipper/custom_clip.dart';
 
 import '../colors/colors.dart';
@@ -7,8 +8,8 @@ class WasphaHeader extends StatelessWidget {
   const WasphaHeader({
     super.key,
     this.text,
-    this.title1 = "We are",
-    this.title2 = "WASPHA",
+    this.title1 ,
+    this.title2 ,
     this.title1Size = 20,
     this.title2Size = 40,
     this.backButtonEnabled = true,
@@ -58,7 +59,7 @@ class WasphaHeader extends StatelessWidget {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Text(
-                          title1 ?? "",
+                          title1 ?? context.localization.intro_message,
                           style: TextStyle(
                             color: Colors.white,
                             fontSize: title1Size,
@@ -66,7 +67,7 @@ class WasphaHeader extends StatelessWidget {
                           ),
                         ),
                         Text(
-                          title2 ?? "",
+                          title2 ?? context.localization.app_name,
                           style: TextStyle(
                             color: Colors.white,
                             fontSize: title2Size,

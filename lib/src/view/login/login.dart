@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:vendor/core/localization/localization.dart';
 import 'package:vendor/src/view/common/auth/social_media.dart';
 import 'package:vendor/src/view/common/auth_btn/auth_btn.dart';
 import 'package:vendor/src/view/common/custome_form/custom_form.dart';
@@ -30,14 +31,14 @@ class Login extends HookConsumerWidget {
           key: _formKey,
           child: Column(
             children: [
-              const WasphaHeader(
-                text: "Welcome, Please login to\nyour account.",
+               WasphaHeader(
+                text: context.localization.login_welcome_message,
                 backButtonEnabled: false,
               ),
               const SizedBox(
                 height: 10,
               ),
-              const Text("Login  via social networks"),
+               Text(context.localization.login_social_networks),
               const SizedBox(
                 height: 10,
               ),
@@ -49,12 +50,12 @@ class Login extends HookConsumerWidget {
               const SizedBox(
                 height: 10,
               ),
-              const Text("or login with mobile"),
+               Text(context.localization.login_with_mobile),
               const SizedBox(
                 height: 10,
               ),
               CustomFormField(
-                text: "Email or Mobile Number",
+                text: context.localization.email_or_mobile,
                 controller: _mobileController,
                 onChanged: (value) => viewModel.updateVendorID(value),
               ),
@@ -62,7 +63,7 @@ class Login extends HookConsumerWidget {
                 height: 30,
               ),
               CustomFormField(
-                text: "Password",
+                text: context.localization.password,
                 isPassword: true,
                 onChanged: (value) => viewModel.updatePassword(value),
                 controller: _passwordController,
@@ -90,7 +91,7 @@ class Login extends HookConsumerWidget {
                               viewModel.updateRememberPassword(value!);
                             },
                           ),
-                          const Text("Remember me"),
+                           Text(context.localization.remember_me,),
                         ],
                       ),
                     ),
@@ -99,7 +100,7 @@ class Login extends HookConsumerWidget {
                       onTap: () {
                         context.push('/forget_pass');
                       },
-                      child: const Text("Forgot Password?"),
+                      child:  Text(context.localization.forgot_password),
                     ),
                   ],
                 ),
@@ -120,13 +121,13 @@ class Login extends HookConsumerWidget {
                       context.mounted &&
                       !ref.read(isVendorIdOrPasswordNullProvider)) {
                     ScaffoldMessenger.of(context).showSnackBar(
-                      const SnackBar(
-                        content: Text("Invalid Vendor ID or Password"),
+                       SnackBar(
+                        content: Text(context.localization.remember_me),
                       ),
                     );
                   }
                 },
-                text: ref.watch(isLoadingProvider) ? "Loading" : "Continue",
+                text: ref.watch(isLoadingProvider) ? context.localization.loading_button : context.localization.continue_button,
               ),
               const SizedBox(
                 height: 10,
@@ -134,13 +135,13 @@ class Login extends HookConsumerWidget {
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  const Text("Don't have an account?"),
+                   Text(context.localization.dont_have_an_account),
                   TextButton(
                     onPressed: () {
                       context.go('/register');
                     },
-                    child: const Text(
-                      "Sign Up",
+                    child:  Text(
+                      context.localization.sign_up,
                       style: TextStyle(color: Colors.blue),
                     ),
                   )
