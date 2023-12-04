@@ -6,8 +6,7 @@ import 'package:vendor/src/view/common/auth_btn/auth_btn.dart';
 import 'package:vendor/src/view/register/viewmodel.dart';
 
 import '../common/auth/auth_container.dart';
-import '../common/auth/social_media.dart';
-import '../common/custome_form/custom_form.dart';
+import '../common/custom_form/custom_form.dart';
 
 class Register extends ConsumerWidget {
   Register({super.key});
@@ -46,11 +45,6 @@ class Register extends ConsumerWidget {
                 const Text("Sign-up via social networks"),
                 const SizedBox(
                   height: 10,
-                ),
-                SocialMedia(
-                  googleOnTap: () {},
-                  facebookOnTap: () {},
-                  appleOnTap: () {},
                 ),
                 const SizedBox(
                   height: 10,

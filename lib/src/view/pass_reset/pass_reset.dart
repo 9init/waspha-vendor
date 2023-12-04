@@ -6,7 +6,7 @@ import 'package:vendor/src/view/common/auth/auth_container.dart';
 import 'package:vendor/src/view/common/auth_btn/auth_btn.dart';
 import 'package:vendor/src/view/pass_reset/viewmodel.dart';
 
-import '../common/custome_form/custom_form.dart';
+import '../common/custom_form/custom_form.dart';
 
 class ResetPassword extends ConsumerWidget {
   ResetPassword({super.key, required this.followUpCode});

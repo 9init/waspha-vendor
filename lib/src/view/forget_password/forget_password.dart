@@ -7,7 +7,7 @@ import 'package:vendor/src/view/common/auth/auth_container.dart';
 import 'package:vendor/src/view/common/auth_btn/auth_btn.dart';
 import 'package:vendor/src/view/forget_password/viewmodel.dart';
 
-import '../common/custome_form/custom_form.dart';
+import '../common/custom_form/custom_form.dart';
 
 class ForgetPassword extends ConsumerWidget {
   ForgetPassword({super.key});

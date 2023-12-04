@@ -27,7 +27,7 @@ final router = GoRouter(initialLocation: '/', routes: [
   GoRoute(
     path: '/forget_pass_otp',
     builder: (context, state) => ForgetPasswordOtp(
-      passResetModel: state.extra as PasswordResetModel,
+      resetModel: state.extra as PasswordResetModel,
     ),
   ),
   GoRoute(

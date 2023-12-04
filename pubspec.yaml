@@ -58,7 +58,6 @@ dependencies:
   flutter_screenutil: ^5.9.0
 
 
-
 dev_dependencies:
   flutter_test:
     sdk: flutter
@@ -117,27 +116,27 @@ flutter:
 
 
   fonts:
-    - family: OpenSans
-      fonts:
-        - asset: assets/fonts/OpenSans-Light.ttf
-          weight: 300
-          style: normal
+  - family: OpenSans
+    fonts:
+    - asset: assets/fonts/OpenSans-Light.ttf
+      weight: 300
+      style: normal
 
-        - asset: assets/fonts/OpenSans-Regular.ttf
-          weight: 400
-          style: normal
+    - asset: assets/fonts/OpenSans-Regular.ttf
+      weight: 400
+      style: normal
 
-        - asset: assets/fonts/OpenSans-Medium.ttf
-          weight: 500
-          style: normal
+    - asset: assets/fonts/OpenSans-Medium.ttf
+      weight: 500
+      style: normal
 
-        - asset: assets/fonts/OpenSans-SemiBold.ttf
-          weight: 600
-          style: normal
+    - asset: assets/fonts/OpenSans-SemiBold.ttf
+      weight: 600
+      style: normal
 
-        - asset: assets/fonts/OpenSans-Bold.ttf
-          weight: 700
-          style: normal
+    - asset: assets/fonts/OpenSans-Bold.ttf
+      weight: 700
+      style: normal
 flutter_intl:
   enabled: true
   arb_dir: lib/core/localization/l10n
