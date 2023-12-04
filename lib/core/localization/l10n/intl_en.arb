@@ -1,3 +1,20 @@
 {
-  "@@locale": "en"
+  "@@locale": "en",
+"_________________________________login_screen_________________________________": "",
+  "intro_message": "We are",
+  "app_name": "WASPHA",
+  "login_welcome_message": "Welcome, Please login to\nyour account.",
+  "login_social_networks": "Login via Social Networks",
+  "login_with_mobile": "or Login with Mobile",
+  "email_or_mobile": "Email or Mobile Number",
+  "password": "Password",
+  "remember_me": "Remember me",
+  "forgot_password": "Forgot Password?",
+  "invalid_vendor_id_or_password": "Invalid Vendor ID or Password",
+  "loading_button": "Loading",
+  "continue_button": "Continue",
+  "dont_have_an_account": "Don't have an account?",
+  "sign_up": "Sign Up",
+  "_________________________________end_of_login_screen_________________________________": ""
+
 }
