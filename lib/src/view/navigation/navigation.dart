@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:vendor/core/gen/assets.gen.dart';
 import 'package:vendor/src/view/home/home.dart';
 
 import '../requests/requests.dart';
@@ -29,9 +30,7 @@ class _Navigation extends State<Navigation> {
         label: 'Request',
       ),
       BottomNavigationBarItem(
-        icon: SvgPicture.asset(
-          'assets/imgs/offers.svg',
-        ),
+        icon: $AssetsImgsGen().offersImg.image(),
         label: 'Offers',
       ),
       BottomNavigationBarItem(
