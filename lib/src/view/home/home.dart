@@ -33,7 +33,7 @@ class HomeScreen extends ConsumerWidget {
                   child: FlutterSwitch(
                     showOnOff: true,
                     value: homeModel.isStoreOnline ?? false,
-                    width: 300.w,
+                    width: 100.w,
                     activeText: "Online",
                     inactiveText: "Offline",
                     activeTextFontWeight: FontWeight.normal,
@@ -53,7 +53,7 @@ class HomeScreen extends ConsumerWidget {
                     Text(
                       "Box",
                       style: TextStyle(
-                        fontSize: 20,
+                        fontSize: 20.sp,
                         fontWeight: FontWeight.bold,
                       ),
                     ),
@@ -75,8 +75,8 @@ class HomeScreen extends ConsumerWidget {
               ],
             ),
             SizedBox(height: 20),
-            const Text('Home',
-                style: TextStyle(fontSize: 25, fontWeight: FontWeight.bold)),
+            Text('Home',
+                style: TextStyle(fontSize: 25.sp, fontWeight: FontWeight.bold)),
             const SizedBox(height: 20),
             const SizedBox(height: 20),
             GestureDetector(
@@ -98,16 +98,16 @@ class HomeScreen extends ConsumerWidget {
                       ],
                     ),
                   ),
-                  child: const Column(
+                  child: Column(
                     children: [
                       Text(
                         "Total Net Profit",
-                        style: TextStyle(fontSize: 20),
+                        style: TextStyle(fontSize: 20.sp),
                       ),
                       Text(
                         "EGP 1,000,000",
                         style: TextStyle(
-                            fontSize: 20, fontWeight: FontWeight.bold),
+                            fontSize: 20.sp, fontWeight: FontWeight.bold),
                       ),
                       SizedBox(height: 20),
                       Row(
@@ -117,12 +117,13 @@ class HomeScreen extends ConsumerWidget {
                             children: [
                               Text(
                                 "Balance",
-                                style: TextStyle(fontSize: 20),
+                                style: TextStyle(fontSize: 20.sp),
                               ),
                               Text(
                                 "- 400",
                                 style: TextStyle(
-                                    fontSize: 20, fontWeight: FontWeight.bold),
+                                    fontSize: 20.sp,
+                                    fontWeight: FontWeight.bold),
                               ),
                             ],
                           ),
@@ -133,11 +134,12 @@ class HomeScreen extends ConsumerWidget {
                                 height: 20,
                               ),
                               Text("Today Net Profit",
-                                  style: TextStyle(fontSize: 20)),
+                                  style: TextStyle(fontSize: 20.sp)),
                               Text(
                                 "EGP 21.4",
                                 style: TextStyle(
-                                    fontSize: 20, fontWeight: FontWeight.bold),
+                                    fontSize: 20.sp,
+                                    fontWeight: FontWeight.bold),
                               ),
                             ],
                           ),
@@ -153,7 +155,7 @@ class HomeScreen extends ConsumerWidget {
                         padding: EdgeInsets.only(left: 30.0),
                         child: Row(
                           children: [
-                            Text("Payouts", style: TextStyle(fontSize: 20)),
+                            Text("Payouts", style: TextStyle(fontSize: 20.sp)),
                             Icon(Icons.arrow_forward),
                           ],
                         ),

@@ -57,7 +57,7 @@ class HomeSwitcher extends StatelessWidget {
         Text(
           title,
           style: TextStyle(
-            fontSize: 45.sp,
+            fontSize: 20.sp,
             fontWeight: FontWeight.bold,
           ),
         ),
