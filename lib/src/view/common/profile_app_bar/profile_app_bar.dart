@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:vendor/core/gen/assets.gen.dart';
 
 class ProfileAppBar extends StatelessWidget implements PreferredSizeWidget {
   ProfileAppBar({
@@ -9,17 +10,23 @@ class ProfileAppBar extends StatelessWidget implements PreferredSizeWidget {
   @override
   Widget build(BuildContext context) {
     return AppBar(
-      leading: const CircleAvatar(
-        radius: 15,
+      leading: Padding(
+        padding: const EdgeInsets.only(left: 10),
+        child: CircleAvatar(
+          radius: 15,
+          backgroundImage: AssetImage($AssetsImgsGen().avatar.path),
+        ),
       ),
       actions: [
         IconButton(
           onPressed: () {},
           icon: const Icon(Icons.notifications),
         ),
-        const Padding(
+        Padding(
           padding: EdgeInsets.symmetric(horizontal: 20),
-          child: CircleAvatar(),
+          child: CircleAvatar(
+            backgroundImage: AssetImage($AssetsImgsGen().storeLogo.path),
+          ),
         )
       ],
     );
