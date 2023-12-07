@@ -1,15 +1,20 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:flutter_switch/flutter_switch.dart';
 import 'package:go_router/go_router.dart';
+import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:vendor/core/gen/assets.gen.dart';
+import 'package:vendor/src/view/common/home_switch/home_switch.dart';
+import 'package:vendor/src/view/home/viewmodel.dart';
 
 import '../common/profile_app_bar/profile_app_bar.dart';
 
-class HomeScreen extends StatelessWidget {
+class HomeScreen extends ConsumerWidget {
   const HomeScreen({super.key});
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
+    final homeModel = ref.watch(homeModelProvider);
     return Scaffold(
       appBar: ProfileAppBar(),
       body: Padding(
@@ -18,29 +23,25 @@ class HomeScreen extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             SizedBox(height: 20),
-            Align(
-              child: Row(mainAxisAlignment: MainAxisAlignment.end, children: [
+            Row(
+              mainAxisAlignment: MainAxisAlignment.end,
+              children: [
                 Container(
-                    margin: EdgeInsets.only(right: 30),
-                    padding: EdgeInsets.only(left: 10),
-                    constraints:
-                        BoxConstraints(maxWidth: 400.w, minWidth: 300.w),
-                    decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(30),
-                        border: Border.all(color: Colors.black)),
-                    child: Row(
-                      children: [
-                        Text("Online",
-                            style: TextStyle(
-                                fontSize: 20, fontWeight: FontWeight.bold)),
-                        Spacer(),
-                        CircleAvatar(
-                          radius: 15,
-                          backgroundColor: Colors.green,
-                        )
-                      ],
-                    ))
-              ]),
+                  margin: EdgeInsets.only(right: 30),
+                  padding: EdgeInsets.only(left: 10),
+                  child: FlutterSwitch(
+                    showOnOff: true,
+                    value: homeModel.isStoreOnline ?? false,
+                    width: 300.w,
+                    activeText: "Online",
+                    inactiveText: "Offline",
+                    activeTextFontWeight: FontWeight.normal,
+                    inactiveTextFontWeight: FontWeight.normal,
+                    switchBorder: Border.all(color: Colors.black),
+                    onToggle: (val) {},
+                  ),
+                ),
+              ],
             ),
             SizedBox(height: 20),
             Row(
@@ -56,97 +57,16 @@ class HomeScreen extends StatelessWidget {
                   ],
                 ),
                 Spacer(),
-                // Column(
-                //   children: [
-                //     $AssetsImgsGen().box2.image(),
-                //     Text(
-                //       "Box",
-                //       style:
-                //           TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
-                //     ),
-                //   ],
-                // ),
-                Column(
-                  children: [
-                    CircleAvatar(
-                      radius: 40,
-                      backgroundColor: Color(0xff00FF00),
-                      child: Column(
-                        children: [
-                          SizedBox(
-                            height: 10,
-                          ),
-                          Text(
-                            "On",
-                            style: TextStyle(
-                                color: Colors.black,
-                                fontSize: 15,
-                                fontWeight: FontWeight.bold),
-                          ),
-                          SizedBox(
-                            height: 10,
-                          ),
-                          SizedBox(
-                              height: 10,
-                              child: Switch(
-                                  value: true,
-                                  onChanged: (v) {},
-                                  activeColor: Colors.white,
-                                  trackOutlineColor:
-                                      MaterialStateProperty.all(Colors.white),
-                                  inactiveTrackColor: Colors.transparent,
-                                  activeTrackColor: Colors.transparent))
-                        ],
-                      ),
-                    ),
-                    Text(
-                      "Delivery",
-                      style:
-                          TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
-                    ),
-                  ],
+                HomeSwitcher(
+                  title: "Delivery",
+                  value: homeModel.isDeliveryEnabled ?? false,
+                  onChanged: (val) {},
                 ),
                 SizedBox(width: 20),
-                Column(
-                  children: [
-                    CircleAvatar(
-                      radius: 40,
-                      backgroundColor: Color(0xffFF0000),
-                      child: Column(
-                        children: [
-                          SizedBox(
-                            height: 10,
-                          ),
-                          Text(
-                            "OFF",
-                            style: TextStyle(
-                                color: Colors.black,
-                                fontSize: 15,
-                                fontWeight: FontWeight.bold),
-                          ),
-                          SizedBox(
-                            height: 10,
-                          ),
-                          SizedBox(
-                              height: 10,
-                              child: Switch(
-                                  value: false,
-                                  onChanged: (v) {},
-                                  activeColor: Colors.white,
-                                  trackOutlineColor:
-                                      MaterialStateProperty.all(Colors.white),
-                                  inactiveTrackColor: Colors.transparent,
-                                  inactiveThumbColor: Colors.white,
-                                  activeTrackColor: Colors.transparent))
-                        ],
-                      ),
-                    ),
-                    Text(
-                      "Delivery",
-                      style:
-                          TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
-                    ),
-                  ],
+                HomeSwitcher(
+                  title: "Pickup",
+                  value: homeModel.isPickupEnabled ?? false,
+                  onChanged: (val) {},
                 ),
               ],
             ),

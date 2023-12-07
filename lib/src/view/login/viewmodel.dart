@@ -1,6 +1,7 @@
 // ignore_for_file: depend_on_referenced_packages
 
-import 'package:riverpod/riverpod.dart';
+import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:vendor/src/models/vendor/vendor.dart';
 import 'package:vendor/src/repository/auth/login.dart';
 
 class LoginModel {
@@ -36,7 +37,7 @@ class LoginViewModel extends StateNotifier<LoginModel> {
     state = state.copyWith(password: newPassword);
   }
 
-  void updateLoading(bool isLoading) {
+  void _setIsLoading(bool isLoading) {
     state = state.copyWith(loading: isLoading);
   }
 
@@ -45,15 +46,16 @@ class LoginViewModel extends StateNotifier<LoginModel> {
   }
 
   // Method to perform the login logic
-  Future<bool> performLogin() async {
+  Future<bool> performLogin(WidgetRef ref) async {
     // Access the username and password from the model
     final vendorId = state.vendorId;
     final password = state.password;
 
     // Perform your login logic here
-    updateLoading(true);
+    _setIsLoading(true);
     final vendor = await LoginRepository.login(vendorId, password);
-    updateLoading(false);
+    ref.read(vendorProvider.notifier).update((state) => vendor);
+    _setIsLoading(false);
 
     return vendor != null;
   }

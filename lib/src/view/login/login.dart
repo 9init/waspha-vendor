@@ -14,9 +14,9 @@ class Login extends HookConsumerWidget {
   final TextEditingController _passwordController = TextEditingController();
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
 
-  Future<bool> validateLogin(LoginViewModel viewModel) async {
+  Future<bool> validateLogin(WidgetRef ref, LoginViewModel viewModel) async {
     if (_formKey.currentState!.validate()) {
-      return await viewModel.performLogin();
+      return await viewModel.performLogin(ref);
     }
     return false;
   }
@@ -97,7 +97,7 @@ class Login extends HookConsumerWidget {
                 onTap: () async {
                   if (ref.read(isLoadingProvider)) return;
 
-                  final result = await validateLogin(viewModel);
+                  final result = await validateLogin(ref, viewModel);
                   if (result && context.mounted) {
                     context.go("/main");
                   }
