@@ -2,6 +2,7 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:vendor/src/models/store/store_model.dart';
 import 'package:vendor/src/shared/networking/Networking.dart';
 import 'package:vendor/src/shared/networking/results.dart';
+import 'package:vendor/src/view/home/viewmodel.dart';
 
 class StoreRepository {
   static Future<StoreModel?> profile() async {
@@ -13,6 +14,18 @@ class StoreRepository {
     };
 
     return value;
+  }
+
+  static Future<bool> updateStoreAttributes(HomeModel attributes) async {
+    final result = await Networking.post(
+      "/update-store-attributes",
+      {
+        "is_online": attributes.isStoreOnline,
+        "delivery": attributes.isDeliveryEnabled,
+        "pickup": attributes.isPickupEnabled
+      },
+    );
+    return result is Success;
   }
 
   static final storeProvider = FutureProvider<StoreModel?>((ref) => profile());

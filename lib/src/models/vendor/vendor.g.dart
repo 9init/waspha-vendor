@@ -11,6 +11,7 @@ _$VendorImpl _$$VendorImplFromJson(Map<String, dynamic> json) => _$VendorImpl(
       email: json['email'] as String,
       contact: json['contact'] as String?,
       country: json['country'] as String?,
+      avatar: json['avatar'] as String?,
       loyaltyPoints: json['loyalty_points'] as int?,
     );
 
@@ -20,5 +21,6 @@ Map<String, dynamic> _$$VendorImplToJson(_$VendorImpl instance) =>
       'email': instance.email,
       'contact': instance.contact,
       'country': instance.country,
+      'avatar': instance.avatar,
       'loyalty_points': instance.loyaltyPoints,
     };

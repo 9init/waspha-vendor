@@ -13,6 +13,7 @@ class Vendor with _$Vendor {
     required String email,
     String? contact,
     String? country,
+    String? avatar,
     @JsonKey(name: "loyalty_points") int? loyaltyPoints,
   }) = _Vendor;
 

@@ -24,6 +24,7 @@ mixin _$Vendor {
   String get email => throw _privateConstructorUsedError;
   String? get contact => throw _privateConstructorUsedError;
   String? get country => throw _privateConstructorUsedError;
+  String? get avatar => throw _privateConstructorUsedError;
   @JsonKey(name: "loyalty_points")
   int? get loyaltyPoints => throw _privateConstructorUsedError;
 
@@ -42,6 +43,7 @@ abstract class $VendorCopyWith<$Res> {
       String email,
       String? contact,
       String? country,
+      String? avatar,
       @JsonKey(name: "loyalty_points") int? loyaltyPoints});
 }
 
@@ -62,6 +64,7 @@ class _$VendorCopyWithImpl<$Res, $Val extends Vendor>
     Object? email = null,
     Object? contact = freezed,
     Object? country = freezed,
+    Object? avatar = freezed,
     Object? loyaltyPoints = freezed,
   }) {
     return _then(_value.copyWith(
@@ -80,6 +83,10 @@ class _$VendorCopyWithImpl<$Res, $Val extends Vendor>
       country: freezed == country
           ? _value.country
           : country // ignore: cast_nullable_to_non_nullable
+              as String?,
+      avatar: freezed == avatar
+          ? _value.avatar
+          : avatar // ignore: cast_nullable_to_non_nullable
               as String?,
       loyaltyPoints: freezed == loyaltyPoints
           ? _value.loyaltyPoints
@@ -101,6 +108,7 @@ abstract class _$$VendorImplCopyWith<$Res> implements $VendorCopyWith<$Res> {
       String email,
       String? contact,
       String? country,
+      String? avatar,
       @JsonKey(name: "loyalty_points") int? loyaltyPoints});
 }
 
@@ -119,6 +127,7 @@ class __$$VendorImplCopyWithImpl<$Res>
     Object? email = null,
     Object? contact = freezed,
     Object? country = freezed,
+    Object? avatar = freezed,
     Object? loyaltyPoints = freezed,
   }) {
     return _then(_$VendorImpl(
@@ -138,6 +147,10 @@ class __$$VendorImplCopyWithImpl<$Res>
           ? _value.country
           : country // ignore: cast_nullable_to_non_nullable
               as String?,
+      avatar: freezed == avatar
+          ? _value.avatar
+          : avatar // ignore: cast_nullable_to_non_nullable
+              as String?,
       loyaltyPoints: freezed == loyaltyPoints
           ? _value.loyaltyPoints
           : loyaltyPoints // ignore: cast_nullable_to_non_nullable
@@ -154,6 +167,7 @@ class _$VendorImpl implements _Vendor {
       required this.email,
       this.contact,
       this.country,
+      this.avatar,
       @JsonKey(name: "loyalty_points") this.loyaltyPoints});
 
   factory _$VendorImpl.fromJson(Map<String, dynamic> json) =>
@@ -168,12 +182,14 @@ class _$VendorImpl implements _Vendor {
   @override
   final String? country;
   @override
+  final String? avatar;
+  @override
   @JsonKey(name: "loyalty_points")
   final int? loyaltyPoints;
 
   @override
   String toString() {
-    return 'Vendor(name: $name, email: $email, contact: $contact, country: $country, loyaltyPoints: $loyaltyPoints)';
+    return 'Vendor(name: $name, email: $email, contact: $contact, country: $country, avatar: $avatar, loyaltyPoints: $loyaltyPoints)';
   }
 
   @override
@@ -185,14 +201,15 @@ class _$VendorImpl implements _Vendor {
             (identical(other.email, email) || other.email == email) &&
             (identical(other.contact, contact) || other.contact == contact) &&
             (identical(other.country, country) || other.country == country) &&
+            (identical(other.avatar, avatar) || other.avatar == avatar) &&
             (identical(other.loyaltyPoints, loyaltyPoints) ||
                 other.loyaltyPoints == loyaltyPoints));
   }
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode =>
-      Object.hash(runtimeType, name, email, contact, country, loyaltyPoints);
+  int get hashCode => Object.hash(
+      runtimeType, name, email, contact, country, avatar, loyaltyPoints);
 
   @JsonKey(ignore: true)
   @override
@@ -214,6 +231,7 @@ abstract class _Vendor implements Vendor {
           required final String email,
           final String? contact,
           final String? country,
+          final String? avatar,
           @JsonKey(name: "loyalty_points") final int? loyaltyPoints}) =
       _$VendorImpl;
 
@@ -227,6 +245,8 @@ abstract class _Vendor implements Vendor {
   String? get contact;
   @override
   String? get country;
+  @override
+  String? get avatar;
   @override
   @JsonKey(name: "loyalty_points")
   int? get loyaltyPoints;

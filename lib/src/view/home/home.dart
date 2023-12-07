@@ -15,6 +15,7 @@ class HomeScreen extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final homeModel = ref.watch(homeModelProvider);
+    final homeModelNotifier = ref.read(homeModelProvider.notifier);
     return Scaffold(
       appBar: ProfileAppBar(),
       body: Padding(
@@ -38,7 +39,7 @@ class HomeScreen extends ConsumerWidget {
                     activeTextFontWeight: FontWeight.normal,
                     inactiveTextFontWeight: FontWeight.normal,
                     switchBorder: Border.all(color: Colors.black),
-                    onToggle: (val) {},
+                    onToggle: (val) => homeModelNotifier.setStoreOnline(val),
                   ),
                 ),
               ],
@@ -51,8 +52,10 @@ class HomeScreen extends ConsumerWidget {
                     $AssetsImgsGen().box2.image(),
                     Text(
                       "Box",
-                      style:
-                          TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+                      style: TextStyle(
+                        fontSize: 20,
+                        fontWeight: FontWeight.bold,
+                      ),
                     ),
                   ],
                 ),
@@ -60,13 +63,14 @@ class HomeScreen extends ConsumerWidget {
                 HomeSwitcher(
                   title: "Delivery",
                   value: homeModel.isDeliveryEnabled ?? false,
-                  onChanged: (val) {},
+                  onChanged: (val) =>
+                      homeModelNotifier.setIsDeliveryEnabled(val),
                 ),
                 SizedBox(width: 20),
                 HomeSwitcher(
                   title: "Pickup",
                   value: homeModel.isPickupEnabled ?? false,
-                  onChanged: (val) {},
+                  onChanged: (val) => homeModelNotifier.setIsPickupEnabled(val),
                 ),
               ],
             ),
