@@ -5,7 +5,7 @@
   "app_name": "WASPHA",
   "login_welcome_message": "Welcome, Please login to\nyour account.",
   "login_social_networks": "Login via Social Networks",
-  "login_with_mobile": "or Login with Mobile",
+  "login_with_mobile": "Login with Mobile",
   "email_or_mobile": "Email or Mobile Number",
   "password": "Password",
   "remember_me": "Remember me",
