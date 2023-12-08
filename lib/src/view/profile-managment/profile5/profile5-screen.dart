@@ -126,7 +126,9 @@ class _Profile5ScreenState extends State<Profile5Screen> {
                       color: Color(0XffE2E8ED),
                     ),
                     ListTile(
-                      onTap: () {},
+                      onTap: () {
+                        context.go("/Profile34Screen");
+                      },
                       title: Text(
                         "Default Pay methods",
                         style: TextStyle(
