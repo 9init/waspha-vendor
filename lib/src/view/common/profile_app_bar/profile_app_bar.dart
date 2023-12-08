@@ -1,5 +1,6 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:vendor/core/gen/assets.gen.dart';
 import 'package:vendor/src/models/vendor/vendor.dart';
@@ -31,10 +32,15 @@ class ProfileAppBar extends ConsumerWidget implements PreferredSizeWidget {
         ),
         Padding(
           padding: EdgeInsets.symmetric(horizontal: 10),
-          child: CircleAvatar(
-            backgroundImage: homeModel.storeImage == null
-                ? AssetImage($AssetsImgsGen().storeLogo.path) as ImageProvider
-                : CachedNetworkImageProvider(homeModel.storeImage!),
+          child: GestureDetector(
+            onTap: () {
+              context.go('/Profile5Screen');
+            },
+            child: CircleAvatar(
+              backgroundImage: homeModel.storeImage == null
+                  ? AssetImage($AssetsImgsGen().storeLogo.path) as ImageProvider
+                  : CachedNetworkImageProvider(homeModel.storeImage!),
+            ),
           ),
         )
       ],
