@@ -14,22 +14,7 @@ class _Profile5ScreenState extends State<Profile5Screen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-          // actions: [
-          //   CircleAvatar(
-          //     backgroundColor: Colors.black,
-          //     child: IconButton(
-          //       onPressed: () {
-          //         context.go('/main');
-          //       },
-          //       icon: Icon(
-          //         Icons.close,
-          //         color: Colors.white,
-          //       ),
-          //     ),
-          //   ),
-          // ],
-          leading: BackButton(
+      appBar: AppBar(leading: BackButton(
         onPressed: () {
           context.go('/main');
         },
@@ -109,7 +94,9 @@ class _Profile5ScreenState extends State<Profile5Screen> {
                   shrinkWrap: true,
                   children: [
                     ListTile(
-                      onTap: () {},
+                      onTap: () {
+                        context.go("/Profile9Screen");
+                      },
                       title: Text(
                         "Applicable Commissions",
                         style: TextStyle(

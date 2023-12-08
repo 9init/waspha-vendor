@@ -6,7 +6,8 @@ import 'package:vendor/src/view/login/login.dart';
 import 'package:vendor/src/view/navigation/navigation.dart';
 import 'package:vendor/src/view/order/order.dart';
 import 'package:vendor/src/view/pass_reset/pass_reset.dart';
-import 'package:vendor/src/view/profile-managment/profile5-screen.dart';
+import 'package:vendor/src/view/profile-managment/profile5/profile5-screen.dart';
+import 'package:vendor/src/view/profile-managment/profile9/profile9screen.dart';
 import 'package:vendor/src/view/receipt/receipt.dart';
 import 'package:vendor/src/view/register/register.dart';
 import 'package:vendor/src/view/requests/requests.dart';
@@ -74,4 +75,7 @@ final router = GoRouter(initialLocation: '/', routes: [
   GoRoute(
       path: '/Profile5Screen',
       builder: (context, state) => const Profile5Screen()),
+  GoRoute(
+      path: '/Profile9Screen',
+      builder: (context, state) => const Profile9Screen()),
 ]);
