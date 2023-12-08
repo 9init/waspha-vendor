@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:go_router/go_router.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:phone_form_field/phone_form_field.dart';
@@ -9,12 +10,12 @@ import 'package:vendor/src/view/forget_password/viewmodel.dart';
 
 import '../common/custom_form/custom_form.dart';
 
-class ForgetPassword extends ConsumerWidget {
+class ForgetPassword extends HookConsumerWidget {
   ForgetPassword({super.key});
 
-  final TextEditingController _emailController = TextEditingController();
-  final PhoneController _mobileController = PhoneController(null);
-  final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
+  late final _emailController = useTextEditingController();
+  late final _mobileController = useMemoized(() => PhoneController(null));
+  late final _formKey = useMemoized(() => GlobalKey<FormState>());
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:go_router/go_router.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:vendor/src/models/loading_state/loading_state.dart';
@@ -8,14 +9,13 @@ import 'package:vendor/src/view/pass_reset/viewmodel.dart';
 
 import '../common/custom_form/custom_form.dart';
 
-class ResetPassword extends ConsumerWidget {
+class ResetPassword extends HookConsumerWidget {
   ResetPassword({super.key, required this.followUpCode});
 
   final String followUpCode;
-  final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
-  final TextEditingController _passwordController = TextEditingController();
-  final TextEditingController _confirmPasswordController =
-      TextEditingController();
+  late final _formKey = useMemoized(() => GlobalKey<FormState>());
+  late final _passwordController = useTextEditingController();
+  late final _confirmPasswordController = useTextEditingController();
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {

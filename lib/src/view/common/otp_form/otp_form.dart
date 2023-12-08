@@ -1,43 +1,34 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_hooks/flutter_hooks.dart';
 
-class OtpForm extends StatefulWidget {
-  final int numberOfFields;
-  final GlobalKey formKey;
-  final void Function(List<String>) onOtpEntered;
-
-  const OtpForm({
+class OtpForm extends HookWidget {
+  OtpForm({
     super.key,
     required this.numberOfFields,
     required this.onOtpEntered,
     required this.formKey,
   });
 
-  @override
-  // ignore: library_private_types_in_public_api
-  _OtpFormState createState() => _OtpFormState();
-}
+  late final List<TextEditingController> controllers;
 
-class _OtpFormState extends State<OtpForm> {
-  late List<TextEditingController> controllers;
-
-  @override
-  void initState() {
-    super.initState();
-    controllers = List.generate(
-      widget.numberOfFields,
-      (index) => TextEditingController(),
-    );
-  }
+  final int numberOfFields;
+  final GlobalKey formKey;
+  final void Function(List<String>) onOtpEntered;
 
   @override
   Widget build(BuildContext context) {
+    controllers = List.generate(
+      numberOfFields,
+      (index) => useTextEditingController(),
+    );
+
     return Form(
-      key: widget.formKey,
+      key: formKey,
       child: Row(
         mainAxisAlignment: MainAxisAlignment.center,
         children: List.generate(
-          widget.numberOfFields,
+          numberOfFields,
           (index) => Padding(
             padding: const EdgeInsets.all(8.0),
             child: SizedBox(
@@ -77,7 +68,7 @@ class _OtpFormState extends State<OtpForm> {
                 controller: controllers[index],
                 onChanged: (value) {
                   if (value.length == 1) {
-                    if (index < widget.numberOfFields - 1) {
+                    if (index < numberOfFields - 1) {
                       FocusScope.of(context).nextFocus();
                     }
                     _updateOtpValues();
@@ -100,6 +91,6 @@ class _OtpFormState extends State<OtpForm> {
   void _updateOtpValues() {
     final List<String> otpValues =
         controllers.map((controller) => controller.text).toList();
-    widget.onOtpEntered(otpValues);
+    onOtpEntered(otpValues);
   }
 }

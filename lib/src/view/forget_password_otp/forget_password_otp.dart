@@ -1,5 +1,6 @@
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:go_router/go_router.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:vendor/src/models/loading_state/loading_state.dart';
@@ -9,14 +10,14 @@ import 'package:vendor/src/view/common/otp_form/otp_form.dart';
 import 'package:vendor/src/view/forget_password/viewmodel.dart';
 import 'package:vendor/src/view/forget_password_otp/viewmodel.dart';
 
-class ForgetPasswordOtp extends ConsumerWidget {
+class ForgetPasswordOtp extends HookConsumerWidget {
   ForgetPasswordOtp({
     super.key,
     required this.resetModel,
   });
 
   final PasswordResetModel resetModel;
-  final otpFormKey = GlobalKey<FormState>();
+  late final otpFormKey = useMemoized(() => GlobalKey<FormState>());
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {

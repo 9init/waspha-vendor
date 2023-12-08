@@ -7,6 +7,7 @@ import 'package:vendor/src/view/common/auth_btn/auth_btn.dart';
 
 import '../common/auth/custom_btn.dart';
 
+@deprecated
 class Verification extends HookWidget {
   Verification({super.key});
 
