@@ -3,7 +3,9 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_switch/flutter_switch.dart';
 import 'package:go_router/go_router.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:intl/intl.dart';
 import 'package:vendor/core/gen/assets.gen.dart';
+import 'package:vendor/core/localization/localization.dart';
 import 'package:vendor/src/view/common/home_switch/home_switch.dart';
 import 'package:vendor/src/view/home/viewmodel.dart';
 
@@ -74,19 +76,15 @@ class HomeScreen extends ConsumerWidget {
                 ),
               ],
             ),
-            SizedBox(height: 20),
-            const Text('Home',
-                style: TextStyle(fontSize: 25, fontWeight: FontWeight.bold)),
-            const SizedBox(height: 20),
-            const SizedBox(height: 20),
+            const SizedBox(height: 60),
             GestureDetector(
               onTap: () {
                 context.push('/payouts');
               },
               child: Center(
                 child: Container(
-                  width: 348,
-                  height: 250,
+                  padding:
+                      EdgeInsets.symmetric(vertical: 90.h, horizontal: 30.w),
                   decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(10),
                     gradient: const LinearGradient(
@@ -98,50 +96,66 @@ class HomeScreen extends ConsumerWidget {
                       ],
                     ),
                   ),
-                  child: const Column(
+                  child: Column(
                     children: [
                       Text(
                         "Total Net Profit",
                         style: TextStyle(fontSize: 20),
                       ),
                       Text(
-                        "EGP 1,000,000",
+                        homeModel.earnings?.totalNetProfit?.toString() ??
+                            context.localization.loading,
                         style: TextStyle(
                             fontSize: 20, fontWeight: FontWeight.bold),
                       ),
                       SizedBox(height: 20),
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                        children: [
-                          Column(
-                            children: [
-                              Text(
-                                "Balance",
-                                style: TextStyle(fontSize: 20),
+                      IntrinsicHeight(
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                          children: [
+                            Expanded(
+                              flex: 1,
+                              child: Column(
+                                children: [
+                                  Text(
+                                    "Balance",
+                                    style: TextStyle(fontSize: 50.sp),
+                                  ),
+                                  Text(
+                                    homeModel.earnings?.totalSettlement
+                                            ?.toString() ??
+                                        context.localization.loading,
+                                    style: TextStyle(
+                                        fontSize: 50.sp,
+                                        fontWeight: FontWeight.bold),
+                                  ),
+                                ],
                               ),
-                              Text(
-                                "- 400",
-                                style: TextStyle(
-                                    fontSize: 20, fontWeight: FontWeight.bold),
+                            ),
+                            VerticalDivider(
+                              thickness: 1,
+                              width: 100.w,
+                              color: Colors.black,
+                            ),
+                            Expanded(
+                              flex: 1,
+                              child: Column(
+                                children: [
+                                  Text("Today Net Profit",
+                                      style: TextStyle(fontSize: 50.sp)),
+                                  Text(
+                                    homeModel.earnings?.todayProfit
+                                            .toString() ??
+                                        context.localization.loading,
+                                    style: TextStyle(
+                                        fontSize: 50.sp,
+                                        fontWeight: FontWeight.bold),
+                                  ),
+                                ],
                               ),
-                            ],
-                          ),
-                          VerticalDivider(),
-                          Column(
-                            children: [
-                              SizedBox(
-                                height: 20,
-                              ),
-                              Text("Today Net Profit",
-                                  style: TextStyle(fontSize: 20)),
-                              Text(
-                                "EGP 21.4",
-                                style: TextStyle(
-                                    fontSize: 20, fontWeight: FontWeight.bold),
-                              ),
-                            ],
-                          ),
-                        ],
+                            ),
+                          ],
+                        ),
                       ),
                       Padding(
                         padding: EdgeInsets.all(8.0),
@@ -158,7 +172,9 @@ class HomeScreen extends ConsumerWidget {
                           ],
                         ),
                       ),
-                      Text("Last update 11/9/2022 11:25 AM")
+                      if (homeModel.latestUpdate != null)
+                        Text(
+                            "${context.localization.last_update} ${DateFormat('MM/d/yyyy hh:mm a').format(homeModel.latestUpdate!)}")
                     ],
                   ),
                 ),

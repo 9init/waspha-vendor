@@ -12,19 +12,19 @@ import 'viewmodel.dart';
 class Login extends HookConsumerWidget {
   Login({super.key});
 
-  late final _mobileController = useTextEditingController();
-  late final _passwordController = useTextEditingController();
-  late final _formKey = useMemoized(() => GlobalKey<FormState>());
-
-  Future<bool> validateLogin(WidgetRef ref, LoginViewModel viewModel) async {
-    if (_formKey.currentState!.validate()) {
-      return await viewModel.performLogin(ref);
-    }
-    return false;
-  }
-
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    final _mobileController = useTextEditingController();
+    final _passwordController = useTextEditingController();
+    final _formKey = useMemoized(() => GlobalKey<FormState>());
+
+    Future<bool> validateLogin(WidgetRef ref, LoginViewModel viewModel) async {
+      if (_formKey.currentState!.validate()) {
+        return await viewModel.performLogin(ref);
+      }
+      return false;
+    }
+
     final viewModel = ref.read(loginViewModelProvider.notifier);
     return Scaffold(
       body: SingleChildScrollView(
@@ -36,9 +36,7 @@ class Login extends HookConsumerWidget {
                 text: context.localization.login_welcome_message,
                 backButtonEnabled: false,
               ),
-              const SizedBox(height: 40),
-              Text(context.localization.login_with_mobile),
-              const SizedBox(height: 10),
+              const SizedBox(height: 50),
               CustomFormField(
                 text: context.localization.email_or_mobile,
                 controller: _mobileController,
