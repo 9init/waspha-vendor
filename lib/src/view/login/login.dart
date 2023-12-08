@@ -107,7 +107,8 @@ class Login extends HookConsumerWidget {
                       !ref.read(isVendorIdOrPasswordNullProvider)) {
                     ScaffoldMessenger.of(context).showSnackBar(
                       SnackBar(
-                        content: Text(context.localization.remember_me),
+                        content: Text(
+                            context.localization.invalid_vendor_id_or_password),
                       ),
                     );
                   }

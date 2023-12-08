@@ -160,8 +160,9 @@ class HomeScreen extends ConsumerWidget {
                       Padding(
                         padding: EdgeInsets.all(8.0),
                         child: Align(
-                            alignment: Alignment.bottomRight,
-                            child: Icon(Icons.arrow_forward)),
+                          alignment: Alignment.bottomRight,
+                          child: Icon(Icons.arrow_forward),
+                        ),
                       ),
                       Padding(
                         padding: EdgeInsets.only(left: 30.0),
