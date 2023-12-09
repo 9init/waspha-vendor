@@ -53,6 +53,7 @@ dependencies:
   phone_form_field: ^8.1.0
   readmore: ^2.2.0
   riverpod_annotation: ^2.3.3
+  timeago: ^3.6.0
 
 dev_dependencies:
   # Build Runner is a package that provides a concrete way of generating files using Dart code, outside of tools like pub and the Dart VM.

@@ -34,7 +34,7 @@ class ProfileAppBar extends ConsumerWidget implements PreferredSizeWidget {
           padding: EdgeInsets.symmetric(horizontal: 10),
           child: GestureDetector(
             onTap: () {
-              context.go('/Profile5Screen');
+              context.push('/store_profile');
             },
             child: CircleAvatar(
               backgroundImage: homeModel.storeImage == null

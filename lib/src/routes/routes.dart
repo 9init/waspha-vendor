@@ -6,14 +6,15 @@ import 'package:vendor/src/view/login/login.dart';
 import 'package:vendor/src/view/navigation/navigation.dart';
 import 'package:vendor/src/view/order/order.dart';
 import 'package:vendor/src/view/pass_reset/pass_reset.dart';
-import 'package:vendor/src/view/profile-managment/Profile34/profile34screen.dart';
-import 'package:vendor/src/view/profile-managment/profile5/profile5-screen.dart';
-import 'package:vendor/src/view/profile-managment/profile9/profile9screen.dart';
 import 'package:vendor/src/view/receipt/receipt.dart';
 import 'package:vendor/src/view/register/register.dart';
 import 'package:vendor/src/view/requests/requests.dart';
 import 'package:vendor/src/view/settlement/settlement.dart';
 import 'package:vendor/src/view/startup/startup.dart';
+import 'package:vendor/src/view/store_profile/profile34/profile34screen.dart';
+import 'package:vendor/src/view/comissions/commissions.dart';
+import 'package:vendor/src/view/store_profile/store_profile.dart';
+import 'package:vendor/src/view/store_reviews/store_reviews.dart';
 import 'package:vendor/src/view/verification/verification.dart';
 
 import '../view/application_form/application_form.dart';
@@ -34,9 +35,10 @@ final router = GoRouter(initialLocation: '/', routes: [
     ),
   ),
   GoRoute(
-      path: '/reset_pass',
-      builder: (context, state) =>
-          ResetPassword(followUpCode: state.extra as String)),
+    path: '/reset_pass',
+    builder: (context, state) =>
+        ResetPassword(followUpCode: state.extra as String),
+  ),
   GoRoute(
     path: '/verification',
     builder: (context, state) => Verification(),
@@ -74,12 +76,19 @@ final router = GoRouter(initialLocation: '/', routes: [
     builder: (context, state) => VerificationWaiting(),
   ),
   GoRoute(
-      path: '/Profile5Screen',
-      builder: (context, state) => const Profile5Screen()),
+    path: '/store_profile',
+    builder: (context, state) => StoreProfile(),
+  ),
   GoRoute(
-      path: '/Profile9Screen',
-      builder: (context, state) => const Profile9Screen()),
+    path: '/commissions',
+    builder: (context, state) => const Commissions(),
+  ),
   GoRoute(
-      path: "/Profile34Screen",
-      builder: (context, state) => const Profile34Screen()),
+    path: "/Profile34Screen",
+    builder: (context, state) => Profile34Screen(),
+  ),
+  GoRoute(
+    path: "/store_reviews",
+    builder: (context, state) => StoreReviewsScreen(),
+  ),
 ]);

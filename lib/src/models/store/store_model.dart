@@ -17,6 +17,7 @@ class StoreModel with _$StoreModel {
     String? image,
     Map<String, List<StoreTimings>>? timings,
     @JsonKey(name: 'average_rating') double? averageRating,
+    @JsonKey(name: 'avg_rating') AvgRating? avgRating,
     @JsonKey(name: 'proposal_prep_time') int? proposalPrepTime,
     @JsonKey(name: 'proposal_selection_time') int? proposalSelectionTime,
     @JsonKey(name: 'location') StoreLocation? location,
@@ -80,6 +81,17 @@ class UnreadCounts with _$UnreadCounts {
 
   factory UnreadCounts.fromJson(Map<String, dynamic> json) =>
       _$UnreadCountsFromJson(json);
+}
+
+@freezed
+abstract class AvgRating with _$AvgRating {
+  const factory AvgRating({
+    required double rating,
+    required int count,
+  }) = _AvgRating;
+
+  factory AvgRating.fromJson(Map<String, dynamic> json) =>
+      _$AvgRatingFromJson(json);
 }
 
 @freezed
