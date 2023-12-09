@@ -17,26 +17,27 @@ class StoreReviewsScreen extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final reviewModel = ref.watch(StoreRepository.storeReviewProvider).value;
     return Scaffold(
-      appBar: AppBar(leading: BackButton(
-        onPressed: () {
-          context.pop();
-        },
-      )),
+      appBar: AppBar(
+        leading: BackButton(
+          onPressed: () {
+            context.pop();
+          },
+        ),
+        title: Align(
+          alignment: Alignment.topLeft,
+          child: Padding(
+            padding: const EdgeInsets.all(10.0),
+            child: Text("Reviews",
+                style: TextStyle(fontSize: 70.sp, fontWeight: FontWeight.bold)),
+          ),
+        ),
+      ),
       body: Column(
         children: [
-          Align(
-            alignment: Alignment.topLeft,
-            child: Padding(
-              padding: const EdgeInsets.all(10.0),
-              child: Text("Reviews",
-                  style: TextStyle(fontSize: 30, fontWeight: FontWeight.bold)),
-            ),
-          ),
-          SizedBox(
-            height: 10,
-          ),
           reviewModel == null
-              ? const CircularProgressIndicator()
+              ? Expanded(
+                  child: Center(child: const CircularProgressIndicator()),
+                )
               : Expanded(
                   child: reviewModel.reviewsRatings.length == 0
                       ? Text(context.localization.no_reviews_yet)
@@ -61,7 +62,6 @@ class ReviewWidget extends StatelessWidget {
   ReviewWidget({super.key, required this.review});
 
   final StoreReviewRating review;
-  final GlobalKey key = GlobalKey(); // declare a global key
 
   @override
   Widget build(BuildContext context) {
