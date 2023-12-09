@@ -5,12 +5,14 @@ import 'package:go_router/go_router.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:vendor/core/gen/assets.gen.dart';
 import 'package:vendor/core/localization/localization.dart';
+import 'package:vendor/src/models/vendor/vendor.dart';
 import 'package:vendor/src/repository/store/profile.dart';
 
 class StoreProfile extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final store = ref.watch(StoreRepository.storeProvider).asData?.value;
+    final vendor = ref.watch(vendorProvider);
 
     return Scaffold(
       appBar: AppBar(leading: BackButton(
@@ -196,7 +198,7 @@ class StoreProfile extends ConsumerWidget {
             ),
             Spacer(),
             Text(
-              "ID: 123456789",
+              "ID: ${vendor?.referralCode ?? "Error"}",
               style: TextStyle(fontSize: 80.sp, fontWeight: FontWeight.bold),
             ),
             SizedBox(height: 200.h)

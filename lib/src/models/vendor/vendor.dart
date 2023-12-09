@@ -14,6 +14,7 @@ class Vendor with _$Vendor {
     String? contact,
     String? country,
     String? avatar,
+    @JsonKey(name: "referral_code") required String referralCode,
     @JsonKey(name: "loyalty_points") int? loyaltyPoints,
   }) = _Vendor;
 
