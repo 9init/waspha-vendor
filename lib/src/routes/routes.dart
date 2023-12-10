@@ -1,4 +1,7 @@
 import 'package:go_router/go_router.dart';
+import 'package:vendor/src/view/carriers_managment/carriers_management.dart';
+import 'package:vendor/src/view/carriers_managment/carriers_management_2.dart';
+import 'package:vendor/src/view/comissions/commissions.dart';
 import 'package:vendor/src/view/forget_password/forget_password.dart';
 import 'package:vendor/src/view/forget_password/viewmodel.dart';
 import 'package:vendor/src/view/forget_password_otp/forget_password_otp.dart';
@@ -12,7 +15,6 @@ import 'package:vendor/src/view/requests/requests.dart';
 import 'package:vendor/src/view/settlement/settlement.dart';
 import 'package:vendor/src/view/startup/startup.dart';
 import 'package:vendor/src/view/store_profile/profile34/profile34screen.dart';
-import 'package:vendor/src/view/comissions/commissions.dart';
 import 'package:vendor/src/view/store_profile/store_profile.dart';
 import 'package:vendor/src/view/store_reviews/store_reviews.dart';
 import 'package:vendor/src/view/verification/verification.dart';
@@ -90,5 +92,15 @@ final router = GoRouter(initialLocation: '/', routes: [
   GoRoute(
     path: "/store_reviews",
     builder: (context, state) => StoreReviewsScreen(),
+  ),
+  GoRoute(
+    path: "/carriers_management",
+    builder: (context, state) => CarrierManagementScreen(),
+  ),
+  GoRoute(
+    path: "/carriers_management_2",
+    builder: (context, state) => CarriersManagement2Screen(
+      id: (state.extra as Map)['id'],
+    ),
   ),
 ]);
