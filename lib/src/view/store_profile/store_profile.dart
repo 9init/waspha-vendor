@@ -131,7 +131,7 @@ class StoreProfile extends ConsumerWidget {
                   ),
                   ListTile(
                     onTap: () {
-                      context.go("/Profile34Screen");
+                      context.push("/Profile34Screen");
                     },
                     title: Text(
                       "Default Pay methods",
@@ -162,7 +162,9 @@ class StoreProfile extends ConsumerWidget {
                     color: Color(0XffE2E8ED),
                   ),
                   ListTile(
-                    onTap: () {},
+                    onTap: () {
+                      context.push("/carriers_management");
+                    },
                     title: Text(
                       "Carriers Management ",
                       style: TextStyle(

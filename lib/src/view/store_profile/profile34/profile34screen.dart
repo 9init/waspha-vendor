@@ -11,7 +11,7 @@ class Profile34Screen extends StatelessWidget {
       appBar: AppBar(
         leading: BackButton(
           onPressed: () {
-            context.go('/main');
+            context.pop();
           },
         ),
       ),
