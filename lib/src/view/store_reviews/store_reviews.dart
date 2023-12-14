@@ -91,7 +91,7 @@ class ReviewWidget extends StatelessWidget {
                 style: TextStyle(color: Colors.grey),
               ),
               Row(
-                children: buildList<Widget>(5, (index) {
+                children: List.generate(5, (index) {
                   final color = index <= review.rating - 1
                       ? Color(0xFFFFB900)
                       : Colors.grey;
@@ -119,12 +119,4 @@ class ReviewWidget extends StatelessWidget {
       ],
     );
   }
-}
-
-List<T> buildList<T>(int length, T Function(int index) buildFunction) {
-  List<T> result = [];
-  for (int i = 0; i < length; i++) {
-    result.add(buildFunction(i));
-  }
-  return result;
 }
