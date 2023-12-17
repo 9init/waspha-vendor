@@ -25,11 +25,8 @@ class StoreReviewsScreen extends ConsumerWidget {
         ),
         title: Align(
           alignment: Alignment.topLeft,
-          child: Padding(
-            padding: const EdgeInsets.all(10.0),
-            child: Text("Reviews",
-                style: TextStyle(fontSize: 70.sp, fontWeight: FontWeight.bold)),
-          ),
+          child: Text("Reviews",
+              style: TextStyle(fontSize: 70.sp, fontWeight: FontWeight.bold)),
         ),
       ),
       body: Column(

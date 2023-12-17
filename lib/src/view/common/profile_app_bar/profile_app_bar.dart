@@ -27,7 +27,7 @@ class ProfileAppBar extends ConsumerWidget implements PreferredSizeWidget {
       ),
       actions: [
         IconButton(
-          onPressed: () {},
+          onPressed: () => context.push('/notification'),
           icon: const Icon(Icons.notifications),
         ),
         Padding(

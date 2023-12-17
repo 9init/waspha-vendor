@@ -15,12 +15,21 @@ class StoreProfile extends ConsumerWidget {
     final vendor = ref.watch(vendorProvider);
 
     return Scaffold(
-      appBar: AppBar(leading: BackButton(
-        onPressed: () {
-          context.pop();
-        },
-      )),
-      body: Align(
+      appBar: AppBar(
+        leading: BackButton(
+          onPressed: () {
+            context.pop();
+          },
+        ),
+        title: Align(
+          alignment: Alignment.topLeft,
+          child: Text(
+            "Store Management",
+            style: TextStyle(fontSize: 70.sp, fontWeight: FontWeight.bold),
+          ),
+        ),
+      ),
+      body: SingleChildScrollView(
         child: Column(
           children: [
             CircleAvatar(
@@ -196,7 +205,7 @@ class StoreProfile extends ConsumerWidget {
                 ],
               ),
             ),
-            Spacer(),
+            SizedBox(height: 100.h),
             Text(
               "ID: ${vendor?.referralCode ?? "Error"}",
               style: TextStyle(fontSize: 80.sp, fontWeight: FontWeight.bold),

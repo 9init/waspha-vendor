@@ -1,58 +1,50 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_hooks/flutter_hooks.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:vendor/src/repository/notification/notification.dart';
 
-import '../common/custom_close_btn/close_btn.dart';
-import '../common/notification_card/notification_card.dart';
+import 'notification_card.dart';
 
-class Notifications extends HookWidget {
+class Notifications extends ConsumerWidget {
   const Notifications({super.key});
 
   @override
-  Widget build(BuildContext context) {
-    final isCollapsed = useState(true);
-    final collapsedString = useState<String>("..More");
+  Widget build(BuildContext context, WidgetRef ref) {
+    final notifications =
+        ref.watch(NotificationRepository.notificationProvider);
     return Scaffold(
       appBar: AppBar(
         automaticallyImplyLeading: false,
-        scrolledUnderElevation: 0,
-        actions: const [
-          Padding(
-            padding: EdgeInsets.symmetric(horizontal: 10),
-            child: CustomCloseButton(),
-          )
-        ],
-      ),
-      body: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 20),
-        child: Column(
-          children: [
-            const Align(
-              alignment: Alignment.topLeft,
-              child: Text(
-                "Notifications",
-                style: TextStyle(fontSize: 30, fontWeight: FontWeight.bold),
-              ),
-            ),
-            const SizedBox(
-              height: 20,
-            ),
-            Expanded(
-              child: ListView.separated(
-                  separatorBuilder: (context, index) => const SizedBox(
-                        height: 20,
-                      ),
-                  itemCount: 2,
-                  itemBuilder: (context, index) {
-                    return NotificationCard(
-                      isCollapsed: isCollapsed,
-                      textBody: "asd",
-                      avatarImage: "",
-                      collapsedString: collapsedString,
-                    );
-                  }),
-            ),
-          ],
+        leading: BackButton(),
+        title: Align(
+          alignment: Alignment.topLeft,
+          child: Text(
+            "Notifications",
+            style: TextStyle(fontSize: 70.sp, fontWeight: FontWeight.bold),
+          ),
         ),
+      ),
+      body: Column(
+        children: [
+          notifications.isLoading
+              ? Expanded(child: Center(child: CircularProgressIndicator()))
+              : Expanded(
+                  child: ListView.separated(
+                    separatorBuilder: (context, index) {
+                      return Padding(
+                        padding: EdgeInsets.only(left: 190.w, right: 40.w),
+                        child: Divider(color: Colors.grey[200]),
+                      );
+                    },
+                    itemCount: notifications.value?.length ?? 0,
+                    itemBuilder: (context, index) {
+                      return NotificationCard(
+                        notificationModel: notifications.value![index],
+                      );
+                    },
+                  ),
+                ),
+        ],
       ),
     );
   }
