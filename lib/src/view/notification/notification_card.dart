@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:vendor/core/gen/assets.gen.dart';
 import 'package:vendor/src/models/notification/notification_model.dart';
+import 'package:timeago/timeago.dart' as timeago;
 
 class NotificationCard extends StatelessWidget {
   const NotificationCard({super.key, required this.notificationModel});
@@ -37,33 +38,26 @@ class NotificationCard extends StatelessWidget {
                       notificationModel.extraData?.sentBy?.name ?? "",
                       style: TextStyle(fontWeight: FontWeight.bold),
                     ),
-                    Padding(
-                      padding: EdgeInsets.symmetric(horizontal: 10.w),
-                      child: Text(
-                        "•",
-                        style: TextStyle(
-                          fontWeight: FontWeight.bold,
-                          color: Colors.grey[700],
-                        ),
-                      ),
-                    ),
-                    Text(
-                      notificationModel.title,
-                      style: TextStyle(
-                        fontSize: 40.sp,
-                        color: Colors.grey[700],
-                      ),
-                    ),
                     Spacer(),
                     Padding(
                       padding: EdgeInsets.symmetric(horizontal: 30.w),
                       child: Text(
-                        "2:00 AM",
+                        timeago.format(
+                          notificationModel.createdAt,
+                          locale: Localizations.localeOf(context).languageCode,
+                        ),
                         style:
                             TextStyle(fontSize: 40.sp, color: Colors.grey[700]),
                       ),
                     ),
                   ]),
+                  Text(
+                    notificationModel.title,
+                    style: TextStyle(
+                      fontSize: 40.sp,
+                      color: Colors.grey[700],
+                    ),
+                  ),
                   SizedBox(height: 10.h),
                   Text(
                     notificationModel.body,

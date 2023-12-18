@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:go_router/go_router.dart';
 
 class Profile34Screen extends StatelessWidget {
   const Profile34Screen({super.key});
@@ -9,11 +8,7 @@ class Profile34Screen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        leading: BackButton(
-          onPressed: () {
-            context.go('/main');
-          },
-        ),
+        leading: BackButton(),
       ),
       body: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 20),

@@ -1,4 +1,5 @@
 import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:vendor/src/models/commission/commission_model.dart';
 import 'package:vendor/src/models/earning/earning_model.dart';
 import 'package:vendor/src/models/store/store_model.dart';
 import 'package:vendor/src/models/store_review/store_review_model.dart';
@@ -12,6 +13,18 @@ class StoreRepository {
 
     final value = switch (result) {
       Success(value: final value) => StoreModel.fromJson(value.data["data"]),
+      _ => null,
+    };
+
+    return value;
+  }
+
+  static Future<CommissionModel?> getCommission() async {
+    final result = await Networking.get("/commission");
+
+    final value = switch (result) {
+      Success(value: final value) =>
+        CommissionModel.fromJson(value.data["data"]),
       _ => null,
     };
 
@@ -54,4 +67,6 @@ class StoreRepository {
   static final storeProvider = FutureProvider((ref) => profile());
   static final storeReviewProvider =
       AutoDisposeFutureProvider((ref) => storeReviews());
+  static final storeCommissionProvider =
+      AutoDisposeFutureProvider((ref) => getCommission());
 }

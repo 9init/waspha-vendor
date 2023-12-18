@@ -81,7 +81,7 @@ final router = GoRouter(initialLocation: '/', routes: [
   ),
   GoRoute(
     path: '/commissions',
-    builder: (context, state) => const Commissions(),
+    builder: (context, state) => Commissions(),
   ),
   GoRoute(
     path: "/Profile34Screen",
