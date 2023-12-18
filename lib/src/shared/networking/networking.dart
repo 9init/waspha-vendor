@@ -6,6 +6,7 @@ import 'package:cookie_jar/cookie_jar.dart';
 import 'package:dio/dio.dart';
 import 'package:dio_cookie_manager/dio_cookie_manager.dart';
 import 'package:path_provider/path_provider.dart';
+import 'package:vendor/src/shared/networking/Token_interceptor.dart';
 import 'package:vendor/src/shared/networking/request_method.dart';
 import 'package:vendor/src/shared/networking/results.dart';
 
@@ -49,6 +50,7 @@ class Networking {
       storage: FileStorage("$appDocPath/.cookies/"),
     );
     _dio.interceptors.add(CookieManager(jar));
+    _dio.interceptors.add(TokenInterceptor(_dio));
   }
 
   /// Delete all cookies
