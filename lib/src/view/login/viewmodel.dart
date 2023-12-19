@@ -1,7 +1,6 @@
 // ignore_for_file: depend_on_referenced_packages
 
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-import 'package:vendor/src/models/vendor/vendor.dart';
 import 'package:vendor/src/repository/auth/login.dart';
 
 class LoginModel {
@@ -54,7 +53,6 @@ class LoginViewModel extends StateNotifier<LoginModel> {
     // Perform your login logic here
     _setIsLoading(true);
     final vendor = await LoginRepository.login(vendorId, password);
-    ref.read(vendorProvider.notifier).update((state) => vendor);
     _setIsLoading(false);
 
     return vendor != null;

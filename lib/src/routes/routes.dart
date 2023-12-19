@@ -11,7 +11,7 @@ import 'package:vendor/src/view/register/register.dart';
 import 'package:vendor/src/view/requests/requests.dart';
 import 'package:vendor/src/view/settlement/settlement.dart';
 import 'package:vendor/src/view/startup/startup.dart';
-import 'package:vendor/src/view/store_profile/profile34/profile34screen.dart';
+import 'package:vendor/src/view/payment_methods/payment_methods.dart';
 import 'package:vendor/src/view/comissions/commissions.dart';
 import 'package:vendor/src/view/store_profile/store_profile.dart';
 import 'package:vendor/src/view/store_reviews/store_reviews.dart';
@@ -84,8 +84,8 @@ final router = GoRouter(initialLocation: '/', routes: [
     builder: (context, state) => Commissions(),
   ),
   GoRoute(
-    path: "/Profile34Screen",
-    builder: (context, state) => Profile34Screen(),
+    path: "/payment_methods",
+    builder: (context, state) => PaymentMethods(),
   ),
   GoRoute(
     path: "/store_reviews",

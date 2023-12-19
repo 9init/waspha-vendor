@@ -1,3 +1,4 @@
+import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:vendor/src/shared/networking/Networking.dart';
 import 'package:vendor/src/shared/networking/results.dart';
 
@@ -20,6 +21,20 @@ class LoginRepository {
 
     return value;
   }
+
+  static Future<Vendor?> vendorProfile() async {
+    final result = await Networking.get("/vendor-profile");
+
+    final value = switch (result) {
+      Success(value: final value) => Vendor.fromJson(value.data["data"]),
+      _ => null,
+    };
+
+    return value;
+  }
+
+  static final vendorProvider =
+      AutoDisposeFutureProvider((ref) => vendorProfile());
 
   static Future<bool> isLoggedIn() async {
     final result = await Networking.post("/average-rating", {});

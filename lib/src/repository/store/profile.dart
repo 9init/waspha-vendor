@@ -1,6 +1,7 @@
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:vendor/src/models/commission/commission_model.dart';
 import 'package:vendor/src/models/earning/earning_model.dart';
+import 'package:vendor/src/models/payment_methods/payment_methods_model.dart';
 import 'package:vendor/src/models/store/store_model.dart';
 import 'package:vendor/src/models/store_review/store_review_model.dart';
 import 'package:vendor/src/shared/networking/Networking.dart';
@@ -13,6 +14,17 @@ class StoreRepository {
 
     final value = switch (result) {
       Success(value: final value) => StoreModel.fromJson(value.data["data"]),
+      _ => null,
+    };
+
+    return value;
+  }
+
+  static Future<PaymentMethods?> getPaymentMethods() async {
+    final result = await Networking.get("/payment-methods");
+
+    final value = switch (result) {
+      Success(:final value) => PaymentMethods.fromJson(value.data["data"]),
       _ => null,
     };
 

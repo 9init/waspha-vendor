@@ -57,7 +57,7 @@ class HomeViewModel extends StateNotifier<HomeModel> {
           );
 
       Future.delayed(
-        Duration(minutes: 1),
+        Duration(minutes: 10),
         () => ref.invalidate(StoreRepository.earningsProvider),
       );
     });

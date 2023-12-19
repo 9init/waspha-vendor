@@ -5,14 +5,14 @@ import 'package:go_router/go_router.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:vendor/core/gen/assets.gen.dart';
 import 'package:vendor/core/localization/localization.dart';
-import 'package:vendor/src/models/vendor/vendor.dart';
+import 'package:vendor/src/repository/auth/login.dart';
 import 'package:vendor/src/repository/store/profile.dart';
 
 class StoreProfile extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final store = ref.watch(StoreRepository.storeProvider).asData?.value;
-    final vendor = ref.watch(vendorProvider);
+    final vendor = ref.watch(LoginRepository.vendorProvider);
 
     return Scaffold(
       appBar: AppBar(
@@ -140,7 +140,7 @@ class StoreProfile extends ConsumerWidget {
                   ),
                   ListTile(
                     onTap: () {
-                      context.go("/Profile34Screen");
+                      context.push("/payment_methods");
                     },
                     title: Text(
                       "Default Pay methods",
@@ -207,7 +207,7 @@ class StoreProfile extends ConsumerWidget {
             ),
             SizedBox(height: 100.h),
             Text(
-              "ID: ${vendor?.referralCode ?? "Error"}",
+              "ID: ${vendor.hasValue ? vendor.value!.referralCode : "Loading"}",
               style: TextStyle(fontSize: 80.sp, fontWeight: FontWeight.bold),
             ),
             SizedBox(height: 200.h)

@@ -1,4 +1,6 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
+import 'package:json_annotation/json_annotation.dart';
+import 'package:vendor/src/models/payment_methods/payment_methods_model.dart';
 
 part 'store_model.freezed.dart';
 part 'store_model.g.dart';
@@ -21,6 +23,7 @@ class StoreModel with _$StoreModel {
     @JsonKey(name: 'proposal_prep_time') int? proposalPrepTime,
     @JsonKey(name: 'proposal_selection_time') int? proposalSelectionTime,
     @JsonKey(name: 'location') StoreLocation? location,
+    PaymentMethods? paymentMethods,
     String? phone,
     @JsonKey(name: 'delivery_range') int? deliveryRange,
     List<int>? categories,

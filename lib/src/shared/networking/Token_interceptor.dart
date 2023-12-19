@@ -1,5 +1,6 @@
 import 'package:dio/dio.dart';
 import 'package:vendor/src/shared/networking/Networking.dart';
+import 'package:vendor/src/shared/networking/results.dart';
 
 class TokenInterceptor extends Interceptor {
   final Dio _dio;
@@ -10,10 +11,19 @@ class TokenInterceptor extends Interceptor {
     // Check if the error is due to unauthorized access
     if (err.response?.statusCode == 401) {
       // Token is in the cookies
-      await Networking.post("resume-access-token", {});
-      return handler.resolve(await _dio.fetch(err.requestOptions));
+      final result = await Networking.post("/resume-access-token", {});
+      switch (result) {
+        case Success(:final value):
+          print(err);
+
+          final accessToken = value.data['data']['access_token'];
+          err.requestOptions.headers['Authorization'] = 'Bearer $accessToken';
+          return handler.resolve(await _dio.fetch(err.requestOptions));
+        default:
+          return handler.reject(err);
+      }
     }
 
-    return handler.next(err);
+    return handler.reject(err);
   }
 }
