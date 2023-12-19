@@ -5,6 +5,7 @@ part 'payment_methods_model.g.dart';
 
 @freezed
 class PaymentMethods with _$PaymentMethods {
+  const PaymentMethods._();
   const factory PaymentMethods({
     @JsonKey(name: 'store')
     @Default(StorePaymentMethods())
@@ -16,6 +17,14 @@ class PaymentMethods with _$PaymentMethods {
 
   factory PaymentMethods.fromJson(Map<String, dynamic> json) =>
       _$PaymentMethodsFromJson(json);
+
+  get expandedJson => {
+        'store_cash_on_delivery': store.cashOnDelivery,
+        'store_device_on_delivery': store.deviceOnDelivery,
+        'store_credit_card': store.creditCard,
+        'express_cash_on_delivery': express.cashOnDelivery,
+        'express_credit_card': express.creditCard,
+      };
 }
 
 @freezed

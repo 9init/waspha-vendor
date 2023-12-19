@@ -45,6 +45,17 @@ class PaymentMethodViewModel extends StateNotifier<PaymentMethodState> {
 
     state = state.copyWith(paymentMethods: methods);
   }
+
+  Future<bool> updatePaymentMethod() async {
+    state = state.copyWith(loadingState: LoadingState.loading);
+    final methods =
+        await StoreRepository.updatePaymentMethods(state.paymentMethods);
+    state = state.copyWith(
+      loadingState: LoadingState.success,
+      paymentMethods: methods,
+    );
+    return methods != null;
+  }
 }
 
 // Provider for the LoginViewModel

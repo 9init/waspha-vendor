@@ -22,5 +22,6 @@
   "show_more" : "Show more",
   "online" : "Online",
   "offline" : "Offline",
-  "show_less" : "Show less"
+  "show_less" : "Show less",
+  "saved" : "Saved"
 }

@@ -23,7 +23,7 @@ class StoreModel with _$StoreModel {
     @JsonKey(name: 'proposal_prep_time') int? proposalPrepTime,
     @JsonKey(name: 'proposal_selection_time') int? proposalSelectionTime,
     @JsonKey(name: 'location') StoreLocation? location,
-    PaymentMethods? paymentMethods,
+    @JsonKey(name: 'payment_methods') PaymentMethods? paymentMethods,
     String? phone,
     @JsonKey(name: 'delivery_range') int? deliveryRange,
     List<int>? categories,

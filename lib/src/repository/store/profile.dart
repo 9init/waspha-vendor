@@ -31,6 +31,19 @@ class StoreRepository {
     return value;
   }
 
+  static Future<PaymentMethods?> updatePaymentMethods(
+      PaymentMethods method) async {
+    final result =
+        await Networking.post("/payment-methods", method.expandedJson);
+
+    final value = switch (result) {
+      Success(:final value) => PaymentMethods.fromJson(value.data["data"]),
+      _ => null,
+    };
+
+    return value;
+  }
+
   static Future<CommissionModel?> getCommission() async {
     final result = await Networking.get("/commission");
 
