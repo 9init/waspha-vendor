@@ -23,5 +23,8 @@
   "online" : "Online",
   "offline" : "Offline",
   "show_less" : "Show less",
-  "saved" : "Saved"
+  "saved" : "Saved",
+  "carriers_management" : "Carriers Management",
+  "offline_carriers" : "Offline Carriers",
+  "online_carriers" : "Online Carriers"
 }

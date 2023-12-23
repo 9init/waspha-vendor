@@ -171,7 +171,9 @@ class StoreProfile extends ConsumerWidget {
                     color: Color(0XffE2E8ED),
                   ),
                   ListTile(
-                    onTap: () {},
+                    onTap: () {
+                      context.push('/carriers_management');
+                    },
                     title: Text(
                       "Carriers Management ",
                       style: TextStyle(

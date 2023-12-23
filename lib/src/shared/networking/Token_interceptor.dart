@@ -14,8 +14,6 @@ class TokenInterceptor extends Interceptor {
       final result = await Networking.post("/resume-access-token", {});
       switch (result) {
         case Success(:final value):
-          print(err);
-
           final accessToken = value.data['data']['access_token'];
           err.requestOptions.headers['Authorization'] = 'Bearer $accessToken';
           return handler.resolve(await _dio.fetch(err.requestOptions));

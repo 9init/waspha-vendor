@@ -1,4 +1,7 @@
 import 'package:go_router/go_router.dart';
+import 'package:vendor/src/models/driver/driver_model.dart';
+import 'package:vendor/src/view/carrier/carrier.dart';
+import 'package:vendor/src/view/carriers_management/carriers_management.dart';
 import 'package:vendor/src/view/forget_password/forget_password.dart';
 import 'package:vendor/src/view/forget_password/viewmodel.dart';
 import 'package:vendor/src/view/forget_password_otp/forget_password_otp.dart';
@@ -91,4 +94,12 @@ final router = GoRouter(initialLocation: '/', routes: [
     path: "/store_reviews",
     builder: (context, state) => StoreReviewsScreen(),
   ),
+  GoRoute(
+    path: "/carriers_management",
+    builder: (context, state) => CarrierManagement(),
+  ),
+  GoRoute(
+    path: "/carrier",
+    builder: (context, state) => Carrier(driverType: state.extra as DriverType),
+  )
 ]);

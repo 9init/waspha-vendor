@@ -67,9 +67,9 @@ class ReviewWidget extends StatelessWidget {
         ListTile(
           key: key,
           leading: Transform.translate(
-            offset: Offset(0, -60.r),
+            offset: Offset(0, -20),
             child: CircleAvatar(
-              radius: 60.r,
+              radius: 20,
               backgroundImage: review.user.avatar == null
                   ? AssetImage($AssetsImgsGen().avatar.path) as ImageProvider
                   : CachedNetworkImageProvider(review.user.avatar!),
