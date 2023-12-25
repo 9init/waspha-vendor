@@ -47,7 +47,6 @@ class HomeScreen extends ConsumerWidget {
                   ),
                 ],
               ),
-              SizedBox(height: 20),
               Row(
                 children: [
                   Column(
