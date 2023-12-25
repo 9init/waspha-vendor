@@ -1,5 +1,4 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
-import 'package:json_annotation/json_annotation.dart';
 import 'package:vendor/src/models/payment_methods/payment_methods_model.dart';
 
 part 'store_model.freezed.dart';
