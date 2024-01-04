@@ -97,6 +97,7 @@ class StoreRepository {
     };
   }
 
+  static final appSettingsProvider = FutureProvider((ref) => getAppSettings());
   static final earningsProvider = FutureProvider((ref) => storeEarnings());
   static final storeProvider = FutureProvider((ref) => profile());
   static final storeReviewProvider =
