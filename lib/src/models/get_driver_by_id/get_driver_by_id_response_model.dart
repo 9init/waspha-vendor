@@ -24,24 +24,6 @@ class GetDriverDataByIdResponseModel with _$GetDriverDataByIdResponseModel {
     String? type,
     String? avatar,
     String? status,
-    Report? report,
-    Vehicle? vehicle,
-    Rating? rating,
-  }) = _GetDriverDataByIdResponseModel;
-  factory GetDriverDataByIdResponseModel.fromJson(Map<String,dynamic>json)=>_$GetDriverDataByIdResponseModelFromJson(json);
-
-}
-
-@Freezed(fromJson: true, toJson: false)
-class GetDriverDataByIdResponseModel with _$GetDriverDataByIdResponseModel {
-  const factory GetDriverDataByIdResponseModel({
-    int? id,
-    String? countryCode,
-    String? name,
-    String? contact,
-    String? type,
-    String? avatar,
-    String? status,
     DriverReport? report,
     DriverVehicle? vehicle,
     DriverRating? rating,
@@ -53,13 +35,13 @@ class GetDriverDataByIdResponseModel with _$GetDriverDataByIdResponseModel {
 @Freezed(fromJson: true, toJson: false)
 class DriverReport with _$DriverReport {
   const factory DriverReport({
-    int? walletDebitAmount,
-    int? totalOrders,
-    int? todayOrders,
-    int? todayDeliveryFees,
-    int? totalDeliveryFees,
-    String? latestOrder,
-    int? averageEta,
+   @JsonKey(name: 'wallet_debit_amount') num? walletDebitAmount,
+    @JsonKey(name: 'total_orders') num? totalOrders,
+    @JsonKey(name: 'today_orders') num? todayOrders,
+    @JsonKey(name: 'today_delivery_fees') num? todayDeliveryFees,
+    @JsonKey(name: 'total_delivery_fees') num? totalDeliveryFees,
+    @JsonKey(name: 'latest_order') String? latestOrder,
+    @JsonKey(name: 'average_eta') num? averageEta,
   }) = _DriverReport;
   factory DriverReport.fromJson(Map<String,dynamic>json)=>_$DriverReportFromJson(json);
 
@@ -70,10 +52,10 @@ class DriverVehicle with _$DriverVehicle {
   const factory DriverVehicle({
     int? id,
     String? name,
-    String? numberPlate,
+   @JsonKey(name: 'number_plate') String? numberPlate,
     String? type,
     String? image,
-    String? colorImage,
+    @JsonKey(name: 'color_image')String? colorImage,
     Title? title,
   }) = _DriverVehicle;
   factory DriverVehicle.fromJson(Map<String,dynamic>json)=>_$DriverVehicleFromJson(json);
