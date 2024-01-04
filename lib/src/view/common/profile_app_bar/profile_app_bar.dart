@@ -23,7 +23,7 @@ class ProfileAppBar extends ConsumerWidget implements PreferredSizeWidget {
         child: CircleAvatar(
           backgroundImage: !vendor.hasValue
               ? AssetImage($AssetsImgsGen().avatar.path) as ImageProvider
-              : CachedNetworkImageProvider(vendor.value!.avatar!),
+              : CachedNetworkImageProvider(vendor.value?.avatar??''),
         ),
       ),
       title: Align(

@@ -9,7 +9,6 @@ class CarriersRepository {
       "/store-drivers",
       {"type": type.name.toLowerCase()},
     );
-
     final value = switch (result) {
       Success(:final value) => () {
           try {
@@ -23,7 +22,6 @@ class CarriersRepository {
         }(),
       _ => null,
     };
-
     return value;
   }
 

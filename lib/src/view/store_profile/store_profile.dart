@@ -209,7 +209,7 @@ class StoreProfile extends ConsumerWidget {
             ),
             SizedBox(height: 100.h),
             Text(
-              "ID: ${vendor.hasValue ? vendor.value!.referralCode : "Loading"}",
+              "ID: ${vendor.hasValue ? vendor.value?.referralCode : "Loading"}",
               style: TextStyle(fontSize: 80.sp, fontWeight: FontWeight.bold),
             ),
             SizedBox(height: 200.h)

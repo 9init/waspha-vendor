@@ -1,12 +1,12 @@
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
-
+import 'package:injectable/injectable.dart';
+@injectable
 class AppInterceptors extends Interceptor {
   @override
   void onRequest(RequestOptions options, RequestInterceptorHandler handler) {
     debugPrint('REQUEST[${options.method}] => PATH: ${options.baseUrl}');
-    debugPrint(
-        'REQUEST DATA: ${options.data}'); // Add this line to print request data
+    debugPrint('REQUEST DATA: ${options.data}'); // Add this line to print request data
     super.onRequest(options, handler);
   }
 
