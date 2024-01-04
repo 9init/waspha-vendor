@@ -4,7 +4,7 @@ import 'package:vendor/src/models/get_driver_by_id/get_driver_by_id_response_mod
 import 'package:vendor/src/shared/networking/Networking.dart';
 
 class GetDriverByIdRepository {
-  static Future<GetDriverByIdResponseModel> getDriverById({
+  static Future<GetDriverByIdResponseModel?> getDriverById({
     required String driverId,
   }) async {
     final data = GetDriverByIdRequestModel(driverId: driverId).toJson();
