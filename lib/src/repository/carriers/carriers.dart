@@ -16,7 +16,6 @@ class CarriersRepository {
                 .map((item) => DriverModel.fromJson(item))
                 .toList();
           } catch (e) {
-            print(e);
             return null;
           }
         }(),
