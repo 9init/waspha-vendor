@@ -13,7 +13,8 @@ import 'package:injectable/injectable.dart' as _i2;
 import 'package:shared_preferences/shared_preferences.dart' as _i4;
 
 import '../../src/shared/networking/debuging_interceptor.dart' as _i3;
-import 'register_module.dart' as _i5;
+import '../../src/view/common/toast_manager/toast_manager.dart' as _i5;
+import 'register_module.dart' as _i6;
 
 extension GetItInjectableX on _i1.GetIt {
 // initializes the registration of main-scope dependencies inside of GetIt
@@ -32,8 +33,9 @@ extension GetItInjectableX on _i1.GetIt {
       () => registerModule.prefs,
       preResolve: true,
     );
+    gh.lazySingleton<_i5.ToastManager>(() => _i5.ToastManager());
     return this;
   }
 }
 
-class _$RegisterModule extends _i5.RegisterModule {}
+class _$RegisterModule extends _i6.RegisterModule {}

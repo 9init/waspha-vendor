@@ -53,7 +53,7 @@ dependencies:
   location: ^5.0.3
   otp_text_field: ^1.1.3
   path_provider: ^2.1.1
-  phone_form_field: ^8.1.0
+  phone_form_field: ^8.1.1
   readmore: ^2.2.0
   riverpod_annotation: ^2.3.3
   timeago: ^3.6.0
@@ -64,7 +64,15 @@ dependencies:
   # Dependency Injection service locator
   get_it: ^7.6.0
   shared_preferences: ^2.2.2
-
+  gap: ^3.0.1
+  image_picker: ^1.0.6
+  # A toast library for friendly user interfaces message
+  fluttertoast: ^8.2.4
+  flutter_contacts: ^1.1.7+1
+  # Validators for form fields
+  form_builder_validators: ^9.1.0
+  # Form builder creation of data collection forms in Flutter by removing the boilerplate needed to build a form, validate fields, react to changes and collect final user input.
+  flutter_form_builder: ^9.1.1
 dev_dependencies:
   # Build Runner is a package that provides a concrete way of generating files using Dart code, outside of tools like pub and the Dart VM.
   # Use the below command to generate files:
@@ -116,6 +124,7 @@ flutter:
   assets:
     - assets/imgs/
     - assets/imgs/onboarding/
+    - assets/svg/
 
   fonts:
     - family: OpenSans
