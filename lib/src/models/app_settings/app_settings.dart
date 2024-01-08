@@ -2,6 +2,8 @@ import 'package:freezed_annotation/freezed_annotation.dart';
 
 part 'app_settings.freezed.dart';
 part 'app_settings.g.dart';
+//TODO://CHECK THIS
+
 @Freezed(fromJson: true,toJson: false)
 class AppSettings with _$AppSettings {
   const factory AppSettings({

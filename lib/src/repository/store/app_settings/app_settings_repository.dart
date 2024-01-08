@@ -7,7 +7,7 @@ import 'package:vendor/src/shared/networking/request_method.dart';
 import 'package:vendor/src/shared/networking/results.dart';
 
 part 'app_settings_repository.g.dart';
-
+//TODO://CHECK THIS
 @riverpod
 class AppSettingsProvider extends _$AppSettingsProvider {
   Future<AppSettings?> getAppSettings() async {
