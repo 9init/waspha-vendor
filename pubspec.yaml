@@ -63,11 +63,15 @@ dependencies:
   injectable: ^2.3.0
   # Dependency Injection service locator
   get_it: ^7.6.0
+  #Flutter plugin for reading and writing simple key-value pairs
   shared_preferences: ^2.2.2
+  #Flutter widgets for easily adding gaps inside Flex widgets such as Columns and Rows or scrolling views.
   gap: ^3.0.1
+  #Flutter plugin for picking images from the device
   image_picker: ^1.0.6
   # A toast library for friendly user interfaces message
   fluttertoast: ^8.2.4
+  #Flutter plugin for accessing device contacts
   flutter_contacts: ^1.1.7+1
   # Validators for form fields
   form_builder_validators: ^9.1.0
