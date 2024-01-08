@@ -11,6 +11,7 @@ import '../common/custom_form/custom_form.dart';
 
 class Register extends HookConsumerWidget {
   Register({super.key});
+
   late final _fullNameController = useTextEditingController();
   late final _emailController = useTextEditingController();
   late final _passwordController = useTextEditingController();
@@ -59,7 +60,7 @@ class Register extends HookConsumerWidget {
                   onChanged: (value) {
                     ref
                         .read(registerViewModelProvider.notifier)
-                        .updateFullName(value);
+                        .updateFullName(value!);
                   },
                 ),
                 const SizedBox(
@@ -76,7 +77,7 @@ class Register extends HookConsumerWidget {
                   onChanged: (value) {
                     ref
                         .read(registerViewModelProvider.notifier)
-                        .updatePassword(value);
+                        .updatePassword(value!);
                   },
                 ),
                 const SizedBox(
@@ -89,7 +90,7 @@ class Register extends HookConsumerWidget {
                   onChanged: (value) {
                     ref
                         .read(registerViewModelProvider.notifier)
-                        .updateConfirmPassword(value);
+                        .updateConfirmPassword(value!);
                   },
                 ),
                 const SizedBox(
@@ -127,7 +128,9 @@ class Register extends HookConsumerWidget {
                     onChanged: (value) {
                       ref
                           .read(registerViewModelProvider.notifier)
-                          .updateReferralNo(int.parse(value));
+                          .updateReferralNo(
+                            int.parse(value!),
+                          );
                     },
                     text: "Referral Code (Optional)"),
                 const SizedBox(
