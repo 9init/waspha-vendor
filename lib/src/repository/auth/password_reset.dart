@@ -7,7 +7,7 @@ import 'package:vendor/src/shared/networking/results.dart';
 class PasswordResetRepository {
   static Future<bool> requestResetPasswordWithPhoneNumber(
       PhoneModel phone) async {
-    final result = await Networking.post("/forget-password", {
+    final result = await Networking.post("/forget-password",{
       "vendor_id": {
         "country_code": phone.countryCode,
         "number": phone.number,
