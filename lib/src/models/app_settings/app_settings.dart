@@ -2,25 +2,24 @@ import 'package:freezed_annotation/freezed_annotation.dart';
 
 part 'app_settings.freezed.dart';
 part 'app_settings.g.dart';
-
-@freezed
+@Freezed(fromJson: true,toJson: false)
 class AppSettings with _$AppSettings {
   const factory AppSettings({
-    @JsonKey(name: 'translations_updated_at') String? translationsUpdatedAt,
-    List<Category>? categories,
-    @JsonKey(name: 'delivery_modes') List<DeliveryMode>? deliveryModes,
+    // @JsonKey(name: 'translations_updated_at') String? translationsUpdatedAt,
+    // List<Category>? categories,
+    // @JsonKey(name: 'delivery_modes') List<DeliveryMode>? deliveryModes,
     @JsonKey(name: 'delivery_vehicles') List<DeliveryVehicle>? deliveryVehicles,
-    @JsonKey(name: 'vendor_rejection_reasons')
-    List<RejectionReason>? vendorRejectionReasons,
-    @JsonKey(name: 'vendor_cancellation_reasons')
-    List<CancellationReason>? vendorCancellationReasons,
+    // @JsonKey(name: 'vendor_rejection_reasons')
+    // List<RejectionReason>? vendorRejectionReasons,
+    // @JsonKey(name: 'vendor_cancellation_reasons')
+    // List<CancellationReason>? vendorCancellationReasons,
   }) = _AppSettings;
 
   factory AppSettings.fromJson(Map<String, dynamic> json) =>
       _$AppSettingsFromJson(json);
 }
 
-@freezed
+@Freezed(fromJson: true,toJson: false)
 class Category with _$Category {
   const factory Category({
     int? id,
@@ -34,7 +33,7 @@ class Category with _$Category {
       _$CategoryFromJson(json);
 }
 
-@freezed
+@Freezed(fromJson: true,toJson: false)
 class DeliveryMode with _$DeliveryMode {
   const factory DeliveryMode({
     int? id,
@@ -48,7 +47,7 @@ class DeliveryMode with _$DeliveryMode {
       _$DeliveryModeFromJson(json);
 }
 
-@freezed
+@Freezed(fromJson: true,toJson: false)
 class DeliveryVehicle with _$DeliveryVehicle {
   const factory DeliveryVehicle({
     int? id,
@@ -63,7 +62,7 @@ class DeliveryVehicle with _$DeliveryVehicle {
       _$DeliveryVehicleFromJson(json);
 }
 
-@freezed
+@Freezed(fromJson: true,toJson: false)
 class RejectionReason with _$RejectionReason {
   const factory RejectionReason({
     int? id,
@@ -74,7 +73,7 @@ class RejectionReason with _$RejectionReason {
       _$RejectionReasonFromJson(json);
 }
 
-@freezed
+@Freezed(fromJson: true,toJson: false)
 class CancellationReason with _$CancellationReason {
   const factory CancellationReason({
     int? id,
@@ -85,7 +84,8 @@ class CancellationReason with _$CancellationReason {
       _$CancellationReasonFromJson(json);
 }
 
-@freezed
+@Freezed(fromJson: true,toJson: false)
+
 class LocalizedName with _$LocalizedName {
   const factory LocalizedName({
     String? en,
@@ -96,7 +96,7 @@ class LocalizedName with _$LocalizedName {
       _$LocalizedNameFromJson(json);
 }
 
-@freezed
+@Freezed(fromJson: true,toJson: false)
 class ImageUrls with _$ImageUrls {
   const factory ImageUrls({
     @JsonKey(name: 'white') String? white,

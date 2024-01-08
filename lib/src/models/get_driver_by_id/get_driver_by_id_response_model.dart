@@ -35,7 +35,7 @@ class GetDriverDataByIdResponseModel with _$GetDriverDataByIdResponseModel {
 @Freezed(fromJson: true, toJson: false)
 class DriverReport with _$DriverReport {
   const factory DriverReport({
-   @JsonKey(name: 'wallet_debit_amount') num? walletDebitAmount,
+    @JsonKey(name: 'wallet_debit_amount') num? walletDebitAmount,
     @JsonKey(name: 'total_orders') num? totalOrders,
     @JsonKey(name: 'today_orders') num? todayOrders,
     @JsonKey(name: 'today_delivery_fees') num? todayDeliveryFees,
@@ -64,8 +64,8 @@ class DriverVehicle with _$DriverVehicle {
 @Freezed(fromJson: true, toJson: false)
 class DriverRating with _$DriverRating {
   const factory DriverRating({
-    int? rate,
-    int? count,
+    double? rate,
+    num? count,
   }) = _DriverRating;
   factory DriverRating.fromJson(Map<String,dynamic>json)=>_$DriverRatingFromJson(json);
 
