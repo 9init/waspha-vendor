@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:vendor/Themes/index.dart';
-import 'package:vendor/core/constans/index.dart';
+import 'package:vendor/src/view/common/colors/colors.dart';
 
 ThemeData lightThemeData() {
   return ThemeData(
@@ -12,9 +12,9 @@ ThemeData lightThemeData() {
     //Setting the Text Theme to LightTextTheme
     appBarTheme: const AppBarTheme(
       iconTheme: IconThemeData(
-        color: ColorConstants.whiteColor,
+        color: WasphaColors.whiteColor,
       ),
     ),
-    dialogBackgroundColor: ColorConstants.whiteColor,
+    dialogBackgroundColor: WasphaColors.whiteColor,
   );
 }

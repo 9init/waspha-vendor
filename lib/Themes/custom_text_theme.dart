@@ -1,72 +1,78 @@
 import 'package:flutter/material.dart';
 import 'package:vendor/core/constans/index.dart';
 import 'package:vendor/core/gen/fonts.gen.dart';
+import 'package:vendor/src/view/common/colors/colors.dart';
 // Custom Text Styles Class For Both Dark Isa  and Light Theme Now :)
-
+////100	extralight/ultralight
+// 200	light/thin
+// 300	book/demi/light
+// 400	regular/normal
+// 500	medium
+// 600	semibold/demibold
+// 700	bold
+// 800	black/extrabold/heavy
+// 900	extrablack/fat/poster/ultrablack/heavy
 class CustomTextTheme {
   static TextTheme textTheme() {
-    const FontWeight medium = FontWeight.w600;
-    const FontWeight regular = FontWeight.w400;
-    const FontWeight normal = FontWeight.w500;
-    const FontWeight normalBold = FontWeight.w700;
-    const FontWeight bold = FontWeight.w800;
+
+
     return TextTheme(
       titleLarge: TextStyle(
         fontSize: AppDimensions.textSizeLarge,
-        color: ColorConstants.blackColor,
-        fontWeight: medium,
+        color: WasphaColors.blackColor,
+        fontWeight: AppDimensions.bold,
         fontFamily: MyFontFamily.openSans,
       ),
       titleMedium: TextStyle(
-        fontSize: AppDimensions.textSizeLarge,
-        color: ColorConstants.blackColor,
-        fontWeight: normal,
+        fontSize: AppDimensions.textSizeMedium,
+        color: WasphaColors.blackColor,
+        fontWeight: AppDimensions.regular,
         fontFamily: MyFontFamily.openSans,
       ),
       titleSmall: TextStyle(
         fontSize: AppDimensions.textSizeLarge,
-        color: ColorConstants.blackColor,
-        fontWeight: regular,
+        color: WasphaColors.blackColor,
+        fontWeight: AppDimensions.regular,
         fontFamily: MyFontFamily.openSans,
       ),
-      displayLarge: TextStyle(
-        fontSize: AppDimensions.textSizeLarge,
-        color: ColorConstants.blackColor,
-        fontWeight: bold,
-        fontFamily: MyFontFamily.openSans,
-      ),
+      // displayLarge: TextStyle(
+      //   fontSize: AppDimensions.textSizeLarge,
+      //   color: WasphaColors.blackColor,
+      //   fontWeight: bold,
+      //   fontFamily: MyFontFamily.openSans,
+      // ),
       displayMedium: TextStyle(
-        fontSize: AppDimensions.textSizeLarge,
-        color: ColorConstants.blackColor,
-        fontWeight: normal,
+        fontSize: AppDimensions.textSizeTitle,
+        color: WasphaColors.blackColor,
+        fontWeight: AppDimensions.bold,
         fontFamily: MyFontFamily.openSans,
       ),
       displaySmall: TextStyle(
-        fontSize: AppDimensions.textSizeLarge,
-        fontWeight: normal,
+        fontSize: AppDimensions.textSizeSmall,
+        fontWeight: AppDimensions.regular,
         fontFamily: MyFontFamily.openSans,
       ),
       labelSmall: TextStyle(
         fontSize: AppDimensions.textSizeLarge,
-        fontWeight: regular,
+        fontWeight: AppDimensions.regular,
         fontFamily: MyFontFamily.openSans,
       ),
-      headlineMedium: TextStyle(
-        fontSize: AppDimensions.textSizeLarge,
-        color: ColorConstants.blackColor,
-        fontWeight: normalBold,
-        fontFamily: MyFontFamily.openSans,
-      ),
+      // headlineMedium: TextStyle(
+      //   fontSize: AppDimensions.textSizeLarge,
+      //   color: WasphaColors.blackColor,
+      //   fontWeight: normalBold,
+      //   fontFamily: MyFontFamily.openSans,
+      // ),
       headlineSmall: TextStyle(
         fontSize: AppDimensions.textSizeLarge,
-        color: ColorConstants.whiteColor,
-        fontWeight: medium,
+        color: WasphaColors.whiteColor,
+        fontWeight: AppDimensions.medium,
         fontFamily: MyFontFamily.openSans,
       ),
       headlineLarge: TextStyle(
         fontSize: AppDimensions.textSizeLarge,
-        color: ColorConstants.blackColor,
-        fontWeight: medium,
+        color: WasphaColors.blackColor,
+        fontWeight:AppDimensions. medium,
         fontFamily: MyFontFamily.openSans,
       ),
     );
