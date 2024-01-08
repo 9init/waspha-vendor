@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:go_router/go_router.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:vendor/core/localization/localization.dart';
 import 'package:vendor/src/models/driver/driver_model.dart';
 import 'package:vendor/src/repository/carriers/carriers.dart';
+import 'package:vendor/src/routes/routes_names.dart';
 import 'package:vendor/src/view/common/carrier_item/carrier_item.dart';
 
 class Carrier extends ConsumerWidget {
@@ -31,7 +33,7 @@ class Carrier extends ConsumerWidget {
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 10),
             child: ElevatedButton(
-              onPressed: () {},
+              onPressed: () => context.push(RoutesNames.addNewDriver),
               child: Text(
                 "Add",
                 style: TextStyle(color: Colors.white),
