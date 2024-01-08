@@ -1,27 +1,25 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_form_builder/flutter_form_builder.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 
-class CustomFormField extends HookWidget {
-  const CustomFormField(
-      {super.key,
-      required this.controller,
-      required this.text,
-      this.isPassword = false,
-      this.isOptional = false,
-      this.onChanged,
-      this.validator,
-      this.labelText,
-      this.textFieldName});
+class CustomTextFormField extends HookWidget {
+  const CustomTextFormField({
+    super.key,
+    required this.controller,
+    required this.text,
+    this.isPassword = false,
+    this.isOptional = false,
+    this.onChanged,
+    this.validator,
+    this.labelText,
+  });
 
   final TextEditingController controller;
   final String text;
   final String? labelText;
   final bool isPassword;
   final bool isOptional;
-  final void Function(String?)? onChanged;
+  final void Function(String)? onChanged;
   final String? Function(String?)? validator;
-  final String? textFieldName;
 
   @override
   Widget build(BuildContext context) {
@@ -29,10 +27,10 @@ class CustomFormField extends HookWidget {
 
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 30),
-      child: FormBuilderTextField(
+      child: TextFormField(
         controller: controller,
         validator: validator ??
-            (value) {
+                (value) {
               if (isOptional) {
                 return null;
               }
@@ -50,17 +48,16 @@ class CustomFormField extends HookWidget {
           floatingLabelBehavior: FloatingLabelBehavior.auto,
           suffixIcon: isPassword
               ? IconButton(
-                  onPressed: () => isPassVisible.value = !isPassVisible.value,
-                  icon: isPassVisible.value
-                      ? const Icon(Icons.visibility)
-                      : const Icon(Icons.visibility_off),
-                )
+            onPressed: () => isPassVisible.value = !isPassVisible.value,
+            icon: isPassVisible.value
+                ? const Icon(Icons.visibility)
+                : const Icon(Icons.visibility_off),
+          )
               : null,
           border: UnderlineInputBorder(
             borderRadius: BorderRadius.circular(10),
           ),
         ),
-        name: textFieldName ?? '',
       ),
     );
   }
