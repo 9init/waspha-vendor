@@ -27,7 +27,7 @@ class Notifications extends ConsumerWidget {
       body: Column(
         children: [
           notifications.isLoading
-              ? Expanded(child: Center(child: CircularProgressIndicator()))
+              ? Expanded(child: Center(child: CircularProgressIndicator.adaptive(),))
               : Expanded(
                   child: ListView.separated(
                     separatorBuilder: (context, index) {
