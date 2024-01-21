@@ -32,7 +32,7 @@ class TransactionsChartWidget extends StatelessWidget {
               topLeft: Radius.circular(8.r),
             ),
             width: 0.34.w,
-            dataSource: transactions 
+            dataSource: transactions ,
             color: WasphaColors.primary,
             xValueMapper: (Transactions sales, _) {
               final reformatDate = DateFormat(DateFormatStyle.dayMonthYear).format(
