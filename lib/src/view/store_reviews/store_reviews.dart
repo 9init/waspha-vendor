@@ -33,7 +33,7 @@ class StoreReviewsScreen extends ConsumerWidget {
         children: [
           reviewModel == null
               ? Expanded(
-                  child: Center(child: const CircularProgressIndicator()),
+                  child: Center(child: const CircularProgressIndicator.adaptive(),),
                 )
               : Expanded(
                   child: reviewModel.reviewsRatings.length == 0
