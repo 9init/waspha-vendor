@@ -37,7 +37,7 @@ class WasphaButton extends StatelessWidget {
               .textTheme
               .titleMedium!
               .copyWith(color: WasphaColors.white),
-        ).center(),
+        ).wrapCenter(),
       ),
     );
   }
