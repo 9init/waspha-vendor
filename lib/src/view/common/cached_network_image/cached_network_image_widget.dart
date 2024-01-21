@@ -21,7 +21,7 @@ class CachedNetworkImageWidget extends StatelessWidget {
       fit: fit,
       width: width,
       height: height,
-      placeholder: (context, url) => CircularProgressIndicator(),
+      placeholder: (context, url) => CircularProgressIndicator.adaptive(),
       errorWidget: (context, url, error) => Icon(Icons.error),
     );
   }

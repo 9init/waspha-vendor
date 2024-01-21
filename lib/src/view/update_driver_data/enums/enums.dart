@@ -11,3 +11,9 @@ enum VehicleType {
 }
 
 enum Gender { male, female }
+
+enum ResponseResult {
+  success,
+  failure,
+  error,
+}

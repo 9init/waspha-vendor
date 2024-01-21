@@ -70,7 +70,7 @@ extension wrapInRow on Row {
 
 
 extension WrapCenter on Widget {
-  Widget center() {
+  Widget wrapCenter() {
     return Center(
       child: this,
     );
