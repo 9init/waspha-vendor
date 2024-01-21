@@ -15,8 +15,8 @@ class Carrier extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final storeDrivers =
-        ref.watch(CarriersRepository.storeDriverProvider(driverType));
+    final storeDrivers = ref.watch(CarriersRepository.storeDriverProvider(driverType));
+    debugPrint('The Driver Type Is $driverType');
     return Scaffold(
       appBar: AppBar(
         leading: BackButton(),
@@ -33,7 +33,8 @@ class Carrier extends ConsumerWidget {
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 10),
             child: ElevatedButton(
-              onPressed: () => context.push(RoutesNames.addNewDriver),
+              onPressed: () =>
+                  context.push(RoutesNames.addNewDriver, extra: driverType),
               child: Text(
                 "Add",
                 style: TextStyle(color: Colors.white),
@@ -49,7 +50,11 @@ class Carrier extends ConsumerWidget {
       body: Column(
         children: [
           storeDrivers.isLoading || storeDrivers.value == null
-              ? Expanded(child: Center(child: CircularProgressIndicator()))
+              ? Expanded(
+                  child: Center(
+                    child: CircularProgressIndicator.adaptive(),
+                  ),
+                )
               : Expanded(
                   child: ListView.separated(
                     separatorBuilder: (context, index) {
