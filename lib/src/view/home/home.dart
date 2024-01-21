@@ -1,11 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_switch/flutter_switch.dart';
+import 'package:gap/gap.dart';
 import 'package:go_router/go_router.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:intl/intl.dart';
+import 'package:vendor/core/constans/index.dart';
+import 'package:vendor/core/extensions/custom_padding.dart';
 import 'package:vendor/core/gen/assets.gen.dart';
 import 'package:vendor/core/localization/localization.dart';
+import 'package:vendor/src/view/common/colors/colors.dart';
 import 'package:vendor/src/view/common/home_switch/home_switch.dart';
 import 'package:vendor/src/view/home/viewmodel.dart';
 
@@ -33,81 +37,113 @@ class HomeScreen extends ConsumerWidget {
                   Container(
                     margin: EdgeInsets.symmetric(horizontal: 20),
                     child: FlutterSwitch(
+                      inactiveTextColor: WasphaColors.darkBlackColor,
+                      activeToggleColor: WasphaColors.greenColor,
+                      activeTextColor: WasphaColors.darkBlackColor,
+                      activeColor: WasphaColors.white,
                       showOnOff: true,
                       value: homeModel.isStoreOnline ?? false,
-                      width: 300.w,
+                      height: 30.h,
+                      width: 112.w,
                       activeText: context.localization.online,
                       inactiveText: context.localization.offline,
-                      activeTextFontWeight: FontWeight.normal,
-                      inactiveTextFontWeight: FontWeight.normal,
-                      valueFontSize: 50.sp,
+                      activeTextFontWeight: FontWeight.bold,
+                      inactiveTextFontWeight: FontWeight.bold,
+                      valueFontSize: 14.sp,
                       switchBorder: Border.all(color: Colors.black),
                       onToggle: (val) => homeModelNotifier.setStoreOnline(val),
                     ),
                   ),
                 ],
               ),
+              Gap(10.h),
               Row(
                 children: [
                   Column(
                     children: [
-                      $AssetsImgsGen().box2.image(),
+                      Container(
+                        height: 100.h,
+                        width: 100.w,
+                        child: Stack(
+                          children: [
+                            MyAssets.imgs.box2.image(),
+                            Align(
+                              alignment: Alignment(-1.1, 0.9),
+                              child: CircleAvatar(
+                                radius: 20.r,
+                                backgroundColor: WasphaColors.redColor,
+                                child: IconButton(
+                                  onPressed: () {},
+                                  icon: Icon(
+                                    Icons.add,
+                                    color: WasphaColors.white,
+                                    size: 15,
+                                  ).wrapCenter(),
+                                ).wrapCenter(),
+                              ),
+                            )
+                          ],
+                        ),
+                      ),
                       Text(
                         "Box",
-                        style: TextStyle(
-                          fontSize: 20,
-                          fontWeight: FontWeight.bold,
-                        ),
+                        style: Theme.of(context)
+                            .textTheme
+                            .displayMedium!
+                            .copyWith(
+                                fontSize: AppDimensions.textSizeExtraLarge),
                       ),
                     ],
                   ),
                   Spacer(),
                   HomeSwitcher(
                     title: "Delivery",
-                    value: homeModel.isDeliveryEnabled ?? false,
+                    value: homeModel.isDeliveryEnabled,
                     onChanged: (val) =>
                         homeModelNotifier.setIsDeliveryEnabled(val),
+                    switchTitle: homeModel.isDeliveryEnabled? "On" : "Off",
                   ),
                   SizedBox(width: 20),
                   HomeSwitcher(
+                    switchTitle: homeModel.isPickupEnabled ? "On" : "Off",
                     title: "Pickup",
-                    value: homeModel.isPickupEnabled ?? false,
+                    value: homeModel.isPickupEnabled ,
                     onChanged: (val) =>
                         homeModelNotifier.setIsPickupEnabled(val),
                   ),
                 ],
               ),
-              const SizedBox(height: 40),
+              SizedBox(height: 40.h),
               GestureDetector(
                 onTap: () {
                   context.push('/payouts');
                 },
                 child: Center(
                   child: Container(
-                    padding:
-                        EdgeInsets.symmetric(vertical: 90.h, horizontal: 30.w),
+                    width: 390.w,
+                    height: 300.h,
                     decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(10),
+                      borderRadius: BorderRadius.circular(25.r),
                       gradient: const LinearGradient(
                         begin: Alignment.topCenter,
                         end: Alignment.bottomCenter,
                         colors: [
-                          Colors.white,
-                          Colors.grey,
+                          WasphaColors.white,
+                          WasphaColors.greyColor,
                         ],
                       ),
                     ),
                     child: Column(
                       children: [
+                        Gap(10.h),
                         Text(
                           "Total Net Profit",
-                          style: TextStyle(fontSize: 20),
+                          style: Theme.of(context).textTheme.titleMedium,
                         ),
                         Text(
                           homeModel.earnings?.totalNetProfit?.toString() ??
                               context.localization.loading,
-                          style: TextStyle(
-                              fontSize: 20, fontWeight: FontWeight.bold),
+                          style: Theme.of(context).textTheme.displayMedium,
                         ),
                         SizedBox(height: 20),
                         IntrinsicHeight(
@@ -120,15 +156,17 @@ class HomeScreen extends ConsumerWidget {
                                   children: [
                                     Text(
                                       "Balance",
-                                      style: TextStyle(fontSize: 50.sp),
+                                      style: Theme.of(context)
+                                          .textTheme
+                                          .titleMedium,
                                     ),
                                     Text(
                                       homeModel.earnings?.totalSettlement
                                               ?.toString() ??
                                           context.localization.loading,
-                                      style: TextStyle(
-                                          fontSize: 50.sp,
-                                          fontWeight: FontWeight.bold),
+                                      style: Theme.of(context)
+                                          .textTheme
+                                          .displayMedium,
                                     ),
                                   ],
                                 ),
@@ -142,15 +180,19 @@ class HomeScreen extends ConsumerWidget {
                                 flex: 1,
                                 child: Column(
                                   children: [
-                                    Text("Today Net Profit",
-                                        style: TextStyle(fontSize: 50.sp)),
+                                    Text(
+                                      "Today Net Profit",
+                                      style: Theme.of(context)
+                                          .textTheme
+                                          .titleMedium,
+                                    ),
                                     Text(
                                       homeModel.earnings?.todayProfit
                                               .toString() ??
                                           context.localization.loading,
-                                      style: TextStyle(
-                                          fontSize: 50.sp,
-                                          fontWeight: FontWeight.bold),
+                                      style: Theme.of(context)
+                                          .textTheme
+                                          .displayMedium,
                                     ),
                                   ],
                                 ),
@@ -169,22 +211,32 @@ class HomeScreen extends ConsumerWidget {
                           padding: EdgeInsets.only(left: 30.0),
                           child: Row(
                             children: [
-                              Text("Payouts", style: TextStyle(fontSize: 20)),
+                              Text(
+                                "Payouts",
+                                style:
+                                    Theme.of(context).textTheme.displayMedium,
+                              ),
                               Icon(Icons.arrow_forward),
                             ],
                           ),
                         ),
                         if (homeModel.latestUpdate != null)
                           Text(
-                              "${context.localization.last_update} ${DateFormat('MM/d/yyyy hh:mm a').format(homeModel.latestUpdate!)}")
+                            "${context.localization.last_update} ${DateFormat('MM/d/yyyy hh:mm a').format(homeModel.latestUpdate!)}",
+                            style: Theme.of(context).textTheme.titleMedium,
+                          )
                       ],
                     ),
                   ),
                 ),
               ),
-              const SizedBox(height: 20),
+              SizedBox(height: 20.h),
               const Align(
-                  alignment: Alignment.centerRight, child: Text("Dismiss all"))
+                alignment: Alignment.centerRight,
+                child: Text(
+                  "Dismiss all",
+                ),
+              )
             ],
           ),
         ),

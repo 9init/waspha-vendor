@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:vendor/core/constans/dimension/dimensions.dart';
 
 class HomeSwitcher extends StatelessWidget {
   const HomeSwitcher({
@@ -7,11 +8,13 @@ class HomeSwitcher extends StatelessWidget {
     required this.title,
     required this.value,
     required this.onChanged,
+    required this.switchTitle,
   });
 
   final Function(bool) onChanged;
   final String title;
   final bool value;
+  final String switchTitle;
 
   @override
   Widget build(BuildContext context) {
@@ -24,16 +27,15 @@ class HomeSwitcher extends StatelessWidget {
             backgroundColor: value ? Color(0xff00FF00) : Color(0xffFF0000),
             child: Column(
               children: [
-                SizedBox(height: 10),
+                SizedBox(height: 10.h),
                 Text(
-                  "On",
-                  style: TextStyle(
-                    color: Colors.black,
-                    fontSize: 15,
-                    fontWeight: FontWeight.bold,
-                  ),
+                  switchTitle,
+                  style: Theme.of(context)
+                      .textTheme
+                      .displayMedium!
+                      .copyWith(fontSize: AppDimensions.textSizeExtraLarge),
                 ),
-                SizedBox(height: 5),
+                SizedBox(height: 10.h),
                 SizedBox(
                   height: 10,
                   child: Transform.scale(
@@ -54,12 +56,14 @@ class HomeSwitcher extends StatelessWidget {
             ),
           ),
         ),
+        SizedBox(height: 10.h),
+
         Text(
           title,
-          style: TextStyle(
-            fontSize: 45.sp,
-            fontWeight: FontWeight.bold,
-          ),
+          style: Theme.of(context)
+              .textTheme
+              .displayMedium!
+              .copyWith(fontSize: AppDimensions.textSizeExtraLarge),
         ),
       ],
     );
