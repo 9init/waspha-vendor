@@ -77,6 +77,16 @@ dependencies:
   form_builder_validators: ^9.1.0
   # Form builder creation of data collection forms in Flutter by removing the boilerplate needed to build a form, validate fields, react to changes and collect final user input.
   flutter_form_builder: ^9.1.1
+  equatable: ^2.0.5
+  easy_date_timeline: ^1.0.2
+  # Provides charting capabilities for your Flutter app.
+  syncfusion_flutter_charts: 22.2.11
+  #for launching a URL and Intent
+  url_launcher: ^6.2.3
+  url_launcher_platform_interface: ^2.2.0
+  url_launcher_android: ^6.2.2
+  url_launcher_ios: ^6.2.4
+  flutter_timezone: ^1.0.8
 dev_dependencies:
   # Build Runner is a package that provides a concrete way of generating files using Dart code, outside of tools like pub and the Dart VM.
   # Use the below command to generate files:
@@ -88,6 +98,7 @@ dev_dependencies:
   # Injectable Generator is a generator for injectable.
   injectable_generator: ^2.4.0
   flutter_lints: ^3.0.1
+
   flutter_test:
     sdk: flutter
   freezed: ^2.4.5
