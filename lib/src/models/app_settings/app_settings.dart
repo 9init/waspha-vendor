@@ -7,14 +7,14 @@ part 'app_settings.g.dart';
 @Freezed(fromJson: true,toJson: false)
 class AppSettings with _$AppSettings {
   const factory AppSettings({
-    // @JsonKey(name: 'translations_updated_at') String? translationsUpdatedAt,
-    // List<Category>? categories,
-    // @JsonKey(name: 'delivery_modes') List<DeliveryMode>? deliveryModes,
+    @JsonKey(name: 'translations_updated_at') String? translationsUpdatedAt,
+    List<Category>? categories,
+    @JsonKey(name: 'delivery_modes') List<DeliveryMode>? deliveryModes,
     @JsonKey(name: 'delivery_vehicles') List<DeliveryVehicle>? deliveryVehicles,
-    // @JsonKey(name: 'vendor_rejection_reasons')
-    // List<RejectionReason>? vendorRejectionReasons,
-    // @JsonKey(name: 'vendor_cancellation_reasons')
-    // List<CancellationReason>? vendorCancellationReasons,
+    @JsonKey(name: 'vendor_rejection_reasons')
+    List<RejectionReason>? vendorRejectionReasons,
+    @JsonKey(name: 'vendor_cancellation_reasons')
+    List<CancellationReason>? vendorCancellationReasons,
   }) = _AppSettings;
 
   factory AppSettings.fromJson(Map<String, dynamic> json) =>
