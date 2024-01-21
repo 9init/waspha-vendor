@@ -6,18 +6,17 @@ import 'package:vendor/core/extensions/custom_padding.dart';
 import 'package:vendor/core/gen/assets.gen.dart';
 import 'package:vendor/core/localization/localization.dart';
 import 'package:vendor/src/view/common/colors/colors.dart';
-import 'package:vendor/src/view/update_driver_data/enums/enums.dart';
 
 
-final selectedGenderProvider =
-    AutoDisposeStateProvider<Gender>((ref) => Gender.male);
+
+final selectedGenderProvider = AutoDisposeStateProvider<String?>((ref) => null);
 
 class DriverGender extends ConsumerWidget {
   const DriverGender({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final Gender selectedGender = ref.watch(selectedGenderProvider);
+    final String? selectedGender = ref.watch(selectedGenderProvider);
 
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
@@ -32,7 +31,7 @@ class DriverGender extends ConsumerWidget {
             MyAssets.svg.male.svg(),
             MyAssets.svg.female.svg(),
           ],
-        ).paddingRow(paddingRight: 10,paddingLeft: 10),
+        ).paddingRow(paddingRight: 10, paddingLeft: 10),
         Row(
           mainAxisAlignment: MainAxisAlignment.end,
           children: [
@@ -40,17 +39,13 @@ class DriverGender extends ConsumerWidget {
               context.localization.male,
               style: Theme.of(context).textTheme.displaySmall,
             ),
-            Radio<Gender>(
-              value: Gender.male,
+            Radio<String?>(
+              value: 'male',
               groupValue: selectedGender,
-              activeColor:WasphaColors.blackColor,
+              activeColor: WasphaColors.blackColor,
               onChanged: (value) {
-                if (value != null) {
-                  ref.read(selectedGenderProvider.notifier).state = value;
-                  debugPrint('Selected Gender: ${value.toString()}');
-                  debugPrint(
-                      'Selected Gender From Provider Is: ${ref.read(selectedGenderProvider.notifier).state}');
-                }
+                ref.read(selectedGenderProvider.notifier).state = value;
+                debugPrint('Selected Gender: $value');
               },
             ),
             Gap(10.w),
@@ -58,18 +53,17 @@ class DriverGender extends ConsumerWidget {
               context.localization.female,
               style: Theme.of(context).textTheme.displaySmall,
             ),
-            Radio<Gender>(
-              activeColor:WasphaColors.blackColor,
-
-              value: Gender.female,
+            Radio<String?>(
+              activeColor: WasphaColors.blackColor,
+              value: 'female',
               groupValue: selectedGender,
               onChanged: (value) {
-                if (value != null) {
-                  ref.read(selectedGenderProvider.notifier).state = value;
-                  debugPrint('Selected Gender: ${value.toString()}');
-                }
+                ref.read(selectedGenderProvider.notifier).state = value;
+                debugPrint('Selected Gender: $value');
               },
             ),
+            Gap(10.w),
+
           ],
         ),
       ],

@@ -1,56 +1,67 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/flutter_svg.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:vendor/core/extensions/custom_padding.dart';
+import 'package:vendor/src/models/app_settings/app_settings.dart';
 import 'package:vendor/src/view/common/colors/colors.dart';
-import 'package:vendor/src/view/update_driver_data/enums/enums.dart';
-import 'package:vendor/src/view/update_driver_data/screens/update_driver_data_screen/widgets/vehicles.dart';
+import 'package:vendor/src/view/common/shadow_container/sahdow_container.dart';
 
-final selectedVehiclesProvider = AutoDisposeStateProvider<VehicleType>(
-  (ref) => VehicleType.Bicycle,
-);
-
+final selectedVehiclesProvider = AutoDisposeStateProvider<String>((ref) => '');
 
 class DeliveryMethodsView extends StatelessWidget {
-  const DeliveryMethodsView({Key? key, required this.vehicle})
-      : super(key: key);
-  final Vehicle vehicle;
+  const DeliveryMethodsView({
+    Key? key,
+    required this.deliveryVehicle,
+  }) : super(key: key);
+
+  final DeliveryVehicle deliveryVehicle;
 
   @override
   Widget build(BuildContext context) {
     return Column(
       children: [
-        Container(
+        InnerShadow(
+          blur: 5,
+          color:WasphaColors.grey200.withOpacity(0.4),
+          offset: const Offset(2.5, 2.5),
+
+          child: Container(
+            padding: EdgeInsets.all(10),
             decoration: BoxDecoration(
               color: WasphaColors.white,
               shape: BoxShape.circle,
             ),
-            child: SvgPicture.asset(
-              vehicle.image,
-            )),
+            child: CachedNetworkImage(
+              imageUrl: deliveryVehicle.image?.color ?? '',
+              width: 50.w,
+              height: 50.h,
+            ),
+          ),
+        ),
         Text(
-          vehicle.name,
+          deliveryVehicle.title?.en ?? '',
           style: Theme.of(context).textTheme.displaySmall,
         ),
         Consumer(
           builder: (context, ref, child) {
-            final VehicleType selectedVehicle =
-                ref.watch(selectedVehiclesProvider);
-            return Radio(
-              value: vehicle.type, // Use the type from the provided Vehicle
-              groupValue: selectedVehicle,
+            var selectedVehicle = ref.watch(selectedVehiclesProvider);
+            debugPrint('selectedVehicle${selectedVehicle}');
+            return Radio<String>(
               activeColor: WasphaColors.blackColor,
-              onChanged: (value) {
-                if (value != null) {
-                  ref.read(selectedVehiclesProvider.notifier).state = value;
-                  debugPrint('Selected Gender: ${value.toString()}');
-                  debugPrint(
-                      'Selected Gender From Provider Is: ${ref.read(selectedVehiclesProvider.notifier).state}');
+              value: deliveryVehicle.name??"",
+              groupValue: selectedVehicle,
+              onChanged: (String? newValue) {
+                if (newValue != null) {
+                  ref.read(selectedVehiclesProvider.notifier).state = newValue;
+                  debugPrint('The New Value Is $newValue');
+                  // Potentially force a rebuild if not automatically happening
                 }
               },
             );
           },
         ),
       ],
-    );
+    ).PaddingColumn(paddingRight: 10,paddingLeft: 10);
   }
 }

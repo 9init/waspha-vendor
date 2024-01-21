@@ -13,11 +13,13 @@ import 'package:vendor/src/view/update_driver_data/providers/get_driver_contact_
 
 class DriverPhoneNumber extends StatefulHookConsumerWidget {
   final GetDriverDataByIdResponseModel? driverDataByIdResponseModel;
+  final GlobalKey<FormState> formKey;
 
-  DriverPhoneNumber(
-      {Key? key,
-      this.driverDataByIdResponseModel,})
-      : super(key: key);
+  DriverPhoneNumber({
+    Key? key,
+    this.driverDataByIdResponseModel,
+    required this.formKey,
+  }) : super(key: key);
 
   @override
   ConsumerState<DriverPhoneNumber> createState() => _DriverPhoneNumberState();
@@ -27,44 +29,64 @@ class _DriverPhoneNumberState extends ConsumerState<DriverPhoneNumber> {
   late PhoneController controller;
 
   @override
-  initState() {
+  void initState() {
     super.initState();
-    controller = PhoneController(null);
-    controller.addListener(() => setState(() {}));
+    initController();
+  }
+
+  void initController() {
+    String initialNumber = widget.driverDataByIdResponseModel?.contact ?? '';
+    controller = PhoneController(
+      PhoneNumber(isoCode: IsoCode.SA, nsn: initialNumber),
+    );
   }
 
   @override
   void dispose() {
-    super.dispose();
     controller.dispose();
+    super.dispose();
   }
+
+  void updateNumber(String newNumber,) {
+    controller.dispose();
+    controller = PhoneController(
+      PhoneNumber(isoCode: IsoCode.SA, nsn: newNumber),
+    );
+    debugPrint('controller.selectNationalNumber()${controller.value!.countryCode}');
+    setState(() {});
+  }
+
+  final phoneKey = GlobalKey<FormFieldState<PhoneNumber>>();
 
   @override
   Widget build(BuildContext context) {
     final phoneNumber = ref.watch(getDriverContactDataProvider);
-    controller.value = PhoneNumber(
-        isoCode: IsoCode.SA,
-        nsn: phoneNumber.driverMobileNumber.isEmpty
-            ? widget.driverDataByIdResponseModel?.contact ?? ''
-            : phoneNumber.driverMobileNumber);
+    //setDriverCountryCode
+    if (phoneNumber.driverMobileNumber.isNotEmpty) {
+      updateNumber(phoneNumber.driverMobileNumber);
+    }
     return Column(
       crossAxisAlignment: CrossAxisAlignment.end,
       children: [
-        Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 35),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Text(
-                context.localization.mobile_number,
-                style: Theme.of(context).textTheme.titleMedium,
-              ),
-              PhoneFormField(
-                controller: controller,
-              ),
-            ],
-          ),
-        ),
+        Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Text(
+              context.localization.mobile_number,
+              style: Theme.of(context).textTheme.titleMedium,
+            ),
+
+            PhoneFormField(
+            onChanged:(PhoneNumber?phoneNumber){
+              debugPrint('The Phone Number Is ${phoneNumber!.countryCode}');
+              ref.read(getDriverContactDataProvider).countryCode=phoneNumber.countryCode;
+            },
+              key: phoneKey,
+              autovalidateMode: AutovalidateMode.disabled,
+              controller: controller,
+            ),
+          ],
+        ).PaddingColumn(paddingRight: 80,paddingLeft: 85),
         Gap(10.h),
         GestureDetector(
           onTap: () => context.push(RoutesNames.contactListScreen),
@@ -84,7 +106,7 @@ class _DriverPhoneNumberState extends ConsumerState<DriverPhoneNumber> {
                   .textTheme
                   .titleMedium!
                   .copyWith(color: WasphaColors.white),
-            ).center(),
+            ).wrapCenter(),
           ),
         ),
       ],
