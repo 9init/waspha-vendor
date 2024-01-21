@@ -8,13 +8,15 @@ import 'package:vendor/src/view/common/colors/colors.dart';
 import 'package:vendor/src/view/common/waspha_button/waspha_button.dart';
 
 class InterActiveAlertDialog extends StatelessWidget {
-  const InterActiveAlertDialog(
-      {Key? key,
-      this.isUpdateOrAddNewDriver = true,
-      required this.driverData,
-      this.confirmationClick})
-      : super(key: key);
-  final bool isUpdateOrAddNewDriver;
+  const InterActiveAlertDialog({
+    Key? key,
+    required this.driverData,
+    this.confirmationClick,
+    required this.body,
+    required this.title,
+  }) : super(key: key);
+  final String body;
+  final String title;
   final Widget driverData;
   final VoidCallback? confirmationClick;
 
@@ -27,9 +29,7 @@ class InterActiveAlertDialog extends StatelessWidget {
         child: Column(
           children: [
             Text(
-              isUpdateOrAddNewDriver
-                  ? context.localization.update_confirmation_title
-                  : context.localization.delete_confirmation_title,
+              body,
               style: Theme.of(context).textTheme.titleMedium!.copyWith(
                     fontSize: AppDimensions.textSizeTitle,
                     fontWeight: AppDimensions.bold,
@@ -37,9 +37,7 @@ class InterActiveAlertDialog extends StatelessWidget {
             ),
             Gap(10.h),
             Text(
-              isUpdateOrAddNewDriver
-                  ? context.localization.update_confirmation_message
-                  : context.localization.delete_confirmation_message,
+              title,
               style: Theme.of(context).textTheme.titleMedium,
               textAlign: TextAlign.center,
             ),

@@ -10,26 +10,31 @@ part 'edit_driver_repository.g.dart';
 
 @riverpod
 class EditDriverRepository extends _$EditDriverRepository {
-  Future<EditDriverResponseModel?> editDriver(
+  Future<EditDriverResponseModel?>? editDriver(
       {required EditDriverRequestModel editDriverRequestModel}) async {
     final data = EditDriverRequestModel(
         id: editDriverRequestModel.id,
         name: editDriverRequestModel.name,
         contact: editDriverRequestModel.contact,
         avatar: editDriverRequestModel.avatar,
-        vehicle: DriverVehicle(
+        vehicle: DriverVehicleData(
           name: editDriverRequestModel.vehicle?.name,
           numberPlate: editDriverRequestModel.vehicle?.numberPlate,
           type: editDriverRequestModel.vehicle?.type,
         )).toJson();
-    final response = await Networking.post(
+    debugPrint('The Body Was Sent For Update Driver Is $data');
+    state = AsyncValue.loading();
+    final response = await Networking.patch(
       WasphaVendorEndPoints.editDriver,
-      data,
+      data: data,
     );
     final result = switch (response) {
       Success(:final value) => () {
           try {
             debugPrint('The Value Is ${value.data}');
+            state = AsyncValue.data(
+              EditDriverResponseModel.fromJson(value.data),
+            );
             return EditDriverResponseModel.fromJson(value.data);
           } catch (e) {
             debugPrint('The Error Is $e');
