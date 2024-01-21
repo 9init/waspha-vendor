@@ -1,14 +1,14 @@
 import 'package:flutter/material.dart';
-import 'package:vendor/src/view/admin_profile/screens/admin_profile_screen/widgets/index.dart';
+import 'package:vendor/src/view/vendor_profile/screens/vendor_profile_screen/widgets/vendor_profile_body.dart';
 
-class AdminProfileScreen extends StatelessWidget {
-  const AdminProfileScreen({Key? key}) : super(key: key);
+class VendorProfileScreen extends StatelessWidget {
+  const VendorProfileScreen({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(),
-      body: AdminProfileBody(),
+      body: VendorProfileBody(),
     );
   }
 }
