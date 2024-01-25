@@ -7,7 +7,7 @@ class Requests extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: ProfileAppBar(),
+      appBar: ProfileAppBar(title: "Requests"),
       body: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [

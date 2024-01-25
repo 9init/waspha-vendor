@@ -1,5 +1,6 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:go_router/go_router.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:vendor/core/gen/assets.gen.dart';
@@ -10,8 +11,10 @@ import 'package:vendor/src/view/home/viewmodel.dart';
 class ProfileAppBar extends ConsumerWidget implements PreferredSizeWidget {
   ProfileAppBar({
     super.key,
+    this.title,
   });
 
+  final String? title;
   final AppBar appBar = AppBar();
 
   @override
@@ -36,8 +39,11 @@ class ProfileAppBar extends ConsumerWidget implements PreferredSizeWidget {
       title: Align(
         alignment: Alignment.topLeft,
         child: Text(
-          "Home",
-          style: Theme.of(context).textTheme.titleLarge,
+          title ?? "",
+          style: TextStyle(
+            fontSize: 25.sp,
+            fontWeight: FontWeight.bold,
+          ),
         ),
       ),
       actions: [

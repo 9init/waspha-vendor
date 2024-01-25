@@ -23,7 +23,7 @@ class HomeScreen extends ConsumerWidget {
     final homeModel = ref.watch(homeModelProvider);
     final homeModelNotifier = ref.read(homeModelProvider.notifier);
     return Scaffold(
-      appBar: ProfileAppBar(),
+      appBar: ProfileAppBar(title: "Home"),
       body: SingleChildScrollView(
         child: Padding(
           padding: const EdgeInsets.symmetric(horizontal: 20),
@@ -101,13 +101,13 @@ class HomeScreen extends ConsumerWidget {
                     value: homeModel.isDeliveryEnabled,
                     onChanged: (val) =>
                         homeModelNotifier.setIsDeliveryEnabled(val),
-                    switchTitle: homeModel.isDeliveryEnabled? "On" : "Off",
+                    switchTitle: homeModel.isDeliveryEnabled ? "On" : "Off",
                   ),
                   SizedBox(width: 20),
                   HomeSwitcher(
                     switchTitle: homeModel.isPickupEnabled ? "On" : "Off",
                     title: "Pickup",
-                    value: homeModel.isPickupEnabled ,
+                    value: homeModel.isPickupEnabled,
                     onChanged: (val) =>
                         homeModelNotifier.setIsPickupEnabled(val),
                   ),

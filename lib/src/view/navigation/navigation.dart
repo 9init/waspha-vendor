@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:vendor/core/gen/assets.gen.dart';
 import 'package:vendor/src/view/home/home.dart';
+import 'package:vendor/src/view/offers/offers.dart';
 
 import '../requests/requests.dart';
 
@@ -60,10 +61,10 @@ class _Navigation extends State<Navigation> {
           bottomSelectedIndex = index;
         });
       },
-      children: const <Widget>[
-        HomeScreen(),
-        Requests(),
-        Colored(color: Colors.blue),
+      children: <Widget>[
+        const HomeScreen(),
+        const Requests(),
+        OffersScreen(),
         Colored(color: Colors.yellow)
       ],
     );
