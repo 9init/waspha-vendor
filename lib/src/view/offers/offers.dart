@@ -7,8 +7,6 @@ import 'package:vendor/src/view/common/profile_app_bar/profile_app_bar.dart';
 class OffersScreen extends HookWidget {
   @override
   Widget build(BuildContext context) {
-    final isPickerClicked = useState(false);
-
     return Scaffold(
       appBar: ProfileAppBar(title: "Offers"),
       body: SingleChildScrollView(

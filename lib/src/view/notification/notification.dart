@@ -20,7 +20,7 @@ class Notifications extends ConsumerWidget {
           alignment: Alignment.topLeft,
           child: Text(
             "Notifications",
-            style: TextStyle(fontSize: 70.sp, fontWeight: FontWeight.bold),
+            style: TextStyle(fontSize: 20.sp, fontWeight: FontWeight.bold),
           ),
         ),
       ),
@@ -35,7 +35,7 @@ class Notifications extends ConsumerWidget {
                   child: ListView.separated(
                     separatorBuilder: (context, index) {
                       return Padding(
-                        padding: EdgeInsets.only(left: 190.w, right: 40.w),
+                        padding: EdgeInsets.only(left: 55.w, right: 20.w),
                         child: Divider(color: Colors.grey[200]),
                       );
                     },
