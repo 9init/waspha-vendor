@@ -87,6 +87,7 @@ dependencies:
   url_launcher_android: ^6.2.2
   url_launcher_ios: ^6.2.4
   flutter_timezone: ^1.0.8
+  date_count_down: ^3.0.0
 dev_dependencies:
   # Build Runner is a package that provides a concrete way of generating files using Dart code, outside of tools like pub and the Dart VM.
   # Use the below command to generate files:

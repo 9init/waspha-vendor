@@ -2,19 +2,28 @@ import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:vendor/src/models/offer/offer_model.dart';
+import 'package:vendor/src/repository/offers/offer.dart';
 import 'package:vendor/src/view/common/profile_app_bar/profile_app_bar.dart';
+import 'package:vendor/src/view/offers/offer_item.dart';
 
-class OffersScreen extends HookWidget {
+class OffersScreen extends HookConsumerWidget {
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
+    final offersState = useState(OfferStatus.active);
+    final offers =
+        ref.watch(OfferRepository.offersProviderFamily(offersState.value));
+
     return Scaffold(
       appBar: ProfileAppBar(title: "Offers"),
       body: SingleChildScrollView(
-        child: Row(
-          children: [
-            Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: IntrinsicWidth(
+        child: Padding(
+          padding: const EdgeInsets.all(20),
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.start,
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              IntrinsicWidth(
                 child: Container(
                   padding: EdgeInsets.symmetric(horizontal: 10.w),
                   decoration: BoxDecoration(
@@ -26,24 +35,30 @@ class OffersScreen extends HookWidget {
                       height: 42,
                       child: DropdownButtonHideUnderline(
                         child: DropdownButton(
-                          value: "pickup",
+                          value: offersState.value.name,
                           items: [
                             DropdownMenuItem(
                               child: Text(
-                                "Pickup",
+                                "Active",
                                 style: TextStyle(color: Colors.white),
                               ),
-                              value: "pickup",
+                              value: "active",
                             ),
                             DropdownMenuItem(
                               child: Text(
-                                "Delivery",
+                                "Inactive",
                                 style: TextStyle(color: Colors.white),
                               ),
-                              value: "delivery",
+                              value: "inactive",
                             ),
                           ],
-                          onChanged: (v) async {},
+                          onChanged: (v) async {
+                            offersState.value = v == "active"
+                                ? OfferStatus.active
+                                : OfferStatus.inactive;
+                            ref.invalidate(OfferRepository.offersProviderFamily(
+                                offersState.value));
+                          },
                           dropdownColor: Colors.black,
                         ),
                       ),
@@ -51,8 +66,18 @@ class OffersScreen extends HookWidget {
                   ),
                 ),
               ),
-            ),
-          ],
+              SizedBox(height: 20.h),
+              if (!offers.isLoading && offers.value != null)
+                ListView.separated(
+                  physics: const NeverScrollableScrollPhysics(),
+                  shrinkWrap: true,
+                  itemCount: offers.value!.length,
+                  separatorBuilder: (context, index) => SizedBox(height: 15),
+                  itemBuilder: (context, index) =>
+                      OfferItem(offer: offers.value![index]),
+                ),
+            ],
+          ),
         ),
       ),
     );
