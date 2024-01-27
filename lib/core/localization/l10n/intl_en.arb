@@ -78,6 +78,8 @@
   "create_team_member": "Create Team Member",
   "add_driver_confirmation_title" : "Add Driver Confirmation",
    "add_driver_confirmation_message": "Are you sure you want to add a new driver?",
+   "upload_documents": "Upload Documents",
+   "please_enter_a_phone_number": "Please enter a phone number",
 
   "EndAddDriverDataScreen": "_________________________EndAddDriverDataScreen_________________________",
   "AddVendorProfileScreen": "_________________________VendorProfileScreen_________________________",
