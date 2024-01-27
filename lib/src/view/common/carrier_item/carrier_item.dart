@@ -38,13 +38,13 @@ class CarrierItem extends StatelessWidget {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text(
-                        driverModel.name,
+                        driverModel.name??'',
                         style: TextStyle(fontWeight: FontWeight.bold),
                       ),
                       IntrinsicWidth(
                         child: Row(
                           children: List.generate(5, (index) {
-                            final color = index <= driverModel.avgRating - 1
+                            final color = index <= (driverModel.avgRating ?? 0) - 1
                                 ? Color(0xFFFFB900)
                                 : Colors.grey;
                             return Icon(Icons.star, color: color, size: 17);
