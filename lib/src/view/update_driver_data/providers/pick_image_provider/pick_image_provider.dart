@@ -4,26 +4,46 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
+
 part 'pick_image_provider.g.dart';
+
 @riverpod
 class PickImageProvider extends _$PickImageProvider {
   final ImagePicker picker = ImagePicker();
 
   @override
   build() {
-    return '';
+    return ImagePickerTypes(
+      driverImageString: '',
+      driverImagePath: '',
+      documentImageString: '',
+      documentImagePath: '',
+    );
   }
 
   bool isImageChosen = false;
-  String chosenImageString = '';
-  String chosenImagePath = '';
 
   Future<void> chooseImageSource(String pickerType) async {
     final pickedImage = await _pickImage(pickerType);
     if (pickedImage != null) {
-      chosenImagePath = pickedImage.path;
-      state = base64Encode(await pickedImage.readAsBytes());
+      // state = base64Encode(await pickedImage.readAsBytes());
+      state = ImagePickerTypes(
+        driverImageString: base64Encode(await pickedImage.readAsBytes()),
+        driverImagePath: pickedImage.path,
+        vendorProfile:base64Encode(await pickedImage.readAsBytes()),
+      );
       isImageChosen = true;
+    }
+  }
+
+  Future<void> chooseDocumentImage(String pickerType) async {
+    final pickedImage = await _pickImage(pickerType);
+    if (pickedImage != null) {
+      state = ImagePickerTypes(
+        documentImageString: base64Encode(await pickedImage.readAsBytes()),
+        documentImagePath: pickedImage.path,
+      );
+      // ... other code ...
     }
   }
 
@@ -51,3 +71,32 @@ class PickImageProvider extends _$PickImageProvider {
   }
 }
 
+class ImagePickerTypes {
+  String driverImageString;
+  String driverImagePath;
+  String documentImageString;
+  String documentImagePath;
+  String vendorProfile;
+
+  ImagePickerTypes({
+    this.driverImageString = '',
+    this.driverImagePath = '',
+    this.documentImageString = '',
+    this.documentImagePath = '',
+    this.vendorProfile = '',
+  });
+
+  ImagePickerTypes copyWith({
+    String? driverImageString,
+    String? driverImagePath,
+    String? documentImageString,
+    String? documentImagePath,
+    String? vendorProfile,
+  }) => ImagePickerTypes(
+    driverImageString: driverImageString ?? this.driverImageString,
+    driverImagePath: driverImagePath ?? this.driverImagePath,
+    documentImageString: documentImageString ?? this.documentImageString,
+    documentImagePath: documentImagePath ?? this.documentImagePath,
+    vendorProfile: vendorProfile ?? this.vendorProfile,
+  );
+}

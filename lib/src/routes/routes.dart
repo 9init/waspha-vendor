@@ -126,15 +126,17 @@ final router = GoRouter(
             driverId: state.pathParameters['driver_id']!,
           );
         }),
-    GoRoute(
-      path: RoutesNames.contactListScreen,
-      builder: (context, state) => const ContactListScreen(),
-    ),
+
     GoRoute(
       path: RoutesNames.addNewDriver,
       builder: (context, state) => AddNewDriverScreen(
         driverType: state.extra as DriverType,
       ),
+
+    ),
+    GoRoute(
+      path: RoutesNames.contactListScreen,
+      builder: (context, state) => const ContactListScreen(),
     ),
     GoRoute(
       path: RoutesNames.profileScreen,

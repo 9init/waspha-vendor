@@ -17,3 +17,4 @@ enum ResponseResult {
   failure,
   error,
 }
+enum PickImageSource { Driver, Document }
