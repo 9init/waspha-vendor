@@ -9,6 +9,7 @@ import 'package:vendor/src/models/driver/driver_model.dart';
 import 'package:vendor/src/view/common/colors/colors.dart';
 import 'package:vendor/src/view/common/custom_form/index.dart';
 import 'package:vendor/src/view/common/user_avatar/user_avatar.dart';
+import 'package:vendor/src/view/update_driver_data/enums/enums.dart';
 import 'package:vendor/src/view/update_driver_data/providers/pick_image_provider/pick_image_provider.dart';
 import 'package:vendor/src/view/update_driver_data/screens/update_driver_data_screen/widgets/image_picker_dialog.dart';
 
@@ -26,35 +27,37 @@ class AddNewDriverNameAndAvatar extends HookWidget{
     final driverConfirmPasswordController = useTextEditingController();
 
     return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Gap(10.h),
-        Text(
-          '${driverType==DriverType.ONLINE? context.localization.new_online_carriers : context.localization.new_offline_carriers}',
-          style: Theme.of(context).textTheme.titleLarge,
-          overflow: TextOverflow.ellipsis,
-          maxLines: 1,
+        Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 15.0),
+          child: Text(
+            '${driverType==DriverType.ONLINE? context.localization.new_online_carriers : context.localization.new_offline_carriers}',
+            style: Theme.of(context).textTheme.titleLarge,
+            overflow: TextOverflow.ellipsis,
+            maxLines: 1,
+          ),
         ),
-        Gap(20.h),
+        Gap(25.h),
         Container(
           width: 120.w,
           height: 120.h,
           child: Consumer(
             builder: (BuildContext context, WidgetRef ref, Widget? child) {
-              final imageNotifier =
-                  ref.watch(pickImageProviderProvider) as String;
-              debugPrint('The Image Taken Is ${imageNotifier}');
-              debugPrint('The Image Taken Is ${imageNotifier.isNotEmpty}');
+              final imagePickerState = ref.watch(pickImageProviderProvider) as ImagePickerTypes;;
+              final driverImageString = imagePickerState.driverImageString;
               return UserAvatar(
                 radius: 20,
-                backgroundColor: WasphaColors.grey200,
-                imageUrl: imageNotifier.toString(),
+                backgroundColor: WasphaColors.grey200.withOpacity(0.2),
+                imageUrl: driverImageString.toString(),
                 imageType: BackgroundImageType.memory,
                 child: Visibility(
-                  visible: imageNotifier.isEmpty,
+                  visible: driverImageString.isEmpty,
                   child: IconButton(
                     onPressed: () => showAdaptiveDialog(
                       context: context,
-                      builder: (context) => ImagePickerDialog(),
+                      builder: (context) => ImagePickerDialog(pickImageSource: PickImageSource.Driver,),
                     ),
                     icon: Icon(
                       Icons.add,
@@ -65,7 +68,7 @@ class AddNewDriverNameAndAvatar extends HookWidget{
               );
             },
           ),
-        ),
+        ).wrapCenter(),
         Gap(5.h),
         Text(
           context.localization.profile_picture,
@@ -75,7 +78,7 @@ class AddNewDriverNameAndAvatar extends HookWidget{
               .copyWith(color: WasphaColors.grey300),
           overflow: TextOverflow.ellipsis,
           maxLines: 1,
-        ),
+        ).wrapCenter(),
         Gap(20.h),
         CustomFormField(
           paddingLeft: 65,

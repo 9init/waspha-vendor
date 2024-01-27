@@ -8,6 +8,7 @@ import 'package:vendor/core/localization/localization.dart';
 import 'package:vendor/src/models/diver/add_driver/add_driver_request_model.dart';
 import 'package:vendor/src/models/driver/driver_model.dart';
 import 'package:vendor/src/repository/carriers/add_driver_repository/add_driver_repository.dart';
+import 'package:vendor/src/repository/carriers/add_driver_repository/add_driver_response_model.dart';
 import 'package:vendor/src/repository/carriers/carriers.dart';
 import 'package:vendor/src/view/common/alert_dialog/alert_dialog.dart';
 import 'package:vendor/src/view/common/colors/colors.dart';
@@ -15,11 +16,14 @@ import 'package:vendor/src/view/common/toast_manager/toast_manager.dart';
 import 'package:vendor/src/view/common/waspha_button/waspha_button.dart';
 import 'package:vendor/src/view/update_driver_data/providers/get_driver_contact_data_provider/get_driver_contact_data_provider.dart';
 import 'package:vendor/src/view/update_driver_data/providers/pick_image_provider/pick_image_provider.dart';
-import 'package:vendor/src/view/update_driver_data/screens/update_driver_data_screen/widgets/delivery_methods_view.dart';
-import 'package:vendor/src/view/update_driver_data/screens/update_driver_data_screen/widgets/driver_gender.dart';
+import 'package:vendor/src/view/update_driver_data/screens/update_driver_data_screen/widgets/index.dart';
 
 class AddNewDriverButton extends ConsumerWidget {
-  const AddNewDriverButton( {Key? key, required this.formKey,required this.driverType,}) : super(key: key);
+  const AddNewDriverButton({
+    Key? key,
+    required this.formKey,
+    required this.driverType,
+  }) : super(key: key);
   final GlobalKey<FormBuilderState> formKey;
   final DriverType driverType;
 
@@ -29,10 +33,16 @@ class AddNewDriverButton extends ConsumerWidget {
     final driverGender = ref.watch(selectedVehiclesProvider);
     final driverVehicle = ref.watch(selectedGenderProvider);
     final driverContactData = ref.watch(getDriverContactDataProvider);
+    final bool termsCheckBox =ref.watch(checkboxProvider);
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 10.0),
       child: WasphaButton(
         onButtonTapped: () {
+          if (!termsCheckBox) {
+            // Show a toast message indicating that the checkbox is not checked
+            di<ToastManager>().error(context.localization.not_granted_message);
+            return;
+          }
           if (formKey.currentState!.saveAndValidate()) {
             showAdaptiveDialog(
               barrierDismissible: false,
@@ -44,33 +54,47 @@ class AddNewDriverButton extends ConsumerWidget {
                         formKey.currentState!.value;
                     final String driverName = savedValues['driverName'];
                     final String driverPassword = savedValues['driverPassword'];
+                    debugPrint(
+                        'The DriverCountryCode Is +${driverContactData.countryCode}');
                     ref
                         .read(
                       addDriverRepositoryProvider(
                         addDriverRequestModel: AddDriverRequestModel(
                           name: driverName,
                           contact: DriverContactRequestModel(
-                              countryCode: driverContactData.countryCode,
-                              number: driverContactData.driverMobileNumber),
+                              countryCode: driverContactData.countryCode.isEmpty
+                                  ? '+020'
+                                  : '+${driverContactData.countryCode}',
+                              number: driverContactData.driverMobileNumber!),
                           email: 'kota@gmail.com',
                           password: driverPassword,
                           vehicleId: 5,
-                          isOnline: true,
-                          avatar: 'Kota',
+                          isOnline:
+                              driverType == DriverType.ONLINE ? true : false,
+                          avatar:
+                              "https://waspha.s3.amazonaws.com/driver/mOHqn3E4fNimage.jpeg",
                         ),
                       ).future,
                     )
                         .whenComplete(() {
-                      di<ToastManager>()
-                          .success(context.localization.review_data_message);
-                      Future.delayed(Duration(seconds: 1), () {
+                      (AddDriverResponseModel? response) {
+                        debugPrint(
+                            'The Response Is ${response?.message ?? ''}');
+                        di<ToastManager>().success(response?.message ?? '');
+
                         ref.invalidate(
-                          CarriersRepository.storeDriverProvider(driverType,),
+                          CarriersRepository.storeDriverProvider(driverType),
                         );
                         context.pop();
                         context.pop();
-                      });
-                    });
+                      };
+                    }).catchError(
+                      (error, stackTrace) {
+                        // Handle error
+                        debugPrint('Error: $error');
+                        di<ToastManager>().error('Kota');
+                      },
+                    );
                   }
                 },
                 driverData: Container(),

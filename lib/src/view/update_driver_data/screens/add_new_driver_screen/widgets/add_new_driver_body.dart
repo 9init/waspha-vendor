@@ -10,12 +10,11 @@ class AddNewDriverBody extends StatelessWidget {
   const AddNewDriverBody({Key? key, required this.driverType})
       : super(key: key);
   final DriverType driverType;
+  static final GlobalKey<FormBuilderState> formKey =
+      GlobalKey<FormBuilderState>();
 
   @override
   Widget build(BuildContext context) {
-    final GlobalKey<FormState> formKeyPhone = GlobalKey<FormState>();
-    final GlobalKey<FormBuilderState> formKey = GlobalKey<FormBuilderState>();
-
     return FormBuilder(
       key: formKey,
       child: SingleChildScrollView(
@@ -24,11 +23,11 @@ class AddNewDriverBody extends StatelessWidget {
             AddNewDriverNameAndAvatar(
               driverType: driverType,
             ),
-            DriverPhoneNumber(
-              formKey: formKeyPhone,
-            ),
+            const DriverPhoneNumber(),
             const DriverDeliveryMethods(),
             const DriverGender(),
+            Gap(10.h),
+            UploadDocuments(),
             const TermsAndConditionsData(),
             Gap(10.h),
             AddNewDriverButton(
@@ -42,3 +41,4 @@ class AddNewDriverBody extends StatelessWidget {
     );
   }
 }
+

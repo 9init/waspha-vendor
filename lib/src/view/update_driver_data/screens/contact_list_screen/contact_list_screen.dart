@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_contacts/flutter_contacts.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
+import 'package:go_router/go_router.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:vendor/core/localization/localization.dart';
 import 'package:vendor/src/view/update_driver_data/providers/get_driver_contact_data_provider/get_driver_contact_data_provider.dart';
@@ -70,12 +71,11 @@ class ContactListScreen extends HookWidget {
                     : _contacts.value[index].id),
                 builder: (context, snapShot) {
                   if (snapShot.hasData) {
-                    var userMobileNumber=ref.read(getDriverContactDataProvider);
+                    var userMobileNumber=ref.read(getDriverContactDataProvider.notifier);
                     return ListTile(
                       onTap: () {
-                        userMobileNumber.driverMobileNumber=snapShot.data!.phones.first.number;
-                        userMobileNumber.driverName=snapShot.data!.displayName;
-                        Navigator.pop(context);
+                        userMobileNumber.setDriverContact(snapShot.data!.displayName, snapShot.data!.phones.first.number);
+                        context.pop();
                       },
                       title: Text(snapShot.data!.displayName),
                       subtitle: Text(
