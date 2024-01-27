@@ -6,12 +6,7 @@ ThemeData lightThemeData() {
   return ThemeData(
     useMaterial3: true,
     brightness: Brightness.light,
-    actionIconTheme: ActionIconThemeData(
-      backButtonIconBuilder: (BuildContext context) => Icon(
-        Icons.arrow_back_ios,
-      ),
-    ),
-    //Setting the Brightness to light  so that this can be used as Light ThemeData
+    scaffoldBackgroundColor: WasphaColors.whiteColor,
     textTheme: CustomTextTheme.textTheme(),
     dialogBackgroundColor: WasphaColors.whiteColor,
   );
