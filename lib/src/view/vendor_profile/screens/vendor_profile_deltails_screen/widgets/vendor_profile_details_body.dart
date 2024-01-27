@@ -8,6 +8,7 @@ import 'package:vendor/src/repository/auth/login.dart';
 import 'package:vendor/src/view/common/colors/colors.dart';
 import 'package:vendor/src/view/common/update_avatar_widget/update_avatar_widget.dart';
 import 'package:vendor/src/view/common/user_avatar/user_avatar.dart';
+import 'package:vendor/src/view/update_driver_data/enums/enums.dart';
 import 'package:vendor/src/view/update_driver_data/providers/pick_image_provider/pick_image_provider.dart';
 import 'package:vendor/src/view/update_driver_data/screens/update_driver_data_screen/widgets/image_picker_dialog.dart';
 import 'package:vendor/src/view/vendor_profile/screens/vendor_profile_deltails_screen/widgets/index.dart';
@@ -24,25 +25,26 @@ class VendorProfileDetailsBody extends ConsumerWidget {
         Consumer(
           builder: (widget, ref, child) {
             final imageNotifier =
-                ref.watch(pickImageProviderProvider) as String;
-            debugPrint('The Image Taken Is ${imageNotifier}');
-            debugPrint('The Image Taken Is ${imageNotifier.isNotEmpty}');
+            ref.watch(pickImageProviderProvider) as ImagePickerTypes;
+            final vendorProfile = imageNotifier.vendorProfile;
 
             return UpdateAvatarWidget(
               onUpdateAvatar: () => showAdaptiveDialog(
                 context: context,
-                builder: (context) => ImagePickerDialog(),
+                builder: (context) => ImagePickerDialog(
+                  pickImageSource: PickImageSource.Driver,
+                ),
               ),
               child: UserAvatar(
                   hasRadiusColor: true,
                   radius: 60.r,
                   backgroundColor: WasphaColors.transparentColor,
-                  imageType: imageNotifier.isEmpty
+                  imageType: vendorProfile.isEmpty
                       ? BackgroundImageType.network
                       : BackgroundImageType.memory,
-                  imageUrl: imageNotifier.isEmpty
+                  imageUrl: vendorProfile.isEmpty
                       ? vendor.value?.avatar ?? ''
-                      : imageNotifier),
+                      : vendorProfile),
             ).wrapCenter();
           },
         ),

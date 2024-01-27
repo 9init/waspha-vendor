@@ -8,7 +8,9 @@ class TransactionsListingScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: CustomAppBar(),
+      appBar: CustomAppBar(
+        automaticallyImplyLeading: true,
+      ),
       body: TransactionsListingBody(),
     );
   }
