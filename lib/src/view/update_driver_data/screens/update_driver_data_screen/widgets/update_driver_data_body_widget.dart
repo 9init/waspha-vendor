@@ -11,11 +11,10 @@ class UpdateDriverDataBodyWidget extends ConsumerWidget {
   const UpdateDriverDataBodyWidget({Key? key, required this.driverId})
       : super(key: key);
   final String driverId;
+ static final GlobalKey<FormBuilderState> formKey = GlobalKey<FormBuilderState>();
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final GlobalKey<FormBuilderState> formKey = GlobalKey<FormBuilderState>();
-    final GlobalKey<FormState> formKeyPhone = GlobalKey<FormState>();
 
     final driverData = ref.watch(
       getDriverByIdRepositoryProvider(
@@ -33,13 +32,11 @@ class UpdateDriverDataBodyWidget extends ConsumerWidget {
           key: formKey,
           child: ListView(
             children: [
-
               DriverFullNameAndAvatar(
                 driverDataByIdResponseModel: data.data!,
               ),
               DriverPhoneNumber(
                 driverDataByIdResponseModel: data.data!,
-                formKey: formKeyPhone,
               ),
               DriverDeliveryMethods(
                 driverDataByIdResponseModel: data.data!,

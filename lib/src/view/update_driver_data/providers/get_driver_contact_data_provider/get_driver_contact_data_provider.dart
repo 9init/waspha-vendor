@@ -19,7 +19,7 @@ class GetDriverContactDataProvider extends StateNotifier<DriverContactState> {
 
 class DriverContactState {
   String driverName;
-  String driverMobileNumber;
+  String?driverMobileNumber;
   String countryCode;
 
   DriverContactState(

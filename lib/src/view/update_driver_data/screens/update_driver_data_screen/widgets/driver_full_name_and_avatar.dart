@@ -11,6 +11,7 @@ import 'package:vendor/src/models/get_driver_by_id/get_driver_by_id_response_mod
 import 'package:vendor/src/view/common/colors/colors.dart';
 import 'package:vendor/src/view/common/custom_form/index.dart';
 import 'package:vendor/src/view/common/update_avatar_widget/update_avatar_widget.dart';
+import 'package:vendor/src/view/update_driver_data/enums/enums.dart';
 import 'package:vendor/src/view/update_driver_data/providers/pick_image_provider/pick_image_provider.dart';
 import 'package:vendor/src/view/update_driver_data/screens/update_driver_data_screen/widgets/image_picker_dialog.dart';
 
@@ -39,16 +40,15 @@ class DriverFullNameAndAvatar extends HookWidget {
         Gap(20.h),
         Consumer(
           builder: (widget, ref, child) {
-            final imageNotifier =
-                ref.watch(pickImageProviderProvider) as String;
-            debugPrint('The Image Taken Is ${imageNotifier}');
-            debugPrint('The Image Taken Is ${imageNotifier.isNotEmpty}');
+            final imageNotifier = ref.watch(pickImageProviderProvider) as ImagePickerTypes;
+            final driverImageString = imageNotifier.driverImageString;
+
             return UpdateAvatarWidget(
               onUpdateAvatar: () => showAdaptiveDialog(
                 context: context,
-                builder: (context) => ImagePickerDialog(),
+                builder: (context) => ImagePickerDialog(pickImageSource: PickImageSource.Driver,),
               ),
-              child: imageNotifier.isNotEmpty
+              child: driverImageString.isNotEmpty
                   ? CircleAvatar(
                       radius: 50.r,
                       backgroundColor: WasphaColors.greyColor,
