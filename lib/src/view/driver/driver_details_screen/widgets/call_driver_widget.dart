@@ -20,8 +20,7 @@ class CallDriverWidget extends StatelessWidget {
     void makePhoneCall() {
       if (getDriverDataByIdResponseModel!.contact != null) {
         final UrlLauncher urlLauncher = di<UrlLauncher>();
-        urlLauncher.makePhoneCall(getDriverDataByIdResponseModel!.countryCode! +
-            getDriverDataByIdResponseModel!.contact!);
+        urlLauncher.makePhoneCall(getDriverDataByIdResponseModel!.contact!.fullPhoneNumber!);
       } else {
         di<ToastManager>().error(context.localization.no_phone_number_message);
       }

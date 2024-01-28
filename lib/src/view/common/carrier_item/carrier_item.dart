@@ -2,9 +2,12 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:go_router/go_router.dart';
+import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:vendor/core/gen/assets.gen.dart';
 import 'package:vendor/src/models/driver/driver_model.dart';
 import 'package:vendor/src/routes/routes_names.dart';
+import 'package:vendor/src/view/common/colors/colors.dart';
+import 'package:vendor/src/view/driver/providers/inject_driver_id.dart';
 
 class CarrierItem extends StatelessWidget {
   CarrierItem({
@@ -38,15 +41,16 @@ class CarrierItem extends StatelessWidget {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text(
-                        driverModel.name??'',
+                        driverModel.name ?? '',
                         style: TextStyle(fontWeight: FontWeight.bold),
                       ),
                       IntrinsicWidth(
                         child: Row(
                           children: List.generate(5, (index) {
-                            final color = index <= (driverModel.avgRating ?? 0) - 1
-                                ? Color(0xFFFFB900)
-                                : Colors.grey;
+                            final color =
+                                index <= (driverModel.avgRating ?? 0) - 1
+                                    ? Color(0xFFFFB900)
+                                    : Colors.grey;
                             return Icon(Icons.star, color: color, size: 17);
                           }),
                         ),
@@ -55,11 +59,24 @@ class CarrierItem extends StatelessWidget {
                     ],
                   ),
                   Spacer(),
-                  IconButton(
-                    onPressed: () => context.pushNamed(
-                        RoutesNames.updateDriverDataScreen,
-                        pathParameters: <String, String>{'driver_id': driverModel.id.toString()}),
-                    icon: Icon(Icons.edit),
+                  Consumer(
+                    builder: (widget, ref, child) {
+                      var driverId = ref.read(injectDriverIdProvider.notifier);
+                      return IconButton(
+                        onPressed: () {
+                          driverId.setDriverId(driverId:driverModel.id.toString());
+                          debugPrint('The Inject Driver Id Is $driverId');
+                          context.pushNamed(RoutesNames.driverDetailsScreen,
+                              pathParameters: <String, String>{
+                                'driver_id': driverModel.id.toString()
+                              });
+                        },
+                        icon: Icon(
+                          Icons.arrow_forward,
+                          color: WasphaColors.blackColor,
+                        ),
+                      );
+                    },
                   ),
                 ],
               ),

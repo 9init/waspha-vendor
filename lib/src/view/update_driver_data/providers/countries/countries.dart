@@ -286,11 +286,7 @@ class Countries {
     {"name": "Uruguay", "dial_code": "+598", "code": "UY"},
     {"name": "Uzbekistan", "dial_code": "+998", "code": "UZ"},
     {"name": "Vanuatu", "dial_code": "+678", "code": "VU"},
-    {
-      "name": "Venezuela, Bolivarian Republic of Venezuela",
-      "dial_code": "+58",
-      "code": "VE"
-    },
+    {"name": "Venezuela, Bolivarian Republic of Venezuela", "dial_code": "+58", "code": "VE"},
     {"name": "Vietnam", "dial_code": "+84", "code": "VN"},
     {"name": "Virgin Islands, British", "dial_code": "+1284", "code": "VG"},
     {"name": "Virgin Islands, U.S.", "dial_code": "+1340", "code": "VI"},
@@ -300,15 +296,15 @@ class Countries {
     {"name": "Zimbabwe", "dial_code": "+263", "code": "ZW"}
   ];
 
-  static String? getCountryCodeFromDialCode(String dialCode) {
+  static String? getCountryCodeFromDialCode(String code) {
     // Handle null or empty dialCode
-    if (dialCode == null || dialCode.isEmpty) {
+    if (code == null || code.isEmpty) {
       return 'EG'; // Provide a default country code (change to your preferred default)
     }
 
     // Find the country with the specified dial code
     final country = allCountries.firstWhere(
-      (element) => element['dial_code'] == dialCode,
+      (element) => element['code'] == code,
       orElse: () => allCountries.first, // Use the first country as a fallback
     );
 
