@@ -42,20 +42,52 @@ dependencies:
   flutter_screenutil: ^5.9.0
   flutter_svg: ^2.0.9
   flutter_switch: ^0.3.2
-  freezed_annotation: ^2.4.1
-  go_router: ^12.1.1
+  # a package containing annotations for freezed.
+  freezed_annotation: ^2.2.0
+  go_router: ^13.0.0
   google_maps_flutter: ^2.5.0
   hooks_riverpod: ^2.4.9
   intl: ^0.18.1
+  # Generating code for JSON serialization and deserialization.
   json_annotation: ^4.8.1
   location: ^5.0.3
   otp_text_field: ^1.1.3
   path_provider: ^2.1.1
-  phone_form_field: ^8.1.0
+  phone_form_field: ^8.1.1
   readmore: ^2.2.0
   riverpod_annotation: ^2.3.3
   timeago: ^3.6.0
-
+  # A package for mapping data models automatically.
+  auto_mappr: ^2.1.1
+  # Dependency Injection service locator
+  injectable: ^2.3.0
+  # Dependency Injection service locator
+  get_it: ^7.6.0
+  #Flutter plugin for reading and writing simple key-value pairs
+  shared_preferences: ^2.2.2
+  #Flutter widgets for easily adding gaps inside Flex widgets such as Columns and Rows or scrolling views.
+  gap: ^3.0.1
+  #Flutter plugin for picking images from the device
+  image_picker: ^1.0.6
+  # A toast library for friendly user interfaces message
+  fluttertoast: ^8.2.4
+  #Flutter plugin for accessing device contacts
+  flutter_contacts: ^1.1.7+1
+  # Validators for form fields
+  form_builder_validators: ^9.1.0
+  # Form builder creation of data collection forms in Flutter by removing the boilerplate needed to build a form, validate fields, react to changes and collect final user input.
+  flutter_form_builder: ^9.1.1
+  equatable: ^2.0.5
+  easy_date_timeline: ^1.0.2
+  # Provides charting capabilities for your Flutter app.
+  syncfusion_flutter_charts: 22.2.11
+  #for launching a URL and Intent
+  url_launcher: ^6.2.3
+  url_launcher_platform_interface: ^2.2.0
+  url_launcher_android: ^6.2.2
+  url_launcher_ios: ^6.2.4
+  flutter_timezone: ^1.0.8
+  date_count_down: ^3.0.0
 dev_dependencies:
   # Build Runner is a package that provides a concrete way of generating files using Dart code, outside of tools like pub and the Dart VM.
   # Use the below command to generate files:
@@ -64,19 +96,17 @@ dev_dependencies:
   custom_lint: ^0.5.7
   # used for code generation related to assets,
   flutter_gen_runner: ^5.3.1
-
-  # The "flutter_lints" package below contains a set of recommended lints to
-  # encourage good coding practices. The lint set provided by the package is
-  # activated in the `analysis_options.yaml` file located at the root of your
-  # package. See that file for information about deactivating specific lint
-  # rules and activating additional ones.
+  # Injectable Generator is a generator for injectable.
+  injectable_generator: ^2.4.0
   flutter_lints: ^3.0.1
+
   flutter_test:
     sdk: flutter
   freezed: ^2.4.5
   # Important: Used to generate localization manually in case it's not generated automatically
+  auto_mappr_annotation: ^2.1.0
   # `dart run intl_utils:generate`
-  intl_utils: ^2.8.3
+  intl_utils: ^2.8.6
   json_serializable: ^6.7.1
   riverpod_generator: ^2.3.9
   riverpod_lint: ^2.3.7
@@ -110,6 +140,7 @@ flutter:
   assets:
     - assets/imgs/
     - assets/imgs/onboarding/
+    - assets/svg/
 
   fonts:
     - family: OpenSans

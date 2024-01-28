@@ -21,4 +21,4 @@ class AuthCheckViewModel extends StateNotifier<AsyncValue<bool>> {
 final authCheckViewModelProvider =
     StateNotifierProvider<AuthCheckViewModel, AsyncValue<bool>>((ref) {
   return AuthCheckViewModel();
-});
+},);

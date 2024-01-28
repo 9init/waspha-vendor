@@ -10,7 +10,7 @@ class RegisterRepository {
       required String countryCode,
       required String phone,
       required String fullPhoneNo}) async {
-    final result = await Networking.post("/vendor/signup-request", {
+    final result = await Networking.post("/vendor/signup-request",{
       "name": name,
       "password": password,
       "email": email,

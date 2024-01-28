@@ -10,7 +10,7 @@ class VerificationSuspended extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: ProfileAppBar(),
+      appBar: ProfileAppBar(title: "Home"),
       body: Center(
         child: Column(
           children: [

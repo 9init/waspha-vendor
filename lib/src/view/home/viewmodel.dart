@@ -6,8 +6,8 @@ class HomeModel {
   HomeModel({
     this.storeImage,
     this.isStoreOnline,
-    this.isPickupEnabled,
-    this.isDeliveryEnabled,
+    this.isPickupEnabled=false,
+    this.isDeliveryEnabled=false,
     this.earnings,
     this.latestUpdate,
   });
@@ -31,8 +31,8 @@ class HomeModel {
   }
 
   final String? storeImage;
-  final bool? isDeliveryEnabled;
-  final bool? isPickupEnabled;
+  final bool isDeliveryEnabled;
+  final bool isPickupEnabled;
   final bool? isStoreOnline;
   final EarningModel? earnings;
   final DateTime? latestUpdate;

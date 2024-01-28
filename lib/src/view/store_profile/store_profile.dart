@@ -3,10 +3,12 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:go_router/go_router.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:vendor/core/constans/index.dart';
 import 'package:vendor/core/gen/assets.gen.dart';
 import 'package:vendor/core/localization/localization.dart';
 import 'package:vendor/src/repository/auth/login.dart';
 import 'package:vendor/src/repository/store/profile.dart';
+import 'package:vendor/src/view/common/colors/colors.dart';
 
 class StoreProfile extends ConsumerWidget {
   @override
@@ -25,7 +27,7 @@ class StoreProfile extends ConsumerWidget {
           alignment: Alignment.topLeft,
           child: Text(
             "Store Management",
-            style: TextStyle(fontSize: 70.sp, fontWeight: FontWeight.bold),
+            style: Theme.of(context).textTheme.titleLarge,
           ),
         ),
       ),
@@ -102,114 +104,108 @@ class StoreProfile extends ConsumerWidget {
               ),
             ),
             SizedBox(height: 20.h),
-            Padding(
-              padding: EdgeInsets.symmetric(horizontal: 120.w),
-              child: Column(
-                children: [
-                  ListTile(
-                    onTap: () {
-                      context.push("/commissions");
-                    },
-                    title: Text(
-                      "Applicable Commissions",
-                      style: TextStyle(
-                          fontSize: 45.sp, fontWeight: FontWeight.bold),
-                    ),
-                    trailing: Icon(
-                      Icons.arrow_forward_ios_rounded,
-                      size: 60.sp,
-                    ),
+            Column(
+              children: [
+                ListTile(
+                  onTap: () {
+                    context.push("/commissions");
+                  },
+                  title: Text(
+                    "Applicable Commissions",
+                    style: Theme.of(context).textTheme.titleMedium!.copyWith(
+                      fontWeight: AppDimensions.semiBold,),
                   ),
-                  Divider(
-                    color: Color(0XffE2E8ED),
+                  trailing: Icon(
+                    Icons.arrow_forward_ios_rounded,
+                    color: WasphaColors.blackColor,
                   ),
-                  ListTile(
-                    onTap: () {},
-                    title: Text(
-                      "Business Management ",
-                      style: TextStyle(
-                          fontSize: 45.sp, fontWeight: FontWeight.bold),
-                    ),
-                    trailing: Icon(
-                      Icons.arrow_forward_ios_rounded,
-                      size: 60.sp,
-                    ),
+                ),
+                Divider(
+                  color: Color(0XffE2E8ED),
+                ),
+                ListTile(
+                  onTap: () {},
+                  title: Text(
+                    "Business Management ",
+                    style: Theme.of(context).textTheme.titleMedium!.copyWith(
+                      fontWeight: AppDimensions.semiBold,),                    ),
+                  trailing: Icon(
+                    Icons.arrow_forward_ios_rounded,
+                    color: WasphaColors.blackColor,
+
                   ),
-                  Divider(
-                    color: Color(0XffE2E8ED),
+                ),
+                Divider(
+                  color: Color(0XffE2E8ED),
+                ),
+                ListTile(
+                  onTap: () {
+                    context.push("/payment_methods");
+                  },
+                  title: Text(
+                    "Default Pay methods",
+                    style: Theme.of(context).textTheme.titleMedium!.copyWith(
+                      fontWeight: AppDimensions.semiBold,),                    ),
+                  trailing: Icon(
+                    Icons.arrow_forward_ios_rounded,
+                    color: WasphaColors.blackColor,
+
                   ),
-                  ListTile(
-                    onTap: () {
-                      context.push("/payment_methods");
-                    },
-                    title: Text(
-                      "Default Pay methods",
-                      style: TextStyle(
-                          fontSize: 45.sp, fontWeight: FontWeight.bold),
-                    ),
-                    trailing: Icon(
-                      Icons.arrow_forward_ios_rounded,
-                      size: 60.sp,
-                    ),
+                ),
+                Divider(
+                  color: Color(0XffE2E8ED),
+                ),
+                ListTile(
+                  onTap: () {},
+                  title: Text(
+                    "Menu Management ",
+                    style: Theme.of(context).textTheme.titleMedium!.copyWith(
+                      fontWeight: AppDimensions.semiBold,),                    ),
+                  trailing: Icon(
+                    Icons.arrow_forward_ios_rounded,
+                    color: WasphaColors.blackColor,
+
                   ),
-                  Divider(
-                    color: Color(0XffE2E8ED),
+                ),
+                Divider(
+                  color: Color(0XffE2E8ED),
+                ),
+                ListTile(
+                  onTap: () {
+                    context.push('/carriers_management');
+                  },
+                  title: Text(
+                    "Carriers Management ",
+                    style: Theme.of(context).textTheme.titleMedium!.copyWith(
+                      fontWeight: AppDimensions.semiBold,),                    ),
+                  trailing: Icon(
+                    Icons.arrow_forward_ios_rounded,
+                    color: WasphaColors.blackColor,
+
                   ),
-                  ListTile(
-                    onTap: () {},
-                    title: Text(
-                      "Menu Management ",
-                      style: TextStyle(
-                          fontSize: 45.sp, fontWeight: FontWeight.bold),
-                    ),
-                    trailing: Icon(
-                      Icons.arrow_forward_ios_rounded,
-                      size: 60.sp,
-                    ),
+                ),
+                Divider(color: Color(0XffE2E8ED)),
+                ListTile(
+                  onTap: () {},
+                  title: Text(
+                    "Brand Relationship",
+                    style: Theme.of(context).textTheme.titleMedium!.copyWith(
+                      fontWeight: AppDimensions.semiBold,                      ),
                   ),
-                  Divider(
-                    color: Color(0XffE2E8ED),
+                  trailing: Icon(
+                    Icons.arrow_forward_ios_rounded,
+                    color: WasphaColors.blackColor,
+
                   ),
-                  ListTile(
-                    onTap: () {
-                      context.push('/carriers_management');
-                    },
-                    title: Text(
-                      "Carriers Management ",
-                      style: TextStyle(
-                        fontSize: 45.sp,
-                        fontWeight: FontWeight.bold,
-                      ),
-                    ),
-                    trailing: Icon(
-                      Icons.arrow_forward_ios_rounded,
-                      size: 60.sp,
-                    ),
-                  ),
-                  Divider(color: Color(0XffE2E8ED)),
-                  ListTile(
-                    onTap: () {},
-                    title: Text(
-                      "Brand Relationship",
-                      style: TextStyle(
-                        fontSize: 45.sp,
-                        fontWeight: FontWeight.bold,
-                      ),
-                    ),
-                    trailing: Icon(
-                      Icons.arrow_forward_ios_rounded,
-                      size: 60.sp,
-                    ),
-                  ),
-                  Divider(
-                    color: Color(0XffE2E8ED),
-                  ),
-                ],
-              ),
+                ),
+                Divider(
+                  color: Color(0XffE2E8ED),
+                ),
+              ],
             ),
             SizedBox(height: 100.h),
             Text(
-              "ID: ${vendor.hasValue ? vendor.value!.referralCode : "Loading"}",
+              "ID: ${vendor.hasValue ? vendor.value?.referralCode : "Loading"}",
               style: TextStyle(fontSize: 80.sp, fontWeight: FontWeight.bold),
             ),
             SizedBox(height: 200.h)

@@ -1,4 +1,5 @@
 import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:vendor/src/models/app_settings/app_settings.dart';
 import 'package:vendor/src/models/commission/commission_model.dart';
 import 'package:vendor/src/models/earning/earning_model.dart';
 import 'package:vendor/src/models/payment_methods/payment_methods_model.dart';
@@ -88,6 +89,15 @@ class StoreRepository {
     };
   }
 
+  static Future<AppSettings?> getAppSettings() async {
+    final result = await Networking.get("/app-settings");
+    return switch (result) {
+      Success(:final value) => AppSettings.fromJson(value.data["data"]),
+      _ => null,
+    };
+  }
+
+  static final appSettingsProvider = FutureProvider((ref) => getAppSettings());
   static final earningsProvider = FutureProvider((ref) => storeEarnings());
   static final storeProvider = FutureProvider((ref) => profile());
   static final storeReviewProvider =

@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:go_router/go_router.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:vendor/core/localization/localization.dart';
 import 'package:vendor/src/models/driver/driver_model.dart';
 import 'package:vendor/src/repository/carriers/carriers.dart';
+import 'package:vendor/src/routes/routes_names.dart';
 import 'package:vendor/src/view/common/carrier_item/carrier_item.dart';
 
 class Carrier extends ConsumerWidget {
@@ -14,8 +16,8 @@ class Carrier extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final storeDrivers =
-        ref.watch(CarriersRepository.storeDriverProvider(driverType));
+    final storeDrivers = ref.watch(CarriersRepository.storeDriverProvider(driverType));
+    debugPrint('The Driver Type Is $driverType');
     return Scaffold(
       appBar: AppBar(
         leading: BackButton(),
@@ -32,7 +34,8 @@ class Carrier extends ConsumerWidget {
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 10),
             child: ElevatedButton(
-              onPressed: () {},
+              onPressed: () =>
+                  context.push(RoutesNames.addNewDriver, extra: driverType),
               child: Text(
                 "Add",
                 style: TextStyle(color: Colors.white),
@@ -48,7 +51,11 @@ class Carrier extends ConsumerWidget {
       body: Column(
         children: [
           storeDrivers.isLoading || storeDrivers.value == null
-              ? Expanded(child: Center(child: CircularProgressIndicator()))
+              ? Expanded(
+                  child: Center(
+                    child: CircularProgressIndicator.adaptive(),
+                  ),
+                )
               : Expanded(
                   child: ListView.separated(
                     separatorBuilder: (context, index) {

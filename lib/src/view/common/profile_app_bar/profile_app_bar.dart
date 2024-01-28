@@ -5,32 +5,45 @@ import 'package:go_router/go_router.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:vendor/core/gen/assets.gen.dart';
 import 'package:vendor/src/repository/auth/login.dart';
+import 'package:vendor/src/routes/routes_names.dart';
 import 'package:vendor/src/view/home/viewmodel.dart';
 
 class ProfileAppBar extends ConsumerWidget implements PreferredSizeWidget {
   ProfileAppBar({
     super.key,
+    this.title,
   });
+
+  final String? title;
   final AppBar appBar = AppBar();
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final homeModel = ref.watch(homeModelProvider);
     final vendor = ref.watch(LoginRepository.vendorProvider);
+    debugPrint('The Vendor profile Is ${vendor.value?.avatar}');
     return AppBar(
       leading: Padding(
         padding: const EdgeInsets.only(left: 14),
-        child: CircleAvatar(
-          backgroundImage: !vendor.hasValue
-              ? AssetImage($AssetsImgsGen().avatar.path) as ImageProvider
-              : CachedNetworkImageProvider(vendor.value!.avatar!),
+        child: GestureDetector(
+          onTap: () => context.push(
+            RoutesNames.profileScreen,
+          ),
+          child: CircleAvatar(
+            backgroundImage: !vendor.hasValue
+                ? AssetImage($AssetsImgsGen().avatar.path) as ImageProvider
+                : CachedNetworkImageProvider(vendor.value?.avatar ?? ''),
+          ),
         ),
       ),
       title: Align(
         alignment: Alignment.topLeft,
         child: Text(
-          "Home",
-          style: TextStyle(fontSize: 70.sp, fontWeight: FontWeight.bold),
+          title ?? "",
+          style: TextStyle(
+            fontSize: 25.sp,
+            fontWeight: FontWeight.bold,
+          ),
         ),
       ),
       actions: [
@@ -46,7 +59,7 @@ class ProfileAppBar extends ConsumerWidget implements PreferredSizeWidget {
             },
             child: CircleAvatar(
               backgroundImage: homeModel.storeImage == null
-                  ? AssetImage($AssetsImgsGen().storeLogo.path) as ImageProvider
+                  ? AssetImage(MyAssets.imgs.storeLogo.path) as ImageProvider
                   : CachedNetworkImageProvider(homeModel.storeImage!),
             ),
           ),

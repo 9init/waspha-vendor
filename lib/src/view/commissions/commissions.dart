@@ -20,7 +20,8 @@ class Commissions extends ConsumerWidget {
         ),
       ),
       body: commission.isLoading
-          ? Container(child: Center(child: CircularProgressIndicator()))
+          ? Container(child: Center(child:  CircularProgressIndicator.adaptive(),
+    ))
           : Padding(
               padding: const EdgeInsets.symmetric(horizontal: 20),
               child: SingleChildScrollView(

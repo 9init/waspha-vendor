@@ -1,20 +1,18 @@
 import 'package:flutter/material.dart';
 import 'package:vendor/Themes/index.dart';
-import 'package:vendor/core/constans/index.dart';
+import 'package:vendor/src/view/common/colors/colors.dart';
 
 ThemeData lightThemeData() {
   return ThemeData(
     useMaterial3: true,
     brightness: Brightness.light,
-
-    //Setting the Brightness to light  so that this can be used as Light ThemeData
-    textTheme: CustomTextTheme.textTheme(),
-    //Setting the Text Theme to LightTextTheme
-    appBarTheme: const AppBarTheme(
-      iconTheme: IconThemeData(
-        color: ColorConstants.whiteColor,
+    actionIconTheme: ActionIconThemeData(
+      backButtonIconBuilder: (BuildContext context) => Icon(
+        Icons.arrow_back_ios,
       ),
     ),
-    dialogBackgroundColor: ColorConstants.whiteColor,
+    //Setting the Brightness to light  so that this can be used as Light ThemeData
+    textTheme: CustomTextTheme.textTheme(),
+    dialogBackgroundColor: WasphaColors.whiteColor,
   );
 }

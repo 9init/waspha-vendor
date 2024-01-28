@@ -40,7 +40,7 @@ class Login extends HookConsumerWidget {
               CustomFormField(
                 text: context.localization.email_or_mobile,
                 controller: _mobileController,
-                onChanged: (value) => viewModel.updateVendorID(value),
+                onChanged: (value) => viewModel.updateVendorID(value!),
               ),
               const SizedBox(
                 height: 30,
@@ -48,7 +48,7 @@ class Login extends HookConsumerWidget {
               CustomFormField(
                 text: context.localization.password,
                 isPassword: true,
-                onChanged: (value) => viewModel.updatePassword(value),
+                onChanged: (value) => viewModel.updatePassword(value!),
                 controller: _passwordController,
               ),
               const SizedBox(

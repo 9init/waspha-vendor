@@ -1,8 +1,10 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:go_router/go_router.dart';
 import 'package:vendor/core/gen/assets.gen.dart';
 import 'package:vendor/src/models/driver/driver_model.dart';
+import 'package:vendor/src/routes/routes_names.dart';
 
 class CarrierItem extends StatelessWidget {
   CarrierItem({
@@ -11,6 +13,7 @@ class CarrierItem extends StatelessWidget {
   });
 
   final DriverModel driverModel;
+
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -52,7 +55,12 @@ class CarrierItem extends StatelessWidget {
                     ],
                   ),
                   Spacer(),
-                  IconButton(onPressed: () {}, icon: Icon(Icons.edit)),
+                  IconButton(
+                    onPressed: () => context.pushNamed(
+                        RoutesNames.updateDriverDataScreen,
+                        pathParameters: <String, String>{'driver_id': driverModel.id.toString()}),
+                    icon: Icon(Icons.edit),
+                  ),
                 ],
               ),
             )

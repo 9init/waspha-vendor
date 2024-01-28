@@ -1,4 +1,3 @@
-// ignore_for_file: depend_on_referenced_packages
 
 import 'dart:io';
 
@@ -6,7 +5,9 @@ import 'package:cookie_jar/cookie_jar.dart';
 import 'package:dio/dio.dart';
 import 'package:dio_cookie_manager/dio_cookie_manager.dart';
 import 'package:path_provider/path_provider.dart';
+import 'package:vendor/core/di/index.dart';
 import 'package:vendor/src/shared/networking/Token_interceptor.dart';
+import 'package:vendor/src/shared/networking/debuging_interceptor.dart';
 import 'package:vendor/src/shared/networking/request_method.dart';
 import 'package:vendor/src/shared/networking/results.dart';
 
@@ -16,6 +17,7 @@ class Networking {
 
   // ignore: constant_identifier_names
   static const String BASE_URL = "https://api.waspha.com/vendor";
+  static const String DRIVER_BASE_URL = "https://api.waspha.com/driver";
 
   static BaseOptions options = BaseOptions(
     baseUrl: BASE_URL,
@@ -23,6 +25,8 @@ class Networking {
     receiveDataWhenStatusError: true,
     connectTimeout: const Duration(seconds: 30),
     receiveTimeout: const Duration(seconds: 30),
+
+
   );
   final _dio = Dio(options);
 
@@ -34,7 +38,6 @@ class Networking {
   /// Gets the singleton instance of the [Networking] class.
   static Future<Networking> _instance() async {
     if (_self != null) return _self!;
-
     final instance = Networking._();
     await instance._prepareJar();
     _self = instance;
@@ -49,8 +52,10 @@ class Networking {
     final jar = PersistCookieJar(
       storage: FileStorage("$appDocPath/.cookies/"),
     );
-    _dio.interceptors.add(CookieManager(jar));
-    _dio.interceptors.add(TokenInterceptor(_dio));
+    _dio.interceptors
+      ..add(CookieManager(jar))
+      ..add(TokenInterceptor(_dio))
+      ..add(di<AppInterceptors>());
   }
 
   /// Delete all cookies
@@ -70,14 +75,15 @@ class Networking {
   /// Returns a [Result] containing either a [Response] on success or an [Exception] on failure.
   static Future<Result<Response<T>, DioException, Exception>> call<T>(
       url, RequestMethod requestMethod,
-      {dynamic data}) async {
+      {dynamic data, String? baseUrl,Map<String,dynamic>?header}) async {
     try {
       final instance = await _instance();
       final Response<T> response = await instance._dio.fetch(
         RequestOptions(
-          baseUrl: BASE_URL + url,
+          baseUrl: baseUrl != null ? baseUrl + url : BASE_URL + url,
           method: "$requestMethod",
           data: data,
+          headers: header
         ),
       );
       return Success(response);
@@ -105,5 +111,12 @@ class Networking {
       String url,
       {dynamic data}) async {
     return call(url, RequestMethod.DELETE, data: data);
+  }
+
+  /// Makes a PATCH request with the specified [url] and optional [data].
+  static Future<Result<Response<T>, DioException, Exception>> patch<T>(
+      String url,
+      {dynamic data}) async {
+    return call(url, RequestMethod.PATCH, data: data);
   }
 }

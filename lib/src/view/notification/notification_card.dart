@@ -13,7 +13,7 @@ class NotificationCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: EdgeInsets.symmetric(horizontal: 30.w, vertical: 10.h),
+      padding: EdgeInsets.symmetric(horizontal: 10.w, vertical: 4.h),
       child: IntrinsicHeight(
         child: Row(
           children: [
@@ -27,7 +27,7 @@ class NotificationCard extends StatelessWidget {
                           : CachedNetworkImageProvider(
                               notificationModel.extraData!.sentBy!.avatar!)),
             ),
-            SizedBox(width: 30.w),
+            SizedBox(width: 12.w),
             Expanded(
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.start,
@@ -40,28 +40,28 @@ class NotificationCard extends StatelessWidget {
                     ),
                     Spacer(),
                     Padding(
-                      padding: EdgeInsets.symmetric(horizontal: 30.w),
+                      padding: EdgeInsets.symmetric(horizontal: 10.w),
                       child: Text(
                         timeago.format(
                           notificationModel.createdAt,
                           locale: Localizations.localeOf(context).languageCode,
                         ),
                         style:
-                            TextStyle(fontSize: 40.sp, color: Colors.grey[700]),
+                            TextStyle(fontSize: 12.sp, color: Colors.grey[700]),
                       ),
                     ),
                   ]),
                   Text(
                     notificationModel.title,
                     style: TextStyle(
-                      fontSize: 40.sp,
+                      fontSize: 12.sp,
                       color: Colors.grey[700],
                     ),
                   ),
-                  SizedBox(height: 10.h),
+                  SizedBox(height: 3.h),
                   Text(
                     notificationModel.body,
-                    style: TextStyle(fontSize: 40.sp, color: Colors.grey[700]),
+                    style: TextStyle(fontSize: 12.sp, color: Colors.grey[700]),
                     softWrap: true,
                   )
                 ],

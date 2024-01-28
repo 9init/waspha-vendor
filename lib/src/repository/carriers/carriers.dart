@@ -9,7 +9,6 @@ class CarriersRepository {
       "/store-drivers",
       {"type": type.name.toLowerCase()},
     );
-
     final value = switch (result) {
       Success(:final value) => () {
           try {
@@ -17,15 +16,14 @@ class CarriersRepository {
                 .map((item) => DriverModel.fromJson(item))
                 .toList();
           } catch (e) {
-            print(e);
             return null;
           }
         }(),
       _ => null,
     };
-
     return value;
   }
+
 
   static final storeDriverProvider =
       AutoDisposeFutureProvider.family<List<DriverModel>?, DriverType>(
