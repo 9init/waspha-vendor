@@ -2,14 +2,18 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:gap/gap.dart';
+import 'package:go_router/go_router.dart';
+import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:vendor/core/constans/index.dart';
 import 'package:vendor/core/extensions/custom_padding.dart';
 import 'package:vendor/core/gen/assets.gen.dart';
 import 'package:vendor/core/localization/localization.dart';
 import 'package:vendor/src/models/get_driver_by_id/get_driver_by_id_response_model.dart';
+import 'package:vendor/src/routes/routes_names.dart';
 import 'package:vendor/src/view/common/colors/colors.dart';
 import 'package:vendor/src/view/common/edit_personal_name/edit_personal_name.dart';
 import 'package:vendor/src/view/common/user_avatar/user_avatar.dart';
+import 'package:vendor/src/view/driver/providers/inject_driver_id.dart';
 
 class DriverAvatarAndNameDetails extends StatelessWidget {
   const DriverAvatarAndNameDetails(
@@ -90,9 +94,20 @@ class DriverAvatarAndNameDetails extends StatelessWidget {
           ),
         ).wrapCenter(),
         Gap(20.h),
-        EditPersonalName(
-          personalName: getDriverDataByIdResponseModel.name ?? '',
-          editPersonalNameFunction: () {},
+        Consumer(
+          builder: (widget, ref, child) {
+            final driverId=ref.watch(injectDriverIdProvider);
+            debugPrint('The Get Driver Id ${driverId.toString()}');
+            return EditPersonalName(
+              personalName: getDriverDataByIdResponseModel.name ?? '',
+              editPersonalNameFunction: () => context.pushNamed(
+                RoutesNames.updateDriverDataScreen,
+                pathParameters: <String, String>{
+                  'driver_id': driverId.toString()
+                },
+              ),
+            );
+          },
         )
       ],
     );

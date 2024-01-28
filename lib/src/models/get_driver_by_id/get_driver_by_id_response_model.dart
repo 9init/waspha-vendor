@@ -18,9 +18,8 @@ class GetDriverByIdResponseModel with _$GetDriverByIdResponseModel {
 class GetDriverDataByIdResponseModel with _$GetDriverDataByIdResponseModel {
   const factory GetDriverDataByIdResponseModel({
     int? id,
-    @JsonKey(name: 'country_code')String? countryCode,
     String? name,
-    String? contact,
+    Contact? contact,
     String? type,
     String? avatar,
     String? status,
@@ -69,12 +68,24 @@ class DriverRating with _$DriverRating {
   }) = _DriverRating;
   factory DriverRating.fromJson(Map<String,dynamic>json)=>_$DriverRatingFromJson(json);
 
-}@Freezed(fromJson: true, toJson: false)
+}
+@Freezed(fromJson: true, toJson: false)
 class Title with _$Title {
   const factory Title({
     String? en,
     String? ar,
   }) = _Title;
   factory Title.fromJson(Map<String,dynamic>json)=>_$TitleFromJson(json);
+
+}
+@Freezed(fromJson: true, toJson: false)
+class Contact with _$Contact {
+  const factory Contact({
+    String? phone,
+    @JsonKey(name:'country_code') String? countryCode,
+    @JsonKey(name:'phone_code') String? phoneCode,
+    @JsonKey(name:'full_phone') String? fullPhoneNumber,
+  }) = _Contact;
+  factory Contact.fromJson(Map<String,dynamic>json)=>_$ContactFromJson(json);
 
 }

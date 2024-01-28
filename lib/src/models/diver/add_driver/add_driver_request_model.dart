@@ -41,7 +41,7 @@ class AddDriverRequestModel {
   createToJson: true,
 )
 class DriverContactRequestModel{
-  @JsonKey(name: 'country_code')
+  @JsonKey(name: 'phone_code')
   final String countryCode;
   final String number;
 

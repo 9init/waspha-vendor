@@ -25,15 +25,15 @@ class DriverPhoneNumber extends HookConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final driverContactData = ref.watch(getDriverContactDataProvider);
     final phoneController = useTextEditingController(
-        text: driverDataByIdResponseModel?.contact ?? '');
+        text: driverDataByIdResponseModel?.contact!.phone ?? '');
     final String? initialCountryCode = Countries.getCountryCodeFromDialCode(
-        driverDataByIdResponseModel?.countryCode ?? '');
+        driverDataByIdResponseModel?.contact?.countryCode ?? '');
     driverContactData.countryCode.isEmpty
-        ? driverDataByIdResponseModel?.countryCode ?? ''
+        ? driverDataByIdResponseModel?.contact?.countryCode ?? ''
         : '';
     debugPrint('The init Country Code Is $initialCountryCode');
     debugPrint(
-        'The Country Code From Response Is ${driverDataByIdResponseModel?.countryCode}');
+        'The Country Code From Response Is ${driverDataByIdResponseModel?.contact?.countryCode??''}');
     phoneController.text = driverContactData.driverMobileNumber ?? '';
     return Column(
       crossAxisAlignment: CrossAxisAlignment.end,

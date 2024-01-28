@@ -20,12 +20,12 @@ class DriverDeliveryMethods extends HookConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final vehicleType = driverDataByIdResponseModel?.vehicle?.type ?? '';
 
-    // Initialize the selected vehicle
-    WidgetsBinding.instance.addPostFrameCallback((_) {
-      if (ref.read(selectedVehiclesProvider.notifier).state.isEmpty) {
-        ref.read(selectedVehiclesProvider.notifier).state = vehicleType;
-      }
-    });
+    // // Initialize the selected vehicle
+    // WidgetsBinding.instance.addPostFrameCallback((_) {
+    //   if (ref.read(selectedVehiclesProvider.notifier).state.isEmpty) {
+    //     ref.read(selectedVehiclesProvider.notifier).state = vehicleType;
+    //   }
+    // });
     final vehicleDescriptionController = useTextEditingController(
         text: driverDataByIdResponseModel?.vehicle?.name ?? '');
     final plateNumberController = useTextEditingController(
@@ -49,13 +49,9 @@ class DriverDeliveryMethods extends HookConsumerWidget {
               return deliveryMethods.when(
                 data: (data) {
                   Future.microtask(() {
-                    if (ref
-                            .read(selectedVehiclesProvider.notifier)
-                            .state
-                            .isEmpty &&
+                    if (ref.read(selectedVehiclesProvider.notifier).state.name!.isEmpty &&
                         driverDataByIdResponseModel?.vehicle != null) {
-                      ref.read(selectedVehiclesProvider.notifier).state =
-                          driverDataByIdResponseModel!.vehicle!.type!;
+                      ref.read(selectedVehiclesProvider.notifier).state.name!= driverDataByIdResponseModel!.vehicle!.type!;
                     }
                   });
                   return Container(

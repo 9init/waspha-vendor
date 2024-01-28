@@ -30,10 +30,11 @@ class AddNewDriverButton extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final driverAvtar = ref.watch(pickImageProviderProvider);
-    final driverGender = ref.watch(selectedVehiclesProvider);
-    final driverVehicle = ref.watch(selectedGenderProvider);
+    final driverVehicle = ref.watch(selectedVehiclesProvider);
+    final driverGender = ref.watch(selectedGenderProvider);
     final driverContactData = ref.watch(getDriverContactDataProvider);
     final bool termsCheckBox =ref.watch(checkboxProvider);
+
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 10.0),
       child: WasphaButton(
@@ -56,6 +57,13 @@ class AddNewDriverButton extends ConsumerWidget {
                     final String driverPassword = savedValues['driverPassword'];
                     debugPrint(
                         'The DriverCountryCode Is +${driverContactData.countryCode}');
+                    debugPrint(
+                        'The Selected Driver Id  Is ${driverVehicle.id}');
+                    String countryCode = driverContactData.countryCode;
+                    if (!countryCode.startsWith('+')) {
+                      countryCode = '+$countryCode';
+                    }
+
                     ref
                         .read(
                       addDriverRepositoryProvider(
@@ -64,11 +72,11 @@ class AddNewDriverButton extends ConsumerWidget {
                           contact: DriverContactRequestModel(
                               countryCode: driverContactData.countryCode.isEmpty
                                   ? '+020'
-                                  : '+${driverContactData.countryCode}',
+                                  : '${countryCode}',
                               number: driverContactData.driverMobileNumber!),
                           email: 'kota@gmail.com',
                           password: driverPassword,
-                          vehicleId: 5,
+                          vehicleId: driverVehicle.id!,
                           isOnline:
                               driverType == DriverType.ONLINE ? true : false,
                           avatar:
@@ -85,6 +93,10 @@ class AddNewDriverButton extends ConsumerWidget {
                         ref.invalidate(
                           CarriersRepository.storeDriverProvider(driverType),
                         );
+                        // context.pushReplacement(
+                        //   '/carrier',
+                        //   extra: driverType,
+                        // );
                         context.pop();
                         context.pop();
                       };

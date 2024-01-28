@@ -7,7 +7,8 @@ import 'package:vendor/src/models/app_settings/app_settings.dart';
 import 'package:vendor/src/view/common/colors/colors.dart';
 import 'package:vendor/src/view/common/shadow_container/sahdow_container.dart';
 
-final selectedVehiclesProvider = AutoDisposeStateProvider<String>((ref) => '');
+final selectedVehiclesProvider =
+    AutoDisposeStateProvider<DeliveryVehicle>((ref) => DeliveryVehicle());
 
 class DeliveryMethodsView extends StatelessWidget {
   const DeliveryMethodsView({
@@ -23,9 +24,8 @@ class DeliveryMethodsView extends StatelessWidget {
       children: [
         InnerShadow(
           blur: 5,
-          color:WasphaColors.grey200.withOpacity(0.4),
+          color: WasphaColors.grey200.withOpacity(0.4),
           offset: const Offset(2.5, 2.5),
-
           child: Container(
             padding: EdgeInsets.all(10),
             decoration: BoxDecoration(
@@ -47,11 +47,11 @@ class DeliveryMethodsView extends StatelessWidget {
           builder: (context, ref, child) {
             var selectedVehicle = ref.watch(selectedVehiclesProvider);
             debugPrint('selectedVehicle${selectedVehicle}');
-            return Radio<String>(
+            return Radio<DeliveryVehicle>(
               activeColor: WasphaColors.blackColor,
-              value: deliveryVehicle.name??"",
+              value: deliveryVehicle,
               groupValue: selectedVehicle,
-              onChanged: (String? newValue) {
+              onChanged: (DeliveryVehicle? newValue) {
                 if (newValue != null) {
                   ref.read(selectedVehiclesProvider.notifier).state = newValue;
                   debugPrint('The New Value Is $newValue');
@@ -62,6 +62,6 @@ class DeliveryMethodsView extends StatelessWidget {
           },
         ),
       ],
-    ).PaddingColumn(paddingRight: 10,paddingLeft: 10);
+    ).PaddingColumn(paddingRight: 10, paddingLeft: 10);
   }
 }

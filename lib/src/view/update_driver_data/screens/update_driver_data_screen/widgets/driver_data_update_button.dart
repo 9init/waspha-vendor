@@ -114,7 +114,7 @@ class DriverDataUpdateButton extends HookConsumerWidget {
                                 countryCode: '',
                                 vehicle: DriverVehicleData(
                                   numberPlate: plateNumber,
-                                  type: userVehicleType,
+                                  type: userVehicleType.name,
                                   id: vehicleId,
                                 ),
                               ),

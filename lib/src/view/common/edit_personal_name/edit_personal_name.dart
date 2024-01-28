@@ -15,19 +15,19 @@ class EditPersonalName extends StatelessWidget {
       child: Stack(
         alignment: Alignment.center,
         children: [
-          Align(
-            alignment: Alignment(personalName.length>10?-0.8:-0.4, -2.4),
-            child: CircleAvatar(
-              backgroundColor: WasphaColors.darkBlackColor,
-              child: IconButton(
-                onPressed: editPersonalNameFunction,
-                icon: Icon(
-                  Icons.edit,
-                  color: WasphaColors.white,
+          GestureDetector(
+            onTap:editPersonalNameFunction ,
+            child: Align(
+              alignment: Alignment(personalName.length>10?-0.8:-0.4, -2.4),
+              child: CircleAvatar(
+                backgroundColor: WasphaColors.darkBlackColor,
+                child:  Icon(
+                    Icons.edit,
+                    color: WasphaColors.white,
+                  ),
                 ),
               ),
             ),
-          ),
           Text(
             personalName,
             style: Theme.of(context).textTheme.labelLarge,
