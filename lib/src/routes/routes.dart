@@ -1,6 +1,7 @@
 import 'package:go_router/go_router.dart';
 import 'package:vendor/src/models/driver/driver_model.dart';
 import 'package:vendor/src/routes/routes_names.dart';
+import 'package:vendor/src/view/application_form/application_form.dart';
 import 'package:vendor/src/view/carrier/carrier.dart';
 import 'package:vendor/src/view/carriers_management/carriers_management.dart';
 import 'package:vendor/src/view/driver/driver_details_screen/driver_details_screen.dart';
@@ -9,8 +10,11 @@ import 'package:vendor/src/view/forget_password/viewmodel.dart';
 import 'package:vendor/src/view/forget_password_otp/forget_password_otp.dart';
 import 'package:vendor/src/view/login/login.dart';
 import 'package:vendor/src/view/navigation/navigation.dart';
+import 'package:vendor/src/view/notification/notification.dart';
+import 'package:vendor/src/view/offer_invoice/offer_invoice.dart';
 import 'package:vendor/src/view/order/order.dart';
 import 'package:vendor/src/view/pass_reset/pass_reset.dart';
+import 'package:vendor/src/view/payouts/payouts.dart';
 import 'package:vendor/src/view/receipt/receipt.dart';
 import 'package:vendor/src/view/register/register.dart';
 import 'package:vendor/src/view/requests/requests.dart';
@@ -28,10 +32,6 @@ import 'package:vendor/src/view/vendor_profile/screens/vendor_profile_deltails_s
 import 'package:vendor/src/view/vendor_profile/screens/vendor_profile_screen/vendor_profile_screen.dart';
 import 'package:vendor/src/view/verification/verification.dart';
 import 'package:vendor/src/view/verification/verification_waiting.dart';
-
-import '../view/application_form/application_form.dart';
-import '../view/notification/notification.dart';
-import '../view/payouts/payouts.dart';
 
 final router = GoRouter(
   debugLogDiagnostics: true,
@@ -153,7 +153,12 @@ final router = GoRouter(
     ),
     GoRoute(
       path: RoutesNames.transactionsListingScreen,
-      builder: (context, state) => TransactionsListingScreen(
+      builder: (context, state) => TransactionsListingScreen(),
+    ),
+    GoRoute(
+      path: RoutesNames.offerInvoiceScreen,
+      builder: (context, state) => OfferInvoiceScreen(
+        invoiceModelId: state.extra as int,
       ),
     ),
   ],
