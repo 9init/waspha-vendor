@@ -1,4 +1,5 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
+import 'package:vendor/src/shared/serializable/datetime.dart';
 
 part 'offer_invoice_model.freezed.dart';
 part 'offer_invoice_model.g.dart';
@@ -43,6 +44,10 @@ class Proposal with _$Proposal {
     @JsonKey(name: 'rfp_store_id') required RfpStoreId? rfpStoreId,
     @JsonKey(name: 'delivery_mode_id') required int? deliveryModeId,
     @JsonKey(name: 'store_id') required dynamic? storeId,
+    @DateTimeSerializer() required DateTime? createdAt,
+    @JsonKey(name: "expiry_date")
+    @DateTimeSerializer()
+    required DateTime? expiryDate,
     required String? status,
     required List<Item>? item,
     required Eta? eta,

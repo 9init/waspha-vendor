@@ -1,3 +1,4 @@
+import 'package:date_count_down/date_count_down.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
@@ -293,7 +294,6 @@ class OfferInvoiceScreen extends ConsumerWidget {
                         ],
                       ),
                       SizedBox(height: 5),
-
                       Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
@@ -307,6 +307,45 @@ class OfferInvoiceScreen extends ConsumerWidget {
                           ),
                         ],
                       ),
+                      SizedBox(height: 30),
+                      Builder(builder: (context) {
+                        final expiryDate =
+                            invoice.value?.proposal?.expiryDate ??
+                                DateTime.now();
+                        final isExpired = expiryDate.isBefore(DateTime.now());
+                        final status = invoice.value?.proposal?.status;
+                        final List<Widget> widgets = [];
+                        if (!isExpired)
+                          widgets.add(
+                            Padding(
+                              padding: const EdgeInsets.only(bottom: 5),
+                              child: Text(
+                                "May expires in",
+                                style: TextStyle(
+                                  fontSize: 11.sp,
+                                  fontWeight: FontWeight.bold,
+                                ),
+                              ),
+                            ),
+                          );
+                        widgets.add(CountDownText(
+                          due: expiryDate,
+                          finishedText: toBeginningOfSentenceCase(status),
+                          showLabel: true,
+                          daysTextShort: "d:",
+                          hoursTextShort: "h:",
+                          minutesTextShort: "m:",
+                          secondsTextShort: "s",
+                          longDateName: false,
+                          style: TextStyle(
+                            fontSize: 14.sp,
+                            fontWeight: FontWeight.bold,
+                          ),
+                        ));
+                        return Column(
+                          children: widgets,
+                        );
+                      }),
                     ],
                   ),
                 ),
